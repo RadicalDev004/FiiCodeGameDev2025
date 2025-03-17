@@ -6267,6 +6267,7 @@ GameObject:
   - component: {fileID: 381333270}
   - component: {fileID: 381333272}
   - component: {fileID: 381333271}
+  - component: {fileID: 381333273}
   m_Layer: 5
   m_Name: Mana
   m_TagString: Untagged
@@ -6283,7 +6284,7 @@ RectTransform:
   m_GameObject: {fileID: 381333269}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1832213491}
@@ -6293,7 +6294,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 50, y: 120}
   m_SizeDelta: {x: 394.0772, y: 309.4665}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &381333271
@@ -6334,6 +6335,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 381333269}
   m_CullTransparentMesh: 1
+--- !u!114 &381333273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 381333269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43508264648ae3b4d8bf2fa57e91042a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manaBar: {fileID: 1832213490}
 --- !u!1 &392298354
 GameObject:
   m_ObjectHideFlags: 0
@@ -7495,6 +7509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _PlayerBehaviour: {fileID: 1456631548}
+  _ManaSystem: {fileID: 1456631549}
   _Movement: {fileID: 1456631544}
   _LookPC: {fileID: 1456631547}
   _Code: {fileID: 2018306486}
@@ -19550,6 +19565,7 @@ GameObject:
   - component: {fileID: 1456631545}
   - component: {fileID: 1456631547}
   - component: {fileID: 1456631548}
+  - component: {fileID: 1456631549}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -19734,6 +19750,18 @@ MonoBehaviour:
   - {fileID: 1792374659}
   - {fileID: 10468292}
   - {fileID: 1394405378}
+--- !u!114 &1456631549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456631536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f5487335837d34bbe732a60d672ef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1464903824
 GameObject:
   m_ObjectHideFlags: 0
@@ -25783,7 +25811,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1832213491
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25843,7 +25871,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.8
+  m_FillAmount: 0
   m_FillClockwise: 0
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -28228,6 +28256,7 @@ MonoBehaviour:
   CurrentHealth: 0
   Speed: 100
   Damage: 50
+  givenManaPerHit: 0.2
   Healing: 0
 --- !u!65 &919132149259727083
 BoxCollider:

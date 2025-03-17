@@ -7,6 +7,8 @@ public class Ref : MonoBehaviour
     public PlayerBehaviour _PlayerBehaviour;
     public static PlayerBehaviour PlayerBehaviour { get { return Instance._PlayerBehaviour; } }
 
+    public ManaSystem _ManaSystem;
+    public static ManaSystem ManaSystem { get { return Instance._ManaSystem; } }
 
     public Movement _Movement;
     public static Movement Movement { get { return Instance._Movement; } }

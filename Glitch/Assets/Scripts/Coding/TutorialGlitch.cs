@@ -34,6 +34,7 @@ public class TutorialGlitch : Editable
         if(code.SequenceEqual(CorrectAnswer))
         {
             OnGlitchSolve();
+            ManaSystem.Instance.UseMana(0.64f);
         }
        
 

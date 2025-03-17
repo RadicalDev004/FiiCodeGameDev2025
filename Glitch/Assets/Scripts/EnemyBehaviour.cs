@@ -8,6 +8,7 @@ public class EnemyBehaviour : MonoBehaviour
     public GameObject Canvas;
     public Slider S_Health;
     public float MaxHealth = 100, CurrentHealth, Speed = 100, Damage = 50;
+    public float givenManaPerHit;
     public bool Healing = false;
     private PlayerBehaviour PlayerBehaviour;
 
@@ -30,6 +31,7 @@ public class EnemyBehaviour : MonoBehaviour
         if(other.TryGetComponent(out Projectile proj))
         {
             UpdateHealthSlider(-proj.damage);
+            ManaSystem.Instance.AddMana(givenManaPerHit);
         }
     }
 
