@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Editable : MonoBehaviour
@@ -67,7 +66,7 @@ public class Editable : MonoBehaviour
         if(state)
         {
             if (Outline != null) return;
-            Outline = transform.AddComponent<Outline>();
+            Outline = gameObject.AddComponent<Outline>();
             Outline.OutlineMode = Outline.Mode.OutlineVisible;
             Outline.OutlineWidth = 7;
         }
