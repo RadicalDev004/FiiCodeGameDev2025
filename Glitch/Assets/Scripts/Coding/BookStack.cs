@@ -62,13 +62,6 @@ public class BookStack : Editable
 
     private IEnumerator BookPosAnimation(List<int> values)
     {
-        if (values.SequenceEqual(CorrectAnswer))
-        {
-            Debug.Log("CORRECT!!!");
-            OnGlitchSolve();
-            
-        }
-
         for (int i = 0; i < books.Count; i++)
         {
             Tween.Position(books[i].transform, IntermediatePos[i], 0.5f, 0, Tween.EaseInOut);
@@ -78,6 +71,13 @@ public class BookStack : Editable
         for (int i = 0; i < values.Count; i++)
         {
            Tween.Position( books[i].transform, initialBookPos[values[i]], 0.5f, 0, Tween.EaseInOut );
-        }        
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (values.SequenceEqual(CorrectAnswer))
+        {
+            OnGlitchSolve();
+        }
     }
 }

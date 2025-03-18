@@ -13,13 +13,14 @@ public class ManaSystem : MonoBehaviour
     {
         if (Instance == null)
             Instance = this;
+        currentMana = maxMana;
     }
 
     public void AddMana(float amount)
     {
         if(currentMana < maxMana)
         {
-            currentMana = currentMana + amount;
+            currentMana += amount;
             OnManaChanged?.Invoke(currentMana);
 
             Debug.Log("current mana: " +  currentMana);
