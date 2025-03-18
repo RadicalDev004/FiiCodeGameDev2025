@@ -1,6 +1,7 @@
 using Pixelplacement;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class Globe : Editable
 
     public bool Validate(List<string> code)
     {
+        Debug.Log(string.Join(", ", code));
         if (code.Count != 2)
         {
             Debug.LogError("Failed validation at length " + code.Count);
@@ -25,8 +27,10 @@ public class Globe : Editable
         List<float> values = new();
         foreach (string s in code)
         {
-            if (float.TryParse(s, out float value))
+            string str = s.Replace(',', '.'); // Convert to dot format
+            if (float.TryParse(str, NumberStyles.Float, CultureInfo.InvariantCulture, out float value))
             {
+                Debug.LogWarning(value);
                 values.Add(value);
             }
             else
