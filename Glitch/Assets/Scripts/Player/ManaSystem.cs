@@ -28,7 +28,7 @@ public class ManaSystem : MonoBehaviour
             {
                 Debug.Log("mana max");
                 OnManaChanged?.Invoke(currentMana);
-                currentMana = 1;
+                currentMana = maxMana;
             }
         }
     }

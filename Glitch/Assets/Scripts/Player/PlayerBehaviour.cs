@@ -6,9 +6,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    [HideInInspector]
-    public List<Editable> EditablesInRange;
-    public Editable EditableToAcess = null;
+    public float interactionRange = 5f;
+    public Camera playerCamera;
+    private Editable editableToAccess = null;
     private UI UI;
     public bool isEpressed = false;
     [Header("Projectiles")]
@@ -17,59 +17,89 @@ public class PlayerBehaviour : MonoBehaviour
     public float CooldownTimer = 1;
     private bool isCoolDown = false;
 
-    public List<ParticleSystem> GlithcSolve = new();
+    public List<ParticleSystem> GlitchSolve = new();
+
+    private float lastSeenEditableTime = 0f;
+    private float uiHideDelay = 0.3f;
 
     private void Awake()
     {
         UI = Ref.UI;
-
         ToggleSolveGlitch(false);
     }
 
-
-
     void Update()
     {
-        if(!Code.IsOpen)
-        {
-            UI.TogglePressE(EditablesInRange.Count > 0);
-        }
-        if(EditablesInRange.Count > 0)
-        {
-            EditableToAcess = GetClosestEditableInRange();
-            EditableToAcess.ToggleOutline(true);
-            ToggleOffOtherEditablesInRange(EditableToAcess);
-        }
-        if(Input.GetKeyDown(KeyCode.E)) 
-        {            
-            if (EditableToAcess != null && !EditableToAcess.Completed && !Code.IsOpen)
-            {
-                Time.timeScale = 0;
-                EditableToAcess.CreateTerminal();
-                UI.TogglePressE(false);
-            }
+        CheckForEditableObject();
 
+        if (Input.GetKeyDown(KeyCode.E) && editableToAccess != null && !Code.IsOpen)
+        {
+            Time.timeScale = 0;
+            editableToAccess.CreateTerminal();
+            UI.TogglePressE(false);
         }
-        if(Input.GetMouseButtonDown(0) && Time.timeScale > 0 && !isCoolDown)
+
+        if (Input.GetMouseButtonDown(0) && Time.timeScale > 0 && !isCoolDown)
         {
             ShootProjectile();
-            StartCoroutine(ShootingCooldwon());
+            StartCoroutine(ShootingCooldown());
+        }
+
+        if (Time.time - lastSeenEditableTime > uiHideDelay)
+        {
+            UI.TogglePressE(false);
+        }
+    }
+
+    private void CheckForEditableObject()
+    {
+        if (Code.IsOpen) return;
+        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, interactionRange))
+        {
+            if (hit.collider.CompareTag("Editable"))
+            {
+                Editable newEditable = hit.collider.GetComponent<Editable>();
+                if (newEditable != null && !newEditable.Completed)
+                {
+                    if (editableToAccess != newEditable)
+                    {
+                        if (editableToAccess != null)
+                            editableToAccess.ToggleOutline(false);
+
+                        editableToAccess = newEditable;
+                        editableToAccess.ToggleOutline(true);
+                    }
+
+                    lastSeenEditableTime = Time.time; 
+                    UI.TogglePressE(true);
+                    return;
+                }
+            }
+        }
+
+        if (editableToAccess != null && Time.time - lastSeenEditableTime > uiHideDelay)
+        {
+            editableToAccess.ToggleOutline(false);
+            editableToAccess = null;
         }
     }
 
     public void ToggleSolveGlitch(bool state)
     {
-        for(int i = 0; i < GlithcSolve.Count; i++)
+        for (int i = 0; i < GlitchSolve.Count; i++)
         {
-            if(state)
-                GlithcSolve[i].Play();
+            if (state)
+                GlitchSolve[i].Play();
             else
-                GlithcSolve[i].Stop();
+                GlitchSolve[i].Stop();
         }
         if (!state) return;
         StartCoroutine(WaitAndStopAnimation());
-        
     }
+
     IEnumerator WaitAndStopAnimation()
     {
         yield return new WaitForSecondsRealtime(5);
@@ -84,54 +114,10 @@ public class PlayerBehaviour : MonoBehaviour
         pj.transform.SetParent(null);
     }
 
-    private IEnumerator ShootingCooldwon()
+    private IEnumerator ShootingCooldown()
     {
         isCoolDown = true;
         yield return new WaitForSeconds(CooldownTimer);
         isCoolDown = false;
-    }
-
-    public Editable GetClosestEditableInRange()
-    {
-        float mindist = 1000;
-        Editable min = null;
-        foreach(var ed in EditablesInRange)
-        {
-            if(ed != null && Vector3.Distance(ed.gameObject.transform.position, transform.position) < mindist)
-            {
-                min = ed;
-                mindist = Vector3.Distance(ed.gameObject.transform.position, transform.position);
-            }
-            if(ed == null)
-            {
-                EditablesInRange.Remove(ed);
-            }
-        }
-        return min;
-    }
-
-    public void ToggleOffOtherEditablesInRange(Editable Current)
-    {
-        foreach(var ed in EditablesInRange)
-        {
-            if(ed != Current)
-            {
-                ed.ToggleOutline(false);
-            }
-        }
-    }
-
-    public void AddEditable(Editable Edt)
-    {
-        if (EditablesInRange.Contains(Edt))
-            return;
-        EditablesInRange.Add(Edt);
-    }
-
-    public void RemoveEditable(Editable Edt)
-    {
-        if (!EditablesInRange.Contains(Edt))
-            return;
-        EditablesInRange.Remove(Edt);
     }
 }

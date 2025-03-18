@@ -15,7 +15,6 @@ public class Editable : MonoBehaviour
     public bool Completed = false;
     public bool UseOutline = true;
 
-
     private PlayerBehaviour playerBehaviour;
     private Code Code;
     private UI UI;
@@ -41,29 +40,11 @@ public class Editable : MonoBehaviour
         Code.OnValidate += SaveCode;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.name == "Player" && !Completed)
-        {
-            Debug.Log("Player Enter Editable " + name);
-            playerBehaviour.AddEditable(this);
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.name == "Player" && !Completed)
-        {
-            Debug.Log("Player Exited Editable " + name);
-            ToggleOutline(false);
-            playerBehaviour.RemoveEditable(this);
-        }
-    }
-
     public void ToggleOutline(bool state)
     {
         if (!UseOutline) return;
 
-        if(state)
+        if (state)
         {
             if (Outline != null) return;
             Outline = gameObject.AddComponent<Outline>();
@@ -75,7 +56,6 @@ public class Editable : MonoBehaviour
             Destroy(Outline);
         }
     }
-
 
     public void SaveCode(List<string> newCode)
     {
@@ -89,13 +69,12 @@ public class Editable : MonoBehaviour
     }
 
     static string ReplaceValue(List<string> newCode, ref int ind)
-    {        
+    {
         return newCode[ind++];
     }
 
     protected void OnGlitchSolve()
     {
-        playerBehaviour.RemoveEditable(this);
         playerBehaviour.ToggleSolveGlitch(true);
         ToggleOutline(false);
         Completed = true;
