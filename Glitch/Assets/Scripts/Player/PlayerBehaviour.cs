@@ -20,12 +20,11 @@ public class PlayerBehaviour : MonoBehaviour
     public List<ParticleSystem> GlitchSolve = new();
 
     private float lastSeenEditableTime = 0f;
-    private float uiHideDelay = 0.3f;
+    [SerializeField] private float uiHideDelay = 0.3f;
 
     private void Awake()
     {
         UI = Ref.UI;
-        ToggleSolveGlitch(false);
     }
 
     void Update()
@@ -54,29 +53,28 @@ public class PlayerBehaviour : MonoBehaviour
     private void CheckForEditableObject()
     {
         if (Code.IsOpen) return;
-        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-        RaycastHit hit;
+        Ray ray = new(playerCamera.transform.position, playerCamera.transform.forward);
 
-        if (Physics.Raycast(ray, out hit, interactionRange))
+        if (Physics.Raycast(ray, out RaycastHit hit, interactionRange))
         {
-            if (hit.collider.CompareTag("Editable"))
+            if (!hit.collider.CompareTag("Editable"))
+                return;
+
+            Editable newEditable = hit.collider.GetComponent<Editable>();
+            if (newEditable != null && !newEditable.Completed)
             {
-                Editable newEditable = hit.collider.GetComponent<Editable>();
-                if (newEditable != null && !newEditable.Completed)
+                if (editableToAccess != newEditable)
                 {
-                    if (editableToAccess != newEditable)
-                    {
-                        if (editableToAccess != null)
-                            editableToAccess.ToggleOutline(false);
+                    if (editableToAccess != null)
+                        editableToAccess.ToggleOutline(false);
 
-                        editableToAccess = newEditable;
-                        editableToAccess.ToggleOutline(true);
-                    }
-
-                    lastSeenEditableTime = Time.time; 
-                    UI.TogglePressE(true);
-                    return;
+                    editableToAccess = newEditable;
+                    editableToAccess.ToggleOutline(true);
                 }
+
+                lastSeenEditableTime = Time.time;
+                UI.TogglePressE(true);
+                return;
             }
         }
 
@@ -87,23 +85,12 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-    public void ToggleSolveGlitch(bool state)
+    public void PlaySolveGlitch()
     {
         for (int i = 0; i < GlitchSolve.Count; i++)
         {
-            if (state)
-                GlitchSolve[i].Play();
-            else
-                GlitchSolve[i].Stop();
+            GlitchSolve[i].Play();
         }
-        if (!state) return;
-        StartCoroutine(WaitAndStopAnimation());
-    }
-
-    IEnumerator WaitAndStopAnimation()
-    {
-        yield return new WaitForSecondsRealtime(5);
-        ToggleSolveGlitch(false);
     }
 
     public void ShootProjectile()

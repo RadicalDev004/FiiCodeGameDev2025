@@ -27,6 +27,9 @@ public class Editable : MonoBehaviour
         Code = Ref.Code;
         UI = Ref.UI;
         ExecutableCode = ExecutableCode.ToLower();
+
+        if(UseOutline)
+            Outline = GetComponent<Outline>();
     }
 
     public void CreateTerminal()
@@ -42,19 +45,9 @@ public class Editable : MonoBehaviour
 
     public void ToggleOutline(bool state)
     {
-        if (!UseOutline) return;
+        if (!UseOutline || Outline == null) return;
 
-        if (state)
-        {
-            if (Outline != null) return;
-            Outline = gameObject.AddComponent<Outline>();
-            Outline.OutlineMode = Outline.Mode.OutlineVisible;
-            Outline.OutlineWidth = 7;
-        }
-        else
-        {
-            Destroy(Outline);
-        }
+        Outline.enabled = state;
     }
 
     public void SaveCode(List<string> newCode)
@@ -75,7 +68,7 @@ public class Editable : MonoBehaviour
 
     protected void OnGlitchSolve()
     {
-        playerBehaviour.ToggleSolveGlitch(true);
+        playerBehaviour.PlaySolveGlitch();
         ToggleOutline(false);
         Completed = true;
     }

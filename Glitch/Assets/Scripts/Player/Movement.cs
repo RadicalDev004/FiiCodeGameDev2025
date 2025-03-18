@@ -60,7 +60,7 @@ public class Movement : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Space) && isGrounded) 
         {
-            velocity.y += Mathf.Sqrt(jumpForce * -3.0f * gravity);
+            Jump();
         }
 
         if (Input.GetKey(KeyCode.LeftShift))
@@ -109,5 +109,10 @@ public class Movement : MonoBehaviour
         }
 
         return velo;
+    }
+
+    public void Jump(float multiplier = 0)
+    {
+        velocity.y += Mathf.Sqrt((jumpForce + multiplier) * -3.0f * gravity);
     }
 }
