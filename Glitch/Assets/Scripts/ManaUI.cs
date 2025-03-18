@@ -1,3 +1,6 @@
+using Pixelplacement;
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +22,22 @@ public class ManaUI : MonoBehaviour
 
     private void UpdateManaUI(float manaPercent)
     {
+        Debug.LogError("Updating mana to " + manaPercent);
+        StartCoroutine(ChangeManaUIAnimation(manaPercent, 1));
+    }
+
+    private IEnumerator ChangeManaUIAnimation(float manaPercent, float duration)
+    {
+        float elapsedTime = 0f;
+        float startValue = manaBar.GetComponent<Image>().fillAmount;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            manaBar.GetComponent<Image>().fillAmount = Mathf.Lerp(startValue, manaPercent, elapsedTime / duration);
+            yield return null;
+        }
+
         manaBar.GetComponent<Image>().fillAmount = manaPercent;
     }
 

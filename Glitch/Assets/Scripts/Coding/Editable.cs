@@ -51,7 +51,7 @@ public class Editable : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.name == "Player")
+        if (other.gameObject.name == "Player" && !Completed)
         {
             Debug.Log("Player Exited Editable " + name);
             ToggleOutline(false);
@@ -95,6 +95,7 @@ public class Editable : MonoBehaviour
 
     protected void OnGlitchSolve()
     {
+        playerBehaviour.RemoveEditable(this);
         playerBehaviour.ToggleSolveGlitch(true);
         ToggleOutline(false);
         Completed = true;
