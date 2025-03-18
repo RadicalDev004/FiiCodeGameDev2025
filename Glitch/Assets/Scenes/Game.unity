@@ -4967,7 +4967,7 @@ GameObject:
   - component: {fileID: 45285860}
   m_Layer: 0
   m_Name: TutorialGlitch
-  m_TagString: Untagged
+  m_TagString: Editable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5071,8 +5071,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 169.086, z: 0}
---- !u!135 &45285860
-SphereCollider:
+--- !u!65 &45285860
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5090,7 +5090,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.46
+  m_Size: {x: 0.9999999, y: 1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &57107778
 GameObject:
@@ -5101,11 +5101,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 57107779}
-  - component: {fileID: 57107781}
   - component: {fileID: 57107780}
+  - component: {fileID: 57107781}
   m_Layer: 0
   m_Name: BookStackEditable
-  m_TagString: Untagged
+  m_TagString: Editable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5192,8 +5192,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.3
-  m_Center: {x: 0, y: -0.05, z: 0}
+  m_Radius: 0.25
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &97495766
 GameObject:
   m_ObjectHideFlags: 0
@@ -6730,7 +6730,7 @@ GameObject:
   - component: {fileID: 437754524}
   m_Layer: 7
   m_Name: EnemyTrigger
-  m_TagString: Untagged
+  m_TagString: Editable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6791,7 +6791,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 5
+  m_Radius: 1.6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &486082470
 GameObject:
@@ -19738,15 +19738,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6435f5e377415f47b7c39b6472fef44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EditablesInRange: []
-  EditableToAcess: {fileID: 0}
+  interactionRange: 0.25
+  playerCamera: {fileID: 963194227}
   isEpressed: 0
   OrgProjectile: {fileID: 1878571690}
   Lifetime: 3
   Size: 1
   Speed: 0.5
   CooldownTimer: 1
-  GlithcSolve:
+  GlitchSolve:
   - {fileID: 1792374659}
   - {fileID: 10468292}
   - {fileID: 1394405378}
@@ -32231,7 +32231,7 @@ GameObject:
   - component: {fileID: 8978582445730429508}
   m_Layer: 0
   m_Name: GLOBE
-  m_TagString: Untagged
+  m_TagString: Editable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60311,8 +60311,8 @@ MonoBehaviour:
   - -24
   - 1.05
   - 1.2
---- !u!135 &8978582445730429508
-SphereCollider:
+--- !u!65 &8978582445730429508
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -60330,8 +60330,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.16
-  m_Center: {x: 0, y: -0.13, z: 0}
+  m_Size: {x: 0.19999999, y: 0.26618955, z: 0.20000015}
+  m_Center: {x: 0, y: -0.000000059604645, z: 0}
 --- !u!4 &9007311477177712269
 Transform:
   m_ObjectHideFlags: 0
