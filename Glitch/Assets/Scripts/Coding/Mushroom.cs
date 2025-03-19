@@ -8,6 +8,8 @@ public class Mushroom : Editable
 {
     public float Multiplier = 0;
     public int MaxCap = 10;
+    [SerializeField] private float TimeOut = 0.2f;
+    private bool Cooldwon = false;
 
     private void Awake()
     {
@@ -49,8 +51,20 @@ public class Mushroom : Editable
     {
         if (other.gameObject.name == "Player")
         {
-            Ref.Movement.Jump(Multiplier);
+            if(!Cooldwon) 
+            {
+                Ref.Movement.Jump(Multiplier);
+                Cooldwon = true;
+                StartCoroutine(WaitForCooldown(TimeOut));
+            }
+            
         }
+    }
+
+    private IEnumerator WaitForCooldown(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Cooldwon = false;
     }
 
     /*private void OnCollisionEnter(Collision collision)

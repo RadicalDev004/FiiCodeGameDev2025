@@ -53,9 +53,13 @@ public class PlayerBehaviour : MonoBehaviour
     private void CheckForEditableObject()
     {
         if (Code.IsOpen) return;
+
         Ray ray = new(playerCamera.transform.position, playerCamera.transform.forward);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, interactionRange))
+        int layer = LayerMask.NameToLayer("Projectile");
+        int layerMask = ~(1 << layer);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, interactionRange, layerMask))
         {
             if (!hit.collider.CompareTag("Editable"))
                 return;
