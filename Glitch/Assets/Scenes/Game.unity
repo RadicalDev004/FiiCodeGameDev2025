@@ -7026,8 +7026,8 @@ GameObject:
   m_Component:
   - component: {fileID: 437754523}
   - component: {fileID: 437754524}
-  - component: {fileID: 437754525}
   - component: {fileID: 437754526}
+  - component: {fileID: 437754527}
   m_Layer: 7
   m_Name: EnemyTrigger
   m_TagString: Editable
@@ -7072,29 +7072,6 @@ MonoBehaviour:
   UseOutline: 1
   Outline: {fileID: 0}
   EnemyBehaviour: {fileID: 919132149259727082}
---- !u!136 &437754525
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 437754522}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.95
-  m_Height: 2.37
-  m_Direction: 1
-  m_Center: {x: 0, y: -0.3, z: 0}
 --- !u!114 &437754526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7113,6 +7090,29 @@ MonoBehaviour:
   precomputeOutline: 1
   bakeKeys: []
   bakeValues: []
+--- !u!136 &437754527
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437754522}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Height: 2.5
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.3, z: 0}
 --- !u!1 &486082470
 GameObject:
   m_ObjectHideFlags: 0
@@ -7641,6 +7641,7 @@ GameObject:
   - component: {fileID: 741692106}
   - component: {fileID: 741692108}
   - component: {fileID: 741692109}
+  - component: {fileID: 741692110}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -7727,6 +7728,22 @@ MonoBehaviour:
   _LookPC: {fileID: 1456631547}
   _Code: {fileID: 2018306486}
   _UI: {fileID: 637296070}
+  _EnemySpawner: {fileID: 741692110}
+--- !u!114 &741692110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741692104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f064b346a2a72489565f8df9a2ddd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OriginalEnemy: {fileID: 919132149259727077}
+  yOffsetUp: 1
+  yOffsetDown: 1
 --- !u!1 &751943219
 GameObject:
   m_ObjectHideFlags: 0
@@ -27781,7 +27798,7 @@ RectTransform:
   m_Father: {fileID: 762680071}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -4.866989, y: 0}
   m_SizeDelta: {x: 0.267, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -30130,13 +30147,14 @@ GameObject:
   - component: {fileID: 543450653468666463}
   - component: {fileID: 919132149259727081}
   - component: {fileID: 919132149259727082}
+  - component: {fileID: 919132149259727083}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &919132149259727081
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -30159,10 +30177,10 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &919132149259727082
 MonoBehaviour:
@@ -30184,6 +30202,29 @@ MonoBehaviour:
   Damage: 50
   givenManaPerHit: 0.2
   Healing: 0
+  lookToPlayerRotationSpeed: 2
+  moveSpeed: 0.1
+--- !u!65 &919132149259727083
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149259727077}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.7615628, y: 2.2394943, z: 1}
+  m_Center: {x: -0.00808835, y: -0.25213718, z: 0}
 --- !u!4 &967774410595474540
 Transform:
   m_ObjectHideFlags: 0
