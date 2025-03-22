@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -101,6 +102,10 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Projectile pj = Instantiate(OrgProjectile, OrgProjectile.transform.parent);
         pj.gameObject.SetActive(true);
+        pj.gameObject.tag = "Projectile";
+        pj.AddComponent<BoxCollider>();
+        pj.AddComponent<Rigidbody>();
+        pj.GetComponent<Rigidbody>().isKinematic = true;
         pj.Shoot(Lifetime, Speed, Size);
         pj.transform.SetParent(null);
     }
