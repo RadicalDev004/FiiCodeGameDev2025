@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class EnemyBehaviour : MonoBehaviour
     public float givenManaPerHit;
     public bool Healing = false;
     private PlayerBehaviour PlayerBehaviour;
+    public float lookToPlayerRotationSpeed = 0.5f;
+    public float moveSpeed = 1;
 
     void Start()
     {
@@ -24,6 +27,15 @@ public class EnemyBehaviour : MonoBehaviour
     private void Update()
     {
         Canvas.transform.LookAt(PlayerBehaviour.gameObject.transform.position);
+
+        Vector3 direction = PlayerBehaviour.transform.position - transform.position;
+        direction.y = 0;
+        if (direction != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, lookToPlayerRotationSpeed * Time.deltaTime);
+        }
+        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,6 +44,7 @@ public class EnemyBehaviour : MonoBehaviour
         {
             UpdateHealthSlider(-proj.damage);
             ManaSystem.Instance.AddMana(givenManaPerHit);
+            Destroy(proj.gameObject);
         }
     }
 

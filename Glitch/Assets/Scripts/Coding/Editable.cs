@@ -71,5 +71,6 @@ public class Editable : MonoBehaviour
         playerBehaviour.PlaySolveGlitch();
         ToggleOutline(false);
         Completed = true;
+        Ref.EnemySpawner.SpawnEnemies(2, 2);
     }
 }
