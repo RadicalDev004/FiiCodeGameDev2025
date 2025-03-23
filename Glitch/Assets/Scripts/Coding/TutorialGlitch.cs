@@ -35,7 +35,7 @@ public class TutorialGlitch : Editable
         if(code.SequenceEqual(CorrectAnswer))
         {
             OnGlitchSolve();
-            Ref.EnemySpawner.SpawnEnemies(0.5f, EnemySpawnAfterComplete);
+            
             ManaSystem.Instance.UseMana(0.64f);
         }
        

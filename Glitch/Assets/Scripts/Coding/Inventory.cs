@@ -1,0 +1,120 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Inventory : Editable
+{
+    public Dictionary<string, int> Functions = new();
+    public Image I_PowerUpOrg;
+    public List<Sprite> PowerupSprites = new();
+
+    private void Awake()
+    {
+        ValidateCode = Validate;
+    }
+
+    void Update()
+    {
+        if(!Code.IsOpen && Input.GetKeyDown(KeyCode.Q)) 
+        {
+            CreateinventoryCode();
+            CreateTerminal();
+        }
+    }
+
+    public void CollectFunction(string functionName)
+    {
+        if(Functions.ContainsKey(functionName))
+        {
+            Functions[functionName]++;
+        }
+        else
+        {
+            Functions.Add(functionName, 1);
+        }
+        
+    }
+
+    public bool Validate(List<string> code)
+    {
+        if(code.Count != 1)
+        {
+            Debug.LogError("Failed validation at length " + code.Count);
+            return false;
+        }
+        if (!FunctionItem.functionNames.Contains(code[0]))
+        {
+            Debug.LogError("Failed validation at type " + code[0]);
+            return false;
+        }
+
+        if (code[0] == FunctionItem.functionNames[0])
+        {
+            StartCoroutine(ShowPowerUpUI(Instantiate(I_PowerUpOrg, I_PowerUpOrg.transform.parent), PowerupSprites[0], 1));
+        }
+        else if (code[0] == FunctionItem.functionNames[1])
+        {
+            StartCoroutine(ShowPowerUpUI(Instantiate(I_PowerUpOrg, I_PowerUpOrg.transform.parent), PowerupSprites[1], 60));
+            StartCoroutine(AttackBoost(60));
+        }
+        else if (code[0] == FunctionItem.functionNames[2])
+        {
+            StartCoroutine(ShowPowerUpUI(Instantiate(I_PowerUpOrg, I_PowerUpOrg.transform.parent), PowerupSprites[2], 60));
+            StartCoroutine(SpeedIncrease(60));
+        }
+
+        Functions[code[0]]--;
+
+        return true;
+    }
+
+    public void CreateinventoryCode()
+    {
+        string fnc = string.Join("", Functions.Select(kvp => kvp.Value > 0 ? $"  {kvp.Key} x{kvp.Value}\r\n" : ""));
+        ExecutableCode = "\r\n<color=red>/* you have:\r\n" +
+            $"{fnc}" +
+            "\r\n*/</color>\r\n\r\n" +
+            "use_powerup(<e></e> );\r\n\r\n" +
+            "<color=#031700>/* use collected functions to help you during battle */</color>\r\n";
+    }
+
+    private IEnumerator ShowPowerUpUI(Image img, Sprite sprt, float timer)
+    {
+        img.sprite = sprt;
+        img.SetNativeSize();
+        float mx = Mathf.Max(img.GetComponent<RectTransform>().sizeDelta.x, img.GetComponent<RectTransform>().sizeDelta.y);
+        float imp = mx / 75;
+        img.GetComponent<RectTransform>().sizeDelta = img.GetComponent<RectTransform>().sizeDelta / imp;
+        img.gameObject.SetActive(true);
+
+        img.fillAmount = 1;
+
+        float elapsedTime = 0f;
+        float startValue = img.fillAmount;
+
+        while (elapsedTime < timer)
+        {
+            elapsedTime += Time.deltaTime;
+            img.fillAmount = Mathf.Lerp(startValue, 0, elapsedTime / timer);
+            yield return null;
+        }
+
+        img.fillAmount = 0;
+        Destroy(img.gameObject);
+    }
+
+    private IEnumerator AttackBoost(float duration)
+    {
+        Ref.PlayerBehaviour.Damage *= 2;
+        yield return new WaitForSeconds(duration);
+        Ref.PlayerBehaviour.Damage /= 2;
+    }
+    private IEnumerator SpeedIncrease(float duration)
+    {
+        Ref.Movement.speed *= 2;
+        yield return new WaitForSeconds(duration);
+        Ref.Movement.speed /= 2;
+    }
+}

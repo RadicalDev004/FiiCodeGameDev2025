@@ -1,3 +1,4 @@
+using Pixelplacement;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ public class PlayerBehaviour : MonoBehaviour
     public bool isEpressed = false;
     [Header("Projectiles")]
     public Projectile OrgProjectile;
-    public float Lifetime = 3, Size = 1, Speed = 0.5f;
+    public float Lifetime = 3, Size = 1, Speed = 0.5f, Damage = 15;
     public float CooldownTimer = 1;
     private bool isCoolDown = false;
 
@@ -21,6 +22,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     private float lastSeenEditableTime = 0f;
     [SerializeField] private float uiHideDelay = 0.3f;
+    public GameObject MagicStaff;
+    public Transform StaffAnimation;
 
     private void Awake()
     {
@@ -40,8 +43,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && Time.timeScale > 0 && !isCoolDown)
         {
-            ShootProjectile();
-            StartCoroutine(ShootingCooldown());
+            StartCoroutine(ShootingProjectileCor(0.2f));
         }
 
         if (Time.time - lastSeenEditableTime > uiHideDelay)
@@ -112,16 +114,29 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void ShootProjectile()
     {
-        Projectile pj = Instantiate(OrgProjectile, OrgProjectile.transform.parent);
-        pj.gameObject.SetActive(true);
-        pj.Shoot(Lifetime, Speed, Size);
-        pj.transform.SetParent(null);
+        
     }
 
-    private IEnumerator ShootingCooldown()
+    private IEnumerator ShootingProjectileCor(float animTime)
     {
         isCoolDown = true;
-        yield return new WaitForSeconds(CooldownTimer);
+        Vector3 initialPos = MagicStaff.transform.localPosition;
+        Quaternion initialRot = MagicStaff.transform.localRotation;
+        Tween.LocalPosition(MagicStaff.transform, StaffAnimation.localPosition, animTime, 0, Tween.EaseInOut);
+        Tween.LocalRotation(MagicStaff.transform, StaffAnimation.localRotation, animTime, 0, Tween.EaseInOut);
+        yield return new WaitForSeconds(animTime);
+
+        Projectile pj = Instantiate(OrgProjectile, OrgProjectile.transform.parent);
+        pj.gameObject.SetActive(true);
+        pj.Shoot(Lifetime, Speed, Size, Damage);
+        pj.transform.SetParent(null);
+
+        
+        Tween.LocalPosition(MagicStaff.transform, initialPos, animTime, 0, Tween.EaseInOut);
+        Tween.LocalRotation(MagicStaff.transform, initialRot, animTime, 0, Tween.EaseInOut);
+
+
+        yield return new WaitForSeconds(CooldownTimer - animTime);
         isCoolDown = false;
     }
 }

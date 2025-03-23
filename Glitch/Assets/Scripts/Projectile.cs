@@ -11,9 +11,10 @@ public class Projectile : MonoBehaviour
         transform.Translate(speed * Time.deltaTime * Vector3.forward);
     }
 
-    public void Shoot(float lifetime, float speed, float size)
+    public void Shoot(float lifetime, float speed, float size, float damage)
     {
         this.speed = speed;
+        this.damage = damage;
         transform.localScale = transform.localScale * size;
         StartCoroutine(Lifetime(lifetime));
     }

@@ -41,6 +41,7 @@ public class Editable : MonoBehaviour
         Code.gameObject.SetActive(true);
         Code.Create(this);
 
+        Time.timeScale = 0;
         Code.OnValidate += SaveCode;
     }
 
@@ -69,6 +70,7 @@ public class Editable : MonoBehaviour
 
     protected void OnGlitchSolve()
     {
+        Ref.EnemySpawner.SpawnEnemies(0.5f, EnemySpawnAfterComplete);
         playerBehaviour.PlaySolveGlitch();
         ToggleOutline(false);
         Completed = true;

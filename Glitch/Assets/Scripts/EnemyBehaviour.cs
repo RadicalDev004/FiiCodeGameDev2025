@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.GraphicsBuffer;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -15,6 +14,9 @@ public class EnemyBehaviour : MonoBehaviour
     private PlayerBehaviour PlayerBehaviour;
     public float lookToPlayerRotationSpeed = 0.5f;
     public float totalSpeed = 0.1f;
+    public FunctionItem OrgFunctionItem;
+    public SkinnedMeshRenderer Body;
+    public List<Material> Stages = new();
 
     void Start()
     {
@@ -97,11 +99,19 @@ public class EnemyBehaviour : MonoBehaviour
         this.Healing = Healing;
         this.AttackSpeed = AttackSpeed;
         this.Difficulty = Difficulty;
+
+        Material[] newMaterials = Body.materials;
+        newMaterials[0] = Stages[this.Difficulty];
+        Body.materials = newMaterials;
     }
 
 
     public void Death()
     {
+        FunctionItem fi = Instantiate(OrgFunctionItem, OrgFunctionItem.transform.parent);
+        fi.transform.SetParent(null);
+        fi.gameObject.SetActive(true);
+        fi.Create();
         Destroy(gameObject);
     }
 }
