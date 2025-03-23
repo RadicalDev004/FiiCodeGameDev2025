@@ -9,6 +9,7 @@ public class TutorialGlitch : Editable
     public List<Texture> GlitchSprites = new();
     public Material GlitchMaterial;
     public List<string> CorrectAnswer = new();
+    
 
     private void Awake()
     {
@@ -27,13 +28,14 @@ public class TutorialGlitch : Editable
 
         if (code[0] != "true" && code[0] != "false")
         {
-            Debug.LogError("Failed validation at type " + code.Count);
+            Debug.LogError("Failed validation at type " + code[0]);
             return false;
         }
 
         if(code.SequenceEqual(CorrectAnswer))
         {
             OnGlitchSolve();
+            Ref.EnemySpawner.SpawnEnemies(0.5f, EnemySpawnAfterComplete);
             ManaSystem.Instance.UseMana(0.64f);
         }
        

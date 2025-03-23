@@ -31,7 +31,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         CheckForEditableObject();
 
-        if (Input.GetKeyDown(KeyCode.E) && editableToAccess != null && !Code.IsOpen)
+        if (Input.GetKeyDown(KeyCode.E) && editableToAccess != null && !Code.IsOpen && !(editableToAccess is Enemy && !ManaSystem.Instance.HasFullMana()))
         {
             Time.timeScale = 0;
             editableToAccess.CreateTerminal();
@@ -47,6 +47,13 @@ public class PlayerBehaviour : MonoBehaviour
         if (Time.time - lastSeenEditableTime > uiHideDelay)
         {
             UI.TogglePressE(false);
+            UI.ToggleNotEnughMana(false);
+        }
+
+        if(ManaSystem.Instance.HasFullMana() && UI.I_NotEnoughMana.activeInHierarchy)
+        {
+            UI.TogglePressE(true);
+            UI.ToggleNotEnughMana(false);
         }
     }
 
@@ -77,7 +84,13 @@ public class PlayerBehaviour : MonoBehaviour
                 }
 
                 lastSeenEditableTime = Time.time;
-                UI.TogglePressE(true);
+                if(editableToAccess is Enemy)
+                {
+                    UI.TogglePressE(ManaSystem.Instance.HasFullMana());
+                    UI.ToggleNotEnughMana(!ManaSystem.Instance.HasFullMana());
+                }
+                else
+                    UI.TogglePressE(true);
                 return;
             }
         }
