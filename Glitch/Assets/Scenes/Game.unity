@@ -6218,8 +6218,9 @@ GameObject:
   - component: {fileID: 276160811}
   - component: {fileID: 276160810}
   - component: {fileID: 276160814}
+  - component: {fileID: 276160815}
   m_Layer: 0
-  m_Name: Cube (6)
+  m_Name: BridgePart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6304,12 +6305,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 276160809}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -5.7443, y: 6.639, z: -7.0267}
-  m_LocalScale: {x: 0.17, y: 0.05, z: 0.17}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.8582363, y: 0.23642349, z: 0.2382164}
+  m_LocalScale: {x: 0.16999999, y: 0.05, z: 0.16999999}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1154874672}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &276160814
 MonoBehaviour:
@@ -6323,6 +6324,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76bc1be8b9b4adb4c9d80f966f58890e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &276160815
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276160809}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &341811834
 GameObject:
   m_ObjectHideFlags: 0
@@ -7319,8 +7347,9 @@ GameObject:
   - component: {fileID: 488827012}
   - component: {fileID: 488827011}
   - component: {fileID: 488827015}
+  - component: {fileID: 488827016}
   m_Layer: 0
-  m_Name: Cube (9)
+  m_Name: BridgePart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7405,12 +7434,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 488827010}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.24226062, w: 0.9702112}
-  m_LocalPosition: {x: -6.0366, y: 6.9623, z: -6.4776}
-  m_LocalScale: {x: 0.44, y: 0.05, z: 0.17}
+  m_LocalRotation: {x: -0, y: -0, z: -0.24226062, w: 0.9702112}
+  m_LocalPosition: {x: 0.5659361, y: 0.5597234, z: 0.7873163}
+  m_LocalScale: {x: 0.44000003, y: 0.050000004, z: 0.17}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1154874672}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -28.04}
 --- !u!114 &488827015
 MonoBehaviour:
@@ -7424,6 +7453,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76bc1be8b9b4adb4c9d80f966f58890e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &488827016
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488827010}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &637296065
 GameObject:
   m_ObjectHideFlags: 0
@@ -8303,8 +8359,9 @@ GameObject:
   - component: {fileID: 865047301}
   - component: {fileID: 865047300}
   - component: {fileID: 865047304}
+  - component: {fileID: 865047305}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: BridgePart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8389,12 +8446,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 865047299}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.24226062, w: 0.9702112}
-  m_LocalPosition: {x: -6.105, y: 6.061, z: -7.8414}
-  m_LocalScale: {x: 0.44, y: 0.05, z: 0.17}
+  m_LocalRotation: {x: -0, y: -0, z: -0.24226062, w: 0.9702112}
+  m_LocalPosition: {x: 0.49753618, y: -0.34157658, z: -0.5764837}
+  m_LocalScale: {x: 0.44000003, y: 0.050000004, z: 0.17}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1154874672}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -28.04}
 --- !u!114 &865047304
 MonoBehaviour:
@@ -8408,6 +8465,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76bc1be8b9b4adb4c9d80f966f58890e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &865047305
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865047299}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &880209817
 GameObject:
   m_ObjectHideFlags: 0
@@ -9598,8 +9682,9 @@ GameObject:
   - component: {fileID: 1071243253}
   - component: {fileID: 1071243252}
   - component: {fileID: 1071243256}
+  - component: {fileID: 1071243257}
   m_Layer: 0
-  m_Name: Cube (4)
+  m_Name: BridgePart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9684,12 +9769,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1071243251}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -6.3717, y: 6.3782, z: -7.0267}
-  m_LocalScale: {x: 0.17, y: 0.05, z: 0.17}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.23083639, y: -0.024376392, z: 0.2382164}
+  m_LocalScale: {x: 0.16999999, y: 0.05, z: 0.16999999}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1154874672}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &1071243256
 MonoBehaviour:
@@ -9703,6 +9788,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76bc1be8b9b4adb4c9d80f966f58890e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &1071243257
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071243251}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1079496434
 GameObject:
   m_ObjectHideFlags: 0
@@ -15209,6 +15321,47 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1148442757}
   m_CullTransparentMesh: 1
+--- !u!1 &1154874671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1154874672}
+  m_Layer: 0
+  m_Name: HiddenBridge
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1154874672
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1154874671}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.602536, y: 6.4025764, z: -7.2649164}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 865047303}
+  - {fileID: 488827014}
+  - {fileID: 1819645116}
+  - {fileID: 1404455762}
+  - {fileID: 1842016134}
+  - {fileID: 1071243255}
+  - {fileID: 276160813}
+  - {fileID: 1318984610}
+  - {fileID: 1190299248}
+  - {fileID: 1279027183}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1167995684
 GameObject:
   m_ObjectHideFlags: 0
@@ -15539,8 +15692,9 @@ GameObject:
   - component: {fileID: 1190299246}
   - component: {fileID: 1190299245}
   - component: {fileID: 1190299249}
+  - component: {fileID: 1190299250}
   m_Layer: 0
-  m_Name: Cube (10)
+  m_Name: BridgePart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15625,12 +15779,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1190299244}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -6.3489, y: 7.0613, z: -6.4776}
-  m_LocalScale: {x: 0.17, y: 0.05, z: 0.2637875}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.25363636, y: 0.65872335, z: 0.7873163}
+  m_LocalScale: {x: 0.16999999, y: 0.05, z: 0.2637875}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1154874672}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &1190299249
 MonoBehaviour:
@@ -15644,6 +15798,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76bc1be8b9b4adb4c9d80f966f58890e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &1190299250
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190299244}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1239060823
 GameObject:
   m_ObjectHideFlags: 0
@@ -15884,8 +16065,9 @@ GameObject:
   - component: {fileID: 1279027181}
   - component: {fileID: 1279027180}
   - component: {fileID: 1279027184}
+  - component: {fileID: 1279027185}
   m_Layer: 0
-  m_Name: Cube (5)
+  m_Name: BridgePart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15971,11 +16153,11 @@ Transform:
   m_GameObject: {fileID: 1279027179}
   serializedVersion: 2
   m_LocalRotation: {x: -0.18301266, y: 0.6830127, z: 0.18301266, w: 0.6830127}
-  m_LocalPosition: {x: -6.0459, y: 6.5121, z: -7.0267}
-  m_LocalScale: {x: 0.17, y: 0.05, z: 0.53}
+  m_LocalPosition: {x: 0.55663633, y: 0.10952377, z: 0.2382164}
+  m_LocalScale: {x: 0.17, y: 0.05, z: 0.5299999}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1154874672}
   m_LocalEulerAnglesHint: {x: -30, y: 90, z: 0}
 --- !u!114 &1279027184
 MonoBehaviour:
@@ -15989,6 +16171,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76bc1be8b9b4adb4c9d80f966f58890e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &1279027185
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1279027179}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1281876653
 GameObject:
   m_ObjectHideFlags: 0
@@ -16203,8 +16412,9 @@ GameObject:
   - component: {fileID: 1318984608}
   - component: {fileID: 1318984607}
   - component: {fileID: 1318984611}
+  - component: {fileID: 1318984612}
   m_Layer: 0
-  m_Name: Cube (8)
+  m_Name: BridgePart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16289,12 +16499,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1318984606}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -5.7443, y: 6.8565, z: -6.4776}
-  m_LocalScale: {x: 0.17, y: 0.05, z: 0.17}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.8582363, y: 0.4539237, z: 0.7873163}
+  m_LocalScale: {x: 0.16999999, y: 0.05, z: 0.16999999}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1154874672}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &1318984611
 MonoBehaviour:
@@ -16308,6 +16518,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76bc1be8b9b4adb4c9d80f966f58890e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &1318984612
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318984606}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1379302663
 GameObject:
   m_ObjectHideFlags: 0
@@ -21203,8 +21440,9 @@ GameObject:
   - component: {fileID: 1404455760}
   - component: {fileID: 1404455759}
   - component: {fileID: 1404455763}
+  - component: {fileID: 1404455764}
   m_Layer: 0
-  m_Name: Cube (3)
+  m_Name: BridgePart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21290,11 +21528,11 @@ Transform:
   m_GameObject: {fileID: 1404455758}
   serializedVersion: 2
   m_LocalRotation: {x: -0.18301266, y: 0.6830127, z: -0.18301266, w: 0.6830127}
-  m_LocalPosition: {x: -6.3717, y: 6.2728, z: -7.2873}
-  m_LocalScale: {x: 0.44, y: 0.05, z: 0.17}
+  m_LocalPosition: {x: 0.23083639, y: -0.12977648, z: -0.02238369}
+  m_LocalScale: {x: 0.43999997, y: 0.05, z: 0.17}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1154874672}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: -30}
 --- !u!114 &1404455763
 MonoBehaviour:
@@ -21308,6 +21546,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76bc1be8b9b4adb4c9d80f966f58890e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &1404455764
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404455758}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1456631536
 GameObject:
   m_ObjectHideFlags: 0
@@ -28156,8 +28421,9 @@ GameObject:
   - component: {fileID: 1819645114}
   - component: {fileID: 1819645113}
   - component: {fileID: 1819645117}
+  - component: {fileID: 1819645118}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: BridgePart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28242,12 +28508,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1819645112}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -6.3717, y: 6.1601, z: -7.7072}
-  m_LocalScale: {x: 0.44, y: 0.05, z: 0.17}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.23083639, y: -0.24247646, z: -0.44228363}
+  m_LocalScale: {x: 0.44, y: 0.05, z: 0.16999999}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1154874672}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &1819645117
 MonoBehaviour:
@@ -28261,6 +28527,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76bc1be8b9b4adb4c9d80f966f58890e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &1819645118
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819645112}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1829758078
 GameObject:
   m_ObjectHideFlags: 0
@@ -28471,8 +28764,9 @@ GameObject:
   - component: {fileID: 1842016132}
   - component: {fileID: 1842016131}
   - component: {fileID: 1842016135}
+  - component: {fileID: 1842016136}
   m_Layer: 0
-  m_Name: Cube (7)
+  m_Name: BridgePart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28558,11 +28852,11 @@ Transform:
   m_GameObject: {fileID: 1842016130}
   serializedVersion: 2
   m_LocalRotation: {x: -0.18301266, y: 0.6830127, z: -0.18301266, w: 0.6830127}
-  m_LocalPosition: {x: -5.7449, y: 6.7502, z: -6.7421}
-  m_LocalScale: {x: 0.44, y: 0.05, z: 0.17}
+  m_LocalPosition: {x: 0.857636, y: 0.34762335, z: 0.52281666}
+  m_LocalScale: {x: 0.43999997, y: 0.05, z: 0.17}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1154874672}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: -30}
 --- !u!114 &1842016135
 MonoBehaviour:
@@ -28576,6 +28870,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76bc1be8b9b4adb4c9d80f966f58890e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &1842016136
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842016130}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1878571684
 GameObject:
   m_ObjectHideFlags: 0
@@ -28592,7 +28913,7 @@ GameObject:
   - component: {fileID: 1878571689}
   m_Layer: 8
   m_Name: Projectile
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48714,6 +49035,7 @@ GameObject:
   - component: {fileID: 2542771286371047522}
   - component: {fileID: 7911501935078105452}
   - component: {fileID: 7974930501223011389}
+  - component: {fileID: 8016737361347546212}
   m_Layer: 0
   m_Name: polySurface128
   m_TagString: Untagged
@@ -48721,6 +49043,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!64 &8016737361347546212
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016737361347546211}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6033983710343408189, guid: 01d3184953e05fb46ae1f4e4ce56774e, type: 3}
 --- !u!1 &8041240400340190682
 GameObject:
   m_ObjectHideFlags: 0
@@ -62404,13 +62748,4 @@ SceneRoots:
   - {fileID: 543450653468666463}
   - {fileID: 741692107}
   - {fileID: 4054939594599563625}
-  - {fileID: 865047303}
-  - {fileID: 488827014}
-  - {fileID: 1819645116}
-  - {fileID: 1404455762}
-  - {fileID: 1842016134}
-  - {fileID: 1071243255}
-  - {fileID: 276160813}
-  - {fileID: 1318984610}
-  - {fileID: 1190299248}
-  - {fileID: 1279027183}
+  - {fileID: 1154874672}
