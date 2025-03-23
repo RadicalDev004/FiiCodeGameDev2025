@@ -26,6 +26,10 @@ public class Ref : MonoBehaviour
     public static UI UI { get { return Instance._UI; } }
 
 
+    public EnemySpawner _EnemySpawner;
+    public static EnemySpawner EnemySpawner { get { return Instance._EnemySpawner; } }
+
+
     public static Ref Instance;
 
 

@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class UI : MonoBehaviour
 {
-    public GameObject I_PressE;
+    public GameObject I_PressE, I_NotEnoughMana;
 
     public void TogglePressE(bool state)
     {
         I_PressE.SetActive(state);
     }
+    public void ToggleNotEnughMana(bool state)
+    {
+        I_NotEnoughMana.SetActive(state);
+    }
+
 }

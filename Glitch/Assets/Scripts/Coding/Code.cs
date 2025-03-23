@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -141,5 +141,23 @@ public class Code : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(f);
         T_ErrText.text = string.Empty;
+    }
+
+    public static bool HasAtMostOneDifference<T>(List<T> list1, List<T> list2)
+    {
+        if (list1.Count != list2.Count) return false;
+
+        int diffCount = 0;
+
+        for (int i = 0; i < list1.Count; i++)
+        {
+            if (!EqualityComparer<T>.Default.Equals(list1[i], list2[i]))
+            {
+                diffCount++;
+                if (diffCount > 1) return false;
+            }
+        }
+
+        return true;
     }
 }
