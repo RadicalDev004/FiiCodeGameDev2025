@@ -33,6 +33,11 @@ public class ManaSystem : MonoBehaviour
         }
     }
 
+    public bool HasFullMana()
+    {
+        return currentMana == maxMana;
+    }
+
     public void UseMana(float amount)
     {
         if(amount <= currentMana)

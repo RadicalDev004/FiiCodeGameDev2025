@@ -14,6 +14,7 @@ public class Editable : MonoBehaviour
     public Func<List<string>, bool> ValidateCode;
     public bool Completed = false;
     public bool UseOutline = true;
+    public int[] EnemySpawnAfterComplete;
 
     private PlayerBehaviour playerBehaviour;
     private Code Code;
@@ -71,6 +72,5 @@ public class Editable : MonoBehaviour
         playerBehaviour.PlaySolveGlitch();
         ToggleOutline(false);
         Completed = true;
-        Ref.EnemySpawner.SpawnEnemies(2, 2);
     }
 }
