@@ -49,10 +49,13 @@ public class Mushroom : Editable
 
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.gameObject.name == "Player")
         {
             if(!Cooldwon) 
             {
+                Debug.LogWarning("MUSHROOM JUMP1");
+                Ref.Movement.velocity = Vector3.zero;
                 Ref.Movement.Jump(Multiplier);
                 Cooldwon = true;
                 StartCoroutine(WaitForCooldown(TimeOut));
@@ -60,6 +63,22 @@ public class Mushroom : Editable
             
         }
     }
+
+    /*private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "Player")
+        {
+            if (!Cooldwon)
+            {
+                Debug.LogWarning("MUSHROOM JUMP2");
+                Ref.Movement.velocity = Vector3.zero;
+                Ref.Movement.Jump(Multiplier);
+                Cooldwon = true;
+                StartCoroutine(WaitForCooldown(TimeOut));
+            }
+
+        }
+    }*/
 
     private IEnumerator WaitForCooldown(float seconds)
     {

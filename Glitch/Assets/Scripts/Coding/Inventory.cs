@@ -64,6 +64,11 @@ public class Inventory : Editable
             StartCoroutine(ShowPowerUpUI(Instantiate(I_PowerUpOrg, I_PowerUpOrg.transform.parent), PowerupSprites[2], 60));
             StartCoroutine(SpeedIncrease(60));
         }
+        else if (code[0] == FunctionItem.functionNames[3])
+        {
+            StartCoroutine(ShowPowerUpUI(Instantiate(I_PowerUpOrg, I_PowerUpOrg.transform.parent), PowerupSprites[2], 60));
+            StartCoroutine(AttackSpeedIncrease(60));
+        }
 
         Functions[code[0]]--;
 
@@ -116,5 +121,12 @@ public class Inventory : Editable
         Ref.Movement.speed *= 2;
         yield return new WaitForSeconds(duration);
         Ref.Movement.speed /= 2;
+    }
+
+    private IEnumerator AttackSpeedIncrease(float duration)
+    {
+        Ref.PlayerBehaviour.CooldownTimer /= 2;
+        yield return new WaitForSeconds(duration);
+        Ref.PlayerBehaviour.CooldownTimer *= 2;
     }
 }

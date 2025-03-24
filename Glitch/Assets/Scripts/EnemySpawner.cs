@@ -28,7 +28,7 @@ public class EnemySpawner : MonoBehaviour
 
             Ray ray = new(newEnemyPos, Vector3.down);
 
-            if (Physics.Raycast(ray, out RaycastHit hit, yOffsetUp + yOffsetDown))
+            if (Physics.Raycast(ray, out RaycastHit hit, yOffsetUp + yOffsetDown) && Mathf.Abs(hit.point.y - PlayerBehaviour.transform.position.y) < 0.1f)
             {
                 Vector3 hitPoint = hit.point;
                 SpawnEnemyBasedOnDifficulty(hitPoint + new Vector3(0, yOffsetDown, 0), difficulty[ind]);
@@ -36,6 +36,7 @@ public class EnemySpawner : MonoBehaviour
                 ind++;
             }
         }
+        Debug.Break();
     }
 
     public void SpawnEnemyBasedOnDifficulty(Vector3 position, int difficulty)

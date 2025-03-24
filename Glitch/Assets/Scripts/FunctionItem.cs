@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class FunctionItem : MonoBehaviour
 {
-    public static List<string> functionNames = new() { "heal()", "attack_boost()", "speed_increase()" };
+    public static List<string> functionNames = new() { "heal()", "attack_boost()", "speed_increase()", "attack_speed()" };
     public string Name;
     private TMP_Text T_Name;
     private Rigidbody Rigidbody;
