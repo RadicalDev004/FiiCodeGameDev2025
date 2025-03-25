@@ -2,6 +2,7 @@ using Pixelplacement;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -41,7 +42,7 @@ public class PlayerBehaviour : MonoBehaviour
             UI.TogglePressE(false);
         }
 
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.M) && !Code.IsOpen)
         {
             UI.ToggleMap();
         }

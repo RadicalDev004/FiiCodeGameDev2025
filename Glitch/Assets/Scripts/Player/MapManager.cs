@@ -5,16 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class MapManager : MonoBehaviour
 {
-    public GameObject mapUI; // UI-ul pentru hartă
-    public List<Button> checkpointButtons; // Lista de butoane pentru checkpoint-uri
+    public GameObject mapUI; 
+    public List<Button> checkpointButtons; 
     private Dictionary<Button, Vector3> teleportLocations = new Dictionary<Button, Vector3>();
 
     void Start()
     {
-        // Inițial ascunde harta
         mapUI.SetActive(false);
 
-        // Ascunde toate butoanele inițial
         foreach (Button button in checkpointButtons)
         {
             button.gameObject.SetActive(false);
@@ -33,9 +31,18 @@ public class MapManager : MonoBehaviour
     {
         bool isActive = !mapUI.activeSelf;
         mapUI.SetActive(isActive);
-        Cursor.visible = isActive;
-        Cursor.lockState = isActive ? CursorLockMode.None : CursorLockMode.Locked; // Blochează cursorul când harta e închisă
-        Time.timeScale = isActive ? 0f : 1f; // Pune jocul pe pauză când harta e deschisă
+        //Cursor.visible = isActive;
+        if (isActive)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Cursor.lockState= CursorLockMode.Locked;
+            Time.timeScale = 1f;
+        }
+       
     }
 
     public void UnlockCheckpoint(Button button, Vector3 worldPosition)
@@ -45,7 +52,7 @@ public class MapManager : MonoBehaviour
         {
             teleportLocations[button] = worldPosition;
             button.onClick.AddListener(() => TeleportPlayer(button));
-            button.gameObject.SetActive(true); // Activează butonul pe hartă
+            button.gameObject.SetActive(true);
         }
     }
 
