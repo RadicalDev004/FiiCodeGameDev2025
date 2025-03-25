@@ -6,30 +6,13 @@ using UnityEngine.SceneManagement;
 public class MapManager : MonoBehaviour
 {
     public GameObject mapUI; 
-    public List<Button> checkpointButtons; 
     private Dictionary<Button, Vector3> teleportLocations = new Dictionary<Button, Vector3>();
+    public bool isActive = false;
 
-    void Start()
+
+    public void ToggleMap()
     {
-        mapUI.SetActive(false);
-
-        foreach (Button button in checkpointButtons)
-        {
-            button.gameObject.SetActive(false);
-        }
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            ToggleMap();
-        }
-    }
-
-    void ToggleMap()
-    {
-        bool isActive = !mapUI.activeSelf;
+        isActive = !mapUI.activeSelf;
         mapUI.SetActive(isActive);
         //Cursor.visible = isActive;
         if (isActive)
@@ -58,17 +41,33 @@ public class MapManager : MonoBehaviour
 
     void TeleportPlayer(Button button)
     {
-        Vector3 targetPosition = teleportLocations[button];
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        CharacterController controller = player.GetComponent<CharacterController>();
-        if (controller != null)
+        if(!AreZombiesAlive())
         {
-            controller.enabled = false; 
-            player.transform.position = targetPosition;
-            controller.enabled = true; 
-        }
+            Vector3 targetPosition = teleportLocations[button];
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            CharacterController controller = player.GetComponent<CharacterController>();
+            if (controller != null)
+            {
+                controller.enabled = false;
+                player.transform.position = targetPosition;
+                controller.enabled = true;
+            }
 
-        player.transform.position = targetPosition;
-        ToggleMap();
+            player.transform.position = targetPosition;
+            ToggleMap();
+        }
+        else
+        {
+            Ref.UI.ToggleZombiesAlive();
+        }
+    }
+
+    public bool AreZombiesAlive()
+    {
+        GameObject[] zombies = GameObject.FindGameObjectsWithTag("Enemy");
+        if (zombies.Length > 0)
+            return true;
+        else
+            return false;
     }
 }

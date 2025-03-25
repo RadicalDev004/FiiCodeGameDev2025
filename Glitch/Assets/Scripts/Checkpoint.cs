@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Checkpoint : MonoBehaviour
 {
     public Button checkpointButton;
     public Vector3 teleportLocation;
+    public UI _UI;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -15,6 +17,12 @@ public class Checkpoint : MonoBehaviour
             {
                 mapController.UnlockCheckpoint(checkpointButton, teleportLocation);
             }
+
+            if (Ref.UI != null)
+            {
+                Ref.UI.ToggleCheckpointText();
+            }
+
             Destroy(gameObject);
         }
     }

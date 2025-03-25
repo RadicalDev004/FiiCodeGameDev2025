@@ -12,6 +12,7 @@ public class JarsColoring : Editable
     public float FillJar1, FillJar2;
     public float MaxPos = -0.02f, MaxFill = 0.09f;
     public SpriteRenderer Org, ToEdit;
+    public GameObject bostan, pereteInviz;
 
     private void Awake()
     {
@@ -73,6 +74,12 @@ public class JarsColoring : Editable
         if((Org.color.b - 0.1f <= ToEdit.color.b && ToEdit.color.b <= Org.color.b + 0.1f) && (Org.color.r - 0.1f <= ToEdit.color.r && ToEdit.color.r <= Org.color.r + 0.1f))
         {
             OnGlitchSolve();
+            Destroy(pereteInviz);
+            yield return new WaitForSeconds(3f);
+            bostan.gameObject.AddComponent<Rigidbody>();
+            bostan.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, 1), ForceMode.Impulse);
+            yield return new WaitForSeconds(10f);
+            Destroy(bostan);
         }
     }
 
