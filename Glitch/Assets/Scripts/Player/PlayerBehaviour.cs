@@ -41,6 +41,11 @@ public class PlayerBehaviour : MonoBehaviour
             UI.TogglePressE(false);
         }
 
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            UI.ToggleMap();
+        }
+
         if (Input.GetMouseButtonDown(0) && Time.timeScale > 0 && !isCoolDown)
         {
             StartCoroutine(ShootingProjectileCor(0.2f));

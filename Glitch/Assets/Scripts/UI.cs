@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
@@ -14,5 +15,9 @@ public class UI : MonoBehaviour
     {
         I_NotEnoughMana.SetActive(state);
     }
+    
+    public void ToggleMap()
+    {
 
+    }
 }
