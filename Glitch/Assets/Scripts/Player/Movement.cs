@@ -17,7 +17,7 @@ public class Movement : MonoBehaviour
 
     private Player PlayerInput;
 
-    private Vector3 LastPos = Vector3.zero;
+    public Vector3 LastPos = Vector3.zero;
 
     private bool StopAudio = true;
     public static bool IsPaused = false;
@@ -90,7 +90,7 @@ public class Movement : MonoBehaviour
             StopAudio = false;
         }
 
-        LastPos = gameObject.transform.position;
+        //LastPos = gameObject.transform.position;
     }
 
     public Vector3 AdjustVelocityToSlope(Vector3 velo)

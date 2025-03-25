@@ -36,7 +36,7 @@ public class EnemySpawner : MonoBehaviour
                 ind++;
             }
         }
-        Debug.Break();
+        //Debug.Break();
     }
 
     public void SpawnEnemyBasedOnDifficulty(Vector3 position, int difficulty)
@@ -99,6 +99,7 @@ public class EnemySpawner : MonoBehaviour
         Debug.LogError("new enemy pos: " + position);
         GameObject newEnemy = Instantiate(OriginalEnemy, position, Quaternion.identity, OriginalEnemy.transform.parent);
         newEnemy.SetActive(true);
-        newEnemy.GetComponent<EnemyBehaviour>().Create(MaxHealth, Speed, Damage, AttackSpeed, Healing, Difficulty);       
+        newEnemy.GetComponent<EnemyBehaviour>().Create(MaxHealth, Speed, Damage, AttackSpeed, Healing, Difficulty);
+        newEnemy.tag = "Enemy";
     }
 }

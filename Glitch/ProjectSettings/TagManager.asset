@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Editable
   - Projectile
+  - CheckpointUI
+  - Enemy
   layers:
   - Default
   - TransparentFX

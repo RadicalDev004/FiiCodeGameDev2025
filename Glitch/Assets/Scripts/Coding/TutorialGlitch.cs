@@ -9,7 +9,6 @@ public class TutorialGlitch : Editable
     public List<Texture> GlitchSprites = new();
     public Material GlitchMaterial;
     public List<string> CorrectAnswer = new();
-    
 
     private void Awake()
     {
@@ -35,8 +34,6 @@ public class TutorialGlitch : Editable
         if(code.SequenceEqual(CorrectAnswer))
         {
             OnGlitchSolve();
-            
-            ManaSystem.Instance.UseMana(0.64f);
         }
        
 

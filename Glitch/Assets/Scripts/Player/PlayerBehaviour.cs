@@ -2,6 +2,7 @@ using Pixelplacement;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,7 @@ public class PlayerBehaviour : MonoBehaviour
     public Camera playerCamera;
     private Editable editableToAccess = null;
     private UI UI;
+    private MapManager mapManager;
     public bool isEpressed = false;
     [Header("Projectiles")]
     public Projectile OrgProjectile;
@@ -28,17 +30,23 @@ public class PlayerBehaviour : MonoBehaviour
     private void Awake()
     {
         UI = Ref.UI;
+        mapManager = UI.gameObject.GetComponent<MapManager>();
     }
 
     void Update()
     {
         CheckForEditableObject();
 
-        if (Input.GetKeyDown(KeyCode.E) && editableToAccess != null && !Code.IsOpen && !(editableToAccess is Enemy && !ManaSystem.Instance.HasFullMana()))
+        if (Input.GetKeyDown(KeyCode.E) && editableToAccess != null && !Code.IsOpen && !(editableToAccess is Enemy && !ManaSystem.Instance.HasFullMana()) && !mapManager.isActive)
         {
             Time.timeScale = 0;
             editableToAccess.CreateTerminal();
             UI.TogglePressE(false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.M) && !Code.IsOpen)
+        {
+            mapManager.GetComponent<MapManager>().ToggleMap();
         }
 
         if (Input.GetMouseButtonDown(0) && Time.timeScale > 0 && !isCoolDown)
