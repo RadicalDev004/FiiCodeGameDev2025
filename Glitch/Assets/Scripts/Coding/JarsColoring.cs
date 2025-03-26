@@ -76,7 +76,7 @@ public class JarsColoring : Editable
             OnGlitchSolve();
             Destroy(pereteInviz);
             yield return new WaitForSeconds(3f);
-            bostan.gameObject.AddComponent<Rigidbody>();
+            bostan.AddComponent<Rigidbody>();
             bostan.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, 1), ForceMode.Impulse);
             yield return new WaitForSeconds(10f);
             Destroy(bostan);
