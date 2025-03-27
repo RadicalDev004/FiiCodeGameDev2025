@@ -53,6 +53,7 @@ public class Inventory : Editable
         if (code[0] == FunctionItem.functionNames[0])
         {
             StartCoroutine(ShowPowerUpUI(Instantiate(I_PowerUpOrg, I_PowerUpOrg.transform.parent), PowerupSprites[0], 1));
+            Ref.PlayerBehaviour.TakeDamage(-50);
         }
         else if (code[0] == FunctionItem.functionNames[1])
         {
@@ -78,7 +79,7 @@ public class Inventory : Editable
     public void CreateinventoryCode()
     {
         string fnc = string.Join("", Functions.Select(kvp => kvp.Value > 0 ? $"  {kvp.Key} x{kvp.Value}\r\n" : ""));
-        ExecutableCode = "\r\n<color=red>/* you have:\r\n" +
+        ExecutableCode = "\r\n<color=black>/* you have:\r\n" +
             $"{fnc}" +
             "\r\n*/</color>\r\n\r\n" +
             "use_powerup(<e></e> );\r\n\r\n" +

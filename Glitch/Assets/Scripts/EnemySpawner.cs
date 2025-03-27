@@ -46,15 +46,17 @@ public class EnemySpawner : MonoBehaviour
         float Damage;
         bool Healing;
         float AttackSpeed;
+        float AttackRange;
 
         switch(difficulty)
         {
             default:
             case 0:
-                MaxHealth = 25 * Random.Range(2, 6);
+                MaxHealth = 25 * Random.Range(3, 6);
                 Speed = 0.25f * Random.Range(3, 6);
                 Damage = 5 * Random.Range(3, 6);
                 Healing = RandomChance.Percent(10);
+                AttackRange = 0.8f + 0.2f * Random.Range(0, 3);
                 AttackSpeed = 1;
             break;
 
@@ -62,23 +64,26 @@ public class EnemySpawner : MonoBehaviour
                 MaxHealth = 25 * Random.Range(3, 8);
                 Speed = 0.25f * Random.Range(4, 6);
                 Damage = 5 * Random.Range(4, 7);
-                Healing = RandomChance.Percent(20);
+                Healing = RandomChance.Percent(25);
+                AttackRange = 0.8f + 0.2f * Random.Range(2, 4);
                 AttackSpeed = 1 + 0.2f * Random.Range(0, 3);
             break;
 
             case 2:
-                MaxHealth = 25 * Random.Range(4, 9);
+                MaxHealth = 25 * Random.Range(4, 10);
                 Speed = 0.25f * Random.Range(5, 7);
                 Damage = 5 * Random.Range(5, 9);
-                Healing = RandomChance.Percent(30);
+                Healing = RandomChance.Percent(35);
+                AttackRange = 0.8f + 0.2f * Random.Range(4, 6);
                 AttackSpeed = 1 + 0.2f * Random.Range(1, 5);
             break;
 
             case 3:
-                MaxHealth = 25 * Random.Range(5, 10);
+                MaxHealth = 25 * Random.Range(5, 12);
                 Speed = 0.25f * Random.Range(6, 8);
                 Damage = 5 * Random.Range(6, 10);
-                Healing = RandomChance.Percent(50);
+                Healing = RandomChance.Percent(55);
+                AttackRange = 0.8f + 0.2f * Random.Range(6, 8);
                 AttackSpeed = 1 + 0.2f * Random.Range(3, 7);
             break;
 
@@ -87,19 +92,20 @@ public class EnemySpawner : MonoBehaviour
                 Speed = 0.25f * Random.Range(8, 12);
                 Damage = 5 * Random.Range(10, 15);
                 Healing = RandomChance.Percent(90);
+                AttackRange = 0.8f + 0.2f * Random.Range(8, 11);
                 AttackSpeed = 1 + 0.2f * Random.Range(4, 9);
             break;
         }
 
-        SpawnEnemy(position, MaxHealth, Speed, Damage, Healing, AttackSpeed, difficulty);
+        SpawnEnemy(position, MaxHealth, Speed, Damage, AttackSpeed, AttackRange, Healing, difficulty);
     }
 
-    public void SpawnEnemy(Vector3 position, int MaxHealth, float Speed, float Damage, bool Healing, float AttackSpeed, int Difficulty)
+    public void SpawnEnemy(Vector3 position, int MaxHealth, float Speed, float Damage, float AttackSpeed, float AttackRange, bool Healing, int Difficulty)
     {
         Debug.LogError("new enemy pos: " + position);
         GameObject newEnemy = Instantiate(OriginalEnemy, position, Quaternion.identity, OriginalEnemy.transform.parent);
         newEnemy.SetActive(true);
-        newEnemy.GetComponent<EnemyBehaviour>().Create(MaxHealth, Speed, Damage, AttackSpeed, Healing, Difficulty);
+        newEnemy.GetComponent<EnemyBehaviour>().Create(MaxHealth, Speed, Damage, AttackSpeed, AttackRange, Healing, Difficulty);
         newEnemy.tag = "Enemy";
     }
 }

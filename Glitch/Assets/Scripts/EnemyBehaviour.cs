@@ -7,10 +7,12 @@ public class EnemyBehaviour : MonoBehaviour
 {
     public GameObject Canvas;
     public Slider S_Health;
-    public float MaxHealth = 0, CurrentHealth, Speed = 1, Damage = 50, AttackSpeed = 1;
-    public float givenManaPerHit;
-    public bool Healing = false;
+    public float MaxHealth = 0, CurrentHealth, Speed = 1, Damage = 50, AttackSpeed = 1, AttackRange = 1, BaseAttackRange = 0.1f, BaseAttackSpeed = 1;
+    public float givenManaPerHit, Dist;
+    public bool Healing = false, Attacking = false;
     public int Difficulty = -1;
+    public GameObject AttackRangeObj;
+    public float AttackObjLocalScaleFactor = 4;
     private PlayerBehaviour PlayerBehaviour;
     public float lookToPlayerRotationSpeed = 0.5f;
     public float totalSpeed = 0.1f;
@@ -26,6 +28,14 @@ public class EnemyBehaviour : MonoBehaviour
     private void Update()
     {
         Canvas.transform.LookAt(PlayerBehaviour.gameObject.transform.position);
+        Dist = Vector3.Distance(transform.position, PlayerBehaviour.transform.position);
+        if ( Dist <= AttackRange * BaseAttackRange && !Attacking)
+        {
+            Attacking = true;
+            StartCoroutine(AttackCor(BaseAttackSpeed / AttackSpeed));
+        }
+
+        if (Attacking) return;
 
         Vector3 direction = PlayerBehaviour.transform.position - transform.position;
         direction.y = 0;
@@ -69,18 +79,19 @@ public class EnemyBehaviour : MonoBehaviour
         S_Health.value = CurrentHealth;
     }
 
-    public void Create(float MaxHealth, float Speed, float Damage, float AttackSpeed, bool Healing, int Difficulty = 0, bool updateCode = true)
+    public void Create(float MaxHealth, float Speed, float Damage, float AttackSpeed,float AttackRange, bool Healing, int Difficulty = 0, bool updateCode = true)
     {
         string code = $"\r\nenemy.speed = <e>{Speed}</e>;\r\n\r\n" +
             $"enemy.damage = <e>{Damage}</e>;\r\n\r\n" +
             $"enemy.attack_speed = <e>{AttackSpeed}</e>;\r\n\r\n" +
-            $"enemy.healing = <e>{Healing}</e>;\r\n\r\n" +            
-            "if(player_in_range())\r\n" +
+            $"enemy.attack_range = <e>{AttackRange}</e>;\r\n\r\n" +
+            $"enemy.healing = <e>{Healing}</e>;\r\n\r\n" +
+            /*"if(player_in_range())\r\n" +
             "{\r\n   " +
             $"attack_obj = <e>player</e>;\r\n   " +
             "damage(attack_obj);\r\n" +
-            "}\r\n\r\n" +
-            "<color=#031700>/* speed >= 0.5, damage >= 0.5, attack_speed >= 0.5, healing = true | false, YOU CANNOT EDIT MORE THAN 1 VALUE AT ONCE*/</color>\r\n\r\n";
+            "}\r\n\r\n" +*/
+            "<color=#031700>/* \r\n YOU CANNOT EDIT MORE THAN 1 VALUE AT ONCE \r\n 0.5 <= speed <= 5, 1 <= damage <= 100, 0.5 <= attack_speed <= 5, 0.5 <= attack_range <= 5, healing = true | false, */</color>\r\n\r\n";
 
         if(updateCode)
             GetComponentInChildren<Enemy>().ExecutableCode = code;
@@ -99,6 +110,7 @@ public class EnemyBehaviour : MonoBehaviour
         this.Healing = Healing;
         this.AttackSpeed = AttackSpeed;
         this.Difficulty = Difficulty;
+        this.AttackRange = AttackRange;
 
         Material[] newMaterials = Body.materials;
         newMaterials[0] = Stages[this.Difficulty];
@@ -113,5 +125,42 @@ public class EnemyBehaviour : MonoBehaviour
         fi.gameObject.SetActive(true);
         fi.Create();
         Destroy(gameObject);
+    }
+
+    private IEnumerator AttackCor(float duration)
+    {
+        AttackRangeObj.SetActive(true);
+        AttackRangeObj.transform.localScale = new(AttackObjLocalScaleFactor * AttackRange, AttackRangeObj.transform.localScale.y, AttackObjLocalScaleFactor * AttackRange);
+
+        AttackRangeObj.GetComponent<MeshRenderer>().material.color = new Color32(255, 0, 0, 0);
+        StartCoroutine(ChangeAlpha(AttackRangeObj.GetComponent<MeshRenderer>().material, duration));
+        yield return new WaitForSeconds(duration);
+
+        if(Vector3.Distance(transform.position, PlayerBehaviour.transform.position) <= AttackRange * BaseAttackRange)
+        {
+            PlayerBehaviour.TakeDamage(Damage);
+        }
+        AttackRangeObj.SetActive(false);
+        Attacking = false;
+    }
+
+    private IEnumerator ChangeAlpha(Material mat, float duration)
+    {
+        if (mat == null) yield break;
+
+        Color color = mat.color;
+        float startAlpha = color.a;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Lerp(startAlpha, 1f, elapsed / duration);
+            mat.color = new Color(color.r, color.g, color.b, alpha);
+            yield return null;
+        }
+
+        color.a = 1f;
+        mat.color = color;
     }
 }

@@ -11,8 +11,10 @@ public class Editable : MonoBehaviour
     [Header("Editable")]
     [TextArea(15, 15)]
     public string ExecutableCode;
+    [TextArea(5, 5)]
+    public string HintText;
     public Func<List<string>, bool> ValidateCode;
-    public bool Completed = false;
+    public bool Completed = false, Block = false;
     public bool UseOutline = true;
     public int[] EnemySpawnAfterComplete;
 
@@ -35,6 +37,7 @@ public class Editable : MonoBehaviour
 
     public void CreateTerminal()
     {
+       
         LookPC.isPaused = true;
         Movement.IsPaused = true;
         Cursor.lockState = CursorLockMode.None;

@@ -2,9 +2,11 @@ using Pixelplacement;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerBehaviour : MonoBehaviour
 {
@@ -14,6 +16,10 @@ public class PlayerBehaviour : MonoBehaviour
     private UI UI;
     private MapManager mapManager;
     public bool isEpressed = false;
+    [Header("Health")]
+    public float MaxHealth;
+    public Slider S_HealthSlider;
+    public float CurrentHealth;
     [Header("Projectiles")]
     public Projectile OrgProjectile;
     public float Lifetime = 3, Size = 1, Speed = 0.5f, Damage = 15;
@@ -31,6 +37,10 @@ public class PlayerBehaviour : MonoBehaviour
     {
         UI = Ref.UI;
         mapManager = UI.gameObject.GetComponent<MapManager>();
+
+        CurrentHealth = MaxHealth;
+        S_HealthSlider.maxValue = MaxHealth;
+        S_HealthSlider.value = CurrentHealth;
     }
 
     void Update()
@@ -39,9 +49,13 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E) && editableToAccess != null && !Code.IsOpen && !(editableToAccess is Enemy && !ManaSystem.Instance.HasFullMana()) && !mapManager.isActive)
         {
-            Time.timeScale = 0;
-            editableToAccess.CreateTerminal();
-            UI.TogglePressE(false);
+            if (!editableToAccess.Block)
+            {
+                Time.timeScale = 0;
+                editableToAccess.CreateTerminal();
+                UI.TogglePressE(false);
+            }
+            
         }
 
         if (Input.GetKeyDown(KeyCode.M) && !Code.IsOpen)
@@ -147,4 +161,20 @@ public class PlayerBehaviour : MonoBehaviour
         yield return new WaitForSeconds(CooldownTimer - animTime);
         isCoolDown = false;
     }
+
+    public void TakeDamage(float amount)
+    {
+        CurrentHealth -= amount;
+        S_HealthSlider.value = CurrentHealth;
+
+        if(CurrentHealth < 0)
+        {
+            //Game Over
+        }
+        if(CurrentHealth > MaxHealth)
+        {
+            CurrentHealth = MaxHealth;
+        }
+    }
+
 }

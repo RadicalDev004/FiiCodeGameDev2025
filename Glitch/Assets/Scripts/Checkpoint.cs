@@ -18,7 +18,7 @@ public class Checkpoint : MonoBehaviour
                 mapController.UnlockCheckpoint(checkpointButton, teleportLocation);
             }
 
-            if (Ref.UI != null)
+            if (Ref.UI != null && gameObject.name != "Tutorial")
             {
                 Ref.UI.ToggleCheckpointText();
             }

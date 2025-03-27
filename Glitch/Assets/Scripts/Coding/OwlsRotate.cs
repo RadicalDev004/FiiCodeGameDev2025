@@ -38,6 +38,7 @@ public class OwlsRotate : Editable
 
     private IEnumerator OwlAnimations(float duration, GameObject o1, GameObject o2)
     {
+        Block = true;
         Tween.LocalRotation(o1.transform, o1.transform.localRotation * Quaternion.Euler(0, 90, 0), duration, 0, Tween.EaseInOut);
         Tween.LocalRotation(o2.transform, o2.transform.localRotation * Quaternion.Euler(0, 90, 0), duration, 0, Tween.EaseInOut);
         yield return new WaitForSeconds(duration);
@@ -50,11 +51,13 @@ public class OwlsRotate : Editable
         {
             OnGlitchSolve();
         }
+        Block = false;
     }
 
     public void SetUpEyes()
     {
-        List<float> currRot = new() { Owls[0].transform.localEulerAngles.y, Owls[1].transform.localEulerAngles.y, Owls[2].transform.localEulerAngles.y, Owls[3].transform.localEulerAngles.y };
+        Debug.Log("setting up owl eyes");
+        List<float> currRot = new() { Owls[0].transform.localEulerAngles.y % 360, Owls[1].transform.localEulerAngles.y % 360, Owls[2].transform.localEulerAngles.y % 360, Owls[3].transform.localEulerAngles.y % 360 };
         for (int i = 0; i <= 3; i++)
         {
             if (currRot[i] == CorrectAnswers[i])

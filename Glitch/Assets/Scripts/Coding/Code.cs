@@ -16,6 +16,7 @@ public class Code : MonoBehaviour
     //public TMP_Text T_Code;
     public TMP_Text T_ErrText;
     public TMP_InputField In_Editable;
+    public TMP_Text T_Hint;
     public Button B_Close;
     public Button B_Reset;
     public static bool IsOpen = false;
@@ -80,11 +81,14 @@ public class Code : MonoBehaviour
 
         ExistingCode.Add(ExecutableCode[LastIndex..(ExecutableCode.Length - 1)]);
         In_Editable.text += ExecutableCode[LastIndex..(ExecutableCode.Length - 1)];
+        T_Hint.text = CurrEditable.HintText;
     }
 
     public void RunCode()
     {
+        
         List<string> edited = ExtractEditedCode(In_Editable.text.ToLower());
+        Debug.LogWarning("Running code with " + string.Join(", ", edited));
         if (edited == null) T_ErrText.text = "Compiler Error!";
         else if(!Validate(edited)) T_ErrText.text = "Validation Error!";
         else
