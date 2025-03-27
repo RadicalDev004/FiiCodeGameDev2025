@@ -43,6 +43,7 @@ public class MagicScroll : Editable
 
     private IEnumerator SwapRunes(GameObject r1, GameObject r2)
     {
+        Block = true;
         Vector3 pr1 = r1.transform.localPosition;
         Vector3 pr2 = r2.transform.localPosition;
 
@@ -64,5 +65,6 @@ public class MagicScroll : Editable
             Tween.LocalPosition(transform, SolvedPos.localPosition, 2, 0, Tween.EaseInOut);
             Tween.LocalRotation(transform, SolvedPos.localRotation, 2, 0, Tween.EaseInOut);
         }
+        Block = false;
     }
 }

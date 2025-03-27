@@ -95,7 +95,7 @@ public class PlayerBehaviour : MonoBehaviour
             if (!hit.collider.CompareTag("Editable"))
                 return;
 
-            Editable newEditable = hit.collider.GetComponent<Editable>();
+            Editable newEditable = hit.collider.GetComponent<Editable>() ?? hit.collider.transform.parent.GetComponent<Editable>();
             if (newEditable != null && !newEditable.Completed)
             {
                 if (editableToAccess != newEditable)

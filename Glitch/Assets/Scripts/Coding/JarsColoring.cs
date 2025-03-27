@@ -63,15 +63,16 @@ public class JarsColoring : Editable
 
     private IEnumerator JarsAnimation(float seconds)
     {
+        Block = true;
         Debug.Log("Old Color: " + ToEdit.color);
         Debug.Log("New color " + new Color(FillJar2, 0, FillJar1, 255));
         Tween.Color(ToEdit, new Color32((byte)FillJar2, 0, (byte)FillJar1, 255), seconds, 0, Tween.EaseInOut);
         EditLiquid(Jar1, FillJar1 / 255 * 100, seconds);
         EditLiquid(Jar2, FillJar2 / 255 * 100, seconds);
         yield return new WaitForSeconds(seconds);
+        Block = false;
 
-
-        if((Org.color.b - 0.1f <= ToEdit.color.b && ToEdit.color.b <= Org.color.b + 0.1f) && (Org.color.r - 0.1f <= ToEdit.color.r && ToEdit.color.r <= Org.color.r + 0.1f))
+        if ((Org.color.b - 0.1f <= ToEdit.color.b && ToEdit.color.b <= Org.color.b + 0.1f) && (Org.color.r - 0.1f <= ToEdit.color.r && ToEdit.color.r <= Org.color.r + 0.1f))
         {
             OnGlitchSolve();
             Destroy(pereteInviz);
