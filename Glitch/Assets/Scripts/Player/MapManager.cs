@@ -53,7 +53,6 @@ public class MapManager : MonoBehaviour
                 controller.enabled = true;
             }
 
-            player.transform.position = targetPosition;
             ToggleMap();
         }
         else
