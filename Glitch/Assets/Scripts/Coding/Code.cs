@@ -85,10 +85,9 @@ public class Code : MonoBehaviour
     }
 
     public void RunCode()
-    {
-        
+    {       
         List<string> edited = ExtractEditedCode(In_Editable.text.ToLower());
-        Debug.LogWarning("Running code with " + string.Join(", ", edited));
+        //Debug.LogWarning("Running code with " + string.Join(", ", edited));
         if (edited == null) T_ErrText.text = "Compiler Error!";
         else if(!Validate(edited)) T_ErrText.text = "Validation Error!";
         else
