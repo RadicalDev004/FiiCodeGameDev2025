@@ -55,7 +55,7 @@ public class PlayerBehaviour : MonoBehaviour
                 editableToAccess.CreateTerminal();
                 UI.TogglePressE(false);
             }
-            
+
         }
 
         if (Input.GetKeyDown(KeyCode.M) && !Code.IsOpen)
@@ -74,7 +74,7 @@ public class PlayerBehaviour : MonoBehaviour
             UI.ToggleNotEnughMana(false);
         }
 
-        if(ManaSystem.Instance.HasFullMana() && UI.I_NotEnoughMana.activeInHierarchy)
+        if (ManaSystem.Instance.HasFullMana() && UI.I_NotEnoughMana.activeInHierarchy)
         {
             UI.TogglePressE(true);
             UI.ToggleNotEnughMana(false);
@@ -95,7 +95,7 @@ public class PlayerBehaviour : MonoBehaviour
             if (!hit.collider.CompareTag("Editable"))
                 return;
 
-            Editable newEditable = hit.collider.GetComponent<Editable>();
+            Editable newEditable = hit.collider.GetComponent<Editable>() ?? hit.collider.transform.parent.GetComponent<Editable>();
             if (newEditable != null && !newEditable.Completed)
             {
                 if (editableToAccess != newEditable)
@@ -108,7 +108,7 @@ public class PlayerBehaviour : MonoBehaviour
                 }
 
                 lastSeenEditableTime = Time.time;
-                if(editableToAccess is Enemy)
+                if (editableToAccess is Enemy)
                 {
                     UI.TogglePressE(ManaSystem.Instance.HasFullMana());
                     UI.ToggleNotEnughMana(!ManaSystem.Instance.HasFullMana());
@@ -136,7 +136,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void ShootProjectile()
     {
-        
+
     }
 
     private IEnumerator ShootingProjectileCor(float animTime)
@@ -153,7 +153,7 @@ public class PlayerBehaviour : MonoBehaviour
         pj.Shoot(Lifetime, Speed, Size, Damage);
         pj.transform.SetParent(null);
 
-        
+
         Tween.LocalPosition(MagicStaff.transform, initialPos, animTime, 0, Tween.EaseInOut);
         Tween.LocalRotation(MagicStaff.transform, initialRot, animTime, 0, Tween.EaseInOut);
 
@@ -167,11 +167,11 @@ public class PlayerBehaviour : MonoBehaviour
         CurrentHealth -= amount;
         S_HealthSlider.value = CurrentHealth;
 
-        if(CurrentHealth < 0)
+        if (CurrentHealth < 0)
         {
             //Game Over
         }
-        if(CurrentHealth > MaxHealth)
+        if (CurrentHealth > MaxHealth)
         {
             CurrentHealth = MaxHealth;
         }
