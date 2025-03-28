@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Windows;
 
@@ -11,7 +12,7 @@ public class MusicalNotes : Editable
     [Header("Particular")]
     public List<int> CorrectOrder = new();
     public List<GameObject> Notes = new();
-    public Material Org;
+    public Material Org, Wrong;
     public List<Material> PlayingMaterials = new();
 
     private void Awake()
@@ -65,13 +66,22 @@ public class MusicalNotes : Editable
     private IEnumerator PlayNotes(List<List<int>> notes, float time)
     {
         Block = true;
-        foreach(var list in notes)
+        for(int i = 0; i < notes.Count; i++)
         {
-            foreach(var note in list)
+            var list = notes[i];
+            for(int j = 0; j < list.Count; j++)
             {
-                Notes[note].GetComponent<MeshRenderer>().material = PlayingMaterials[note];
+                var note = list[j];
+                Notes[note].GetComponent<MeshRenderer>().material = (i > 0 && note != notes[0][j]) ? Wrong : PlayingMaterials[note];
                 yield return new WaitForSeconds(time);
                 Notes[note].GetComponent<MeshRenderer>().material = Org;
+                yield return new WaitForSeconds(time);
+            }
+            for(int j = list.Count; i > 0 && j < notes[0].Count; j++)
+            {
+                Notes.All(x => x.GetComponent<MeshRenderer>().material = Wrong);
+                yield return new WaitForSeconds(time);
+                Notes.All(x => x.GetComponent<MeshRenderer>().material = Org);
                 yield return new WaitForSeconds(time);
             }
             yield return new WaitForSeconds(1);

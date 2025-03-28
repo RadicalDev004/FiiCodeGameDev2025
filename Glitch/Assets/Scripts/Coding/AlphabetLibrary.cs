@@ -2,15 +2,16 @@ using Pixelplacement;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class AlphabetLibrary : Editable
 {
-    public string CorrectRaspuns = "BSDAML";
+    [Header("Particular")]
+    public List<GameObject> Books = new();
+    public List<string> CorrectAnswer = new();
 
     public Animator animatorCarti;
-
-    public float wait;
 
     private void Awake()
     {
@@ -19,27 +20,31 @@ public class AlphabetLibrary : Editable
 
     public bool Validate(List<string> code)
     {
-        if (code.Count != 1)
+        if (code.Count != CorrectAnswer.Count)
         {
             Debug.LogError("Failed validation at length " + code.Count);
             return false;
         }
 
-        code[0] = code[0].ToUpper();
+        for(int i = 0; i < code.Count; i++)
+        {
+            code[i] = code[i].ToUpper();
+            if (code[i] == CorrectAnswer[i])
+            {
+                Debug.Log("Correct at book " + i);
+                Books[i].GetComponentInChildren<TMP_Text>().text = CorrectAnswer[i];
+            }
+        }
 
-        if (code[0].SequenceEqual(CorrectRaspuns))
+        if(code.SequenceEqual(CorrectAnswer))
         {
-            StartCoroutine(WaitForWin());
-            return true;
+            StartCoroutine(WaitForWin(3));
         }
-        else
-        {
-            Debug.Log("String introdus: " + code[0]);
-            return false;
-        }
+
+        return true;
     }
 
-    private IEnumerator WaitForWin()
+    private IEnumerator WaitForWin(float wait)
     {
         ToggleOutline(false);
         animatorCarti.Play("AnimatieCarti");
