@@ -69,11 +69,13 @@ public class Globe : Editable
 
     private IEnumerator WaitForWin(List<float> values, float wait)
     {
+        Block = true;
         yield return new WaitForSeconds(wait);
 
         if (((CorrectAnswer[0] <= values[0] && values[0] <= CorrectAnswer[1]) || (360 + CorrectAnswer[0] <= values[0] && values[0] <= 360 + CorrectAnswer[1])) && CorrectAnswer[2] <= values[1] && values[1] <= CorrectAnswer[3])
         {
             OnGlitchSolve();
         }
+        Block = false;
     }
 }

@@ -68,7 +68,7 @@ public class Editable : MonoBehaviour
 
     static string ReplaceValue(List<string> newCode, ref int ind)
     {
-        return newCode[ind++];
+        return newCode.Count > ind ? newCode[ind++] : null;
     }
 
     protected void OnGlitchSolve()

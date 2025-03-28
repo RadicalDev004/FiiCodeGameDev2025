@@ -62,6 +62,7 @@ public class BookStack : Editable
 
     private IEnumerator BookPosAnimation(List<int> values)
     {
+        Block = true;
         for (int i = 0; i < books.Count; i++)
         {
             Tween.Position(books[i].transform, IntermediatePos[i], 0.5f, 0, Tween.EaseInOut);
@@ -79,5 +80,6 @@ public class BookStack : Editable
         {
             OnGlitchSolve();
         }
+        Block = false;
     }
 }

@@ -42,9 +42,9 @@ public class MushroomTeleport : Editable
         }
 
         Vector3 targetPosition = teleportList[value];
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        CharacterController controller = player.GetComponent<CharacterController>();
-        if (controller != null)
+        GameObject player = Ref.PlayerBehaviour.gameObject;
+
+        if(player.TryGetComponent(out CharacterController controller))
         {
             controller.enabled = false;
             player.transform.position = targetPosition;

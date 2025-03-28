@@ -32,6 +32,12 @@ public class OwlsRotate : Editable
             return false;
         }
 
+        if (code[0] == code[1])
+        {
+            Debug.LogError("Failed validation at duplicate " + code[0] + " " + code[1]);
+            return false;
+        }
+
         StartCoroutine(OwlAnimations(2, Owls[OwlNames.IndexOf(code[0])], Owls[OwlNames.IndexOf(code[1])]));
         return true;
     }
