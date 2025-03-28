@@ -10670,7 +10670,6 @@ GameObject:
   - component: {fileID: 771400192}
   - component: {fileID: 771400194}
   - component: {fileID: 771400195}
-  - component: {fileID: 771400196}
   m_Layer: 0
   m_Name: BookShelf
   m_TagString: Editable
@@ -10738,7 +10737,7 @@ MonoBehaviour:
 
 
     <color=#031700>/* The given
-    argument must be a string! */</color>
+    argument must be a string of length 6! */</color>
 
 '
   HintText: 'You might want to search a secret alphabet.
@@ -10888,27 +10887,6 @@ MonoBehaviour:
     - {x: -0.59222865, y: -0.09862506, z: -0.7997114}
     - {x: 0.5190676, y: 0.54883236, z: -0.6552494}
     - {x: -0.32489523, y: -0.5234481, z: -0.7876834}
---- !u!65 &771400196
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 771400191}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5882031, y: 0.15097186, z: 1.2486316}
-  m_Center: {x: 1.2192805, y: 0.13808642, z: -1.5263606}
 --- !u!1 &834610805
 GameObject:
   m_ObjectHideFlags: 0
