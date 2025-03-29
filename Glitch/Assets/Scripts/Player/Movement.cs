@@ -1,3 +1,4 @@
+using Pixelplacement;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class Movement : MonoBehaviour
     public float speed = 12f;
     public float jumpForce = 5;
     public float gravity = -9.81f;
+    private Animator StaffAnimator;
 
     public Vector3 velocity, move;
     private Vector2 MovementInput;
@@ -19,7 +21,7 @@ public class Movement : MonoBehaviour
 
     public Vector3 LastPos = Vector3.zero;
 
-    private bool StopAudio = true;
+    private bool StopAudio = true, Jumping = false;
     public static bool IsPaused = false;
     public static int SprintAdditive;
 
@@ -31,6 +33,7 @@ public class Movement : MonoBehaviour
         Controller = GetComponent<CharacterController>();
         PlayerInput = new();
         IsPaused = false;
+        StaffAnimator = Ref.PlayerBehaviour.StaffAnimator;
     }
     private void Start()
     {
@@ -61,12 +64,46 @@ public class Movement : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space) && isGrounded) 
         {
             Jump();
+            
+        }
+        if(!Input.GetKeyDown(KeyCode.Space) && Jumping && isGrounded)
+        {
+            Jumping = false;
+            StaffAnimator.SetBool("jump", false);
+        }
+        if(!Jumping && !isGrounded && !StaffAnimator.GetBool("jump"))
+        {
+            Jumping = true;
+            StaffAnimator.SetBool("jump", true);
         }
 
         if (Input.GetKey(KeyCode.LeftShift))
+        {
+            if(StaffAnimator.GetFloat("walkSpeed") == 1)
+            {
+                StaffAnimator.SetFloat("walkSpeed", 1.7f);
+            }
+            if(SprintAdditive == 1)
+            {
+                Tween.Value(Cam.GetComponent<Camera>().fieldOfView, 70, val => Cam.GetComponent<Camera>().fieldOfView = val, 0.2f, 0, Tween.EaseInOut);
+
+            }
             SprintAdditive = 2;
+
+        }
         else
+        {
+            if (StaffAnimator.GetFloat("walkSpeed") > 1)
+            {
+                StaffAnimator.SetFloat("walkSpeed", 1);
+            }
+            if(SprintAdditive == 2)
+            {
+                Tween.Value(Cam.GetComponent<Camera>().fieldOfView, 60, val => Cam.GetComponent<Camera>().fieldOfView = val, 0.2f, 0, Tween.EaseInOut);
+            }
             SprintAdditive = 1;
+            
+        }
 
         MovementInput = PlayerInput.Main.Move.ReadValue<Vector2>();
         move = Cam.forward * MovementInput.y + Cam.right * MovementInput.x;
@@ -75,6 +112,18 @@ public class Movement : MonoBehaviour
 
         //velocity = AdjustVelocityToSlope(velocity);
         velocity.y += gravity * Time.deltaTime;
+
+        if(MovementInput.x != 0 || MovementInput.y != 0)
+        {
+            if(isGrounded && !StaffAnimator.GetBool("walk"))
+            {
+                StaffAnimator.SetBool("walk", true);
+            }
+        }
+        else
+        {
+            StaffAnimator.SetBool("walk", false);
+        }
 
         Controller.Move(velocity * Time.deltaTime);
 
@@ -113,6 +162,8 @@ public class Movement : MonoBehaviour
 
     public void Jump(float multiplier = 0)
     {
+        Jumping = true;
+        StaffAnimator.SetBool("jump", true);
         velocity.y += Mathf.Sqrt((jumpForce + multiplier) * -3.0f * gravity);
     }
 }

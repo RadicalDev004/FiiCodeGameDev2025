@@ -91,7 +91,7 @@ public class EnemyBehaviour : MonoBehaviour
             $"attack_obj = <e>player</e>;\r\n   " +
             "damage(attack_obj);\r\n" +
             "}\r\n\r\n" +*/
-            "<color=#031700>/* \r\n YOU CANNOT EDIT MORE THAN 1 VALUE AT ONCE \r\n 0.5 <= speed <= 5, 1 <= damage <= 100, 0.5 <= attack_speed <= 5, 0.5 <= attack_range <= 5, healing = true | false, */</color>\r\n\r\n";
+            "<color=#44cd8b>/* \r\n YOU CANNOT EDIT MORE THAN 1 VALUE AT ONCE \r\n 0.5 <= speed <= 5, 1 <= damage <= 100, 0.5 <= attack_speed <= 5, 0.5 <= attack_range <= 5, healing = true | false, */</color>\r\n\r\n";
 
         if(updateCode)
             GetComponentInChildren<Enemy>().ExecutableCode = code;

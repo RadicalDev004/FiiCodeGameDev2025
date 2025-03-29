@@ -6,22 +6,26 @@ using UnityEngine.SceneManagement;
 public class MapManager : MonoBehaviour
 {
     public GameObject mapUI; 
-    private Dictionary<Button, Vector3> teleportLocations = new Dictionary<Button, Vector3>();
-    public bool isActive = false;
+    private Dictionary<Button, Vector3> teleportLocations = new();
+    public static bool IsOpen = false;
 
 
-    public void ToggleMap()
+    public void ToggleMap(bool state)
     {
-        isActive = !mapUI.activeSelf;
-        mapUI.SetActive(isActive);
+        IsOpen = state;
+        mapUI.SetActive(IsOpen);
         //Cursor.visible = isActive;
-        if (isActive)
+        if (IsOpen)
         {
+            LookPC.isPaused = state;
+            Movement.IsPaused = state;
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0f;
         }
         else
         {
+            LookPC.isPaused = state;
+            Movement.IsPaused = state;
             Cursor.lockState= CursorLockMode.Locked;
             Time.timeScale = 1f;
         }
@@ -44,7 +48,7 @@ public class MapManager : MonoBehaviour
         if(!AreZombiesAlive())
         {
             Vector3 targetPosition = teleportLocations[button];
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            GameObject player = Ref.PlayerBehaviour.gameObject;
             CharacterController controller = player.GetComponent<CharacterController>();
             if (controller != null)
             {
@@ -53,7 +57,7 @@ public class MapManager : MonoBehaviour
                 controller.enabled = true;
             }
 
-            ToggleMap();
+            ToggleMap(false);
         }
         else
         {
