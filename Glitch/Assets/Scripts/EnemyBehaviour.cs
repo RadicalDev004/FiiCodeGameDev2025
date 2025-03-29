@@ -120,10 +120,14 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void Death()
     {
-        FunctionItem fi = Instantiate(OrgFunctionItem, OrgFunctionItem.transform.parent);
-        fi.transform.SetParent(null);
-        fi.gameObject.SetActive(true);
-        fi.Create();
+        for(int i = 0; i <= Difficulty; i++)
+        {
+            FunctionItem fi = Instantiate(OrgFunctionItem, OrgFunctionItem.transform.parent);
+            fi.transform.SetParent(null);
+            fi.gameObject.SetActive(true);
+            fi.Create();
+        }
+        
         Destroy(gameObject);
     }
 

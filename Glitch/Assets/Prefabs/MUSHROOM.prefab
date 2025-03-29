@@ -51,7 +51,9 @@ MonoBehaviour:
   ExecutableCode: "\nif(touched_by_player())\n{\n   jump_increase = <e>0</e>;\n  
     player.add_jump(jump_increase);\n}\n\n<color=#031700>/* 0 <= jump_increase <=
     6 */</color>\n\n"
+  HintText: use the jump mushroom to jump higher and unlock new areas.
   Completed: 0
+  Block: 0
   UseOutline: 0
   EnemySpawnAfterComplete: 
   Outline: {fileID: 0}

@@ -57,7 +57,7 @@ MonoBehaviour:
     <= 4  */</color>
 
 '
-  HintText: 
+  HintText: use the teleport mushroom to navigate the shelves of the wardrobe.
   Completed: 0
   Block: 0
   UseOutline: 1

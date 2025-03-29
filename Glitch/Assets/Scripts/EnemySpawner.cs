@@ -54,7 +54,7 @@ public class EnemySpawner : MonoBehaviour
             case 0:
                 MaxHealth = 25 * Random.Range(3, 6);
                 Speed = 0.25f * Random.Range(3, 6);
-                Damage = 5 * Random.Range(3, 6);
+                Damage = 5 * Random.Range(2, 4);
                 Healing = RandomChance.Percent(10);
                 AttackRange = 0.8f + 0.2f * Random.Range(0, 3);
                 AttackSpeed = 1;
@@ -63,7 +63,7 @@ public class EnemySpawner : MonoBehaviour
             case 1:
                 MaxHealth = 25 * Random.Range(3, 8);
                 Speed = 0.25f * Random.Range(4, 6);
-                Damage = 5 * Random.Range(4, 7);
+                Damage = 5 * Random.Range(3, 5);
                 Healing = RandomChance.Percent(25);
                 AttackRange = 0.8f + 0.2f * Random.Range(2, 4);
                 AttackSpeed = 1 + 0.2f * Random.Range(0, 3);
@@ -72,7 +72,7 @@ public class EnemySpawner : MonoBehaviour
             case 2:
                 MaxHealth = 25 * Random.Range(4, 10);
                 Speed = 0.25f * Random.Range(5, 7);
-                Damage = 5 * Random.Range(5, 9);
+                Damage = 5 * Random.Range(4, 6);
                 Healing = RandomChance.Percent(35);
                 AttackRange = 0.8f + 0.2f * Random.Range(4, 6);
                 AttackSpeed = 1 + 0.2f * Random.Range(1, 5);
@@ -81,7 +81,7 @@ public class EnemySpawner : MonoBehaviour
             case 3:
                 MaxHealth = 25 * Random.Range(5, 12);
                 Speed = 0.25f * Random.Range(6, 8);
-                Damage = 5 * Random.Range(6, 10);
+                Damage = 5 * Random.Range(5, 7);
                 Healing = RandomChance.Percent(55);
                 AttackRange = 0.8f + 0.2f * Random.Range(6, 8);
                 AttackSpeed = 1 + 0.2f * Random.Range(3, 7);
@@ -90,7 +90,7 @@ public class EnemySpawner : MonoBehaviour
             case 4:
                 MaxHealth = 25 * Random.Range(10, 15);
                 Speed = 0.25f * Random.Range(8, 12);
-                Damage = 5 * Random.Range(10, 15);
+                Damage = 5 * Random.Range(6, 10);
                 Healing = RandomChance.Percent(90);
                 AttackRange = 0.8f + 0.2f * Random.Range(8, 11);
                 AttackSpeed = 1 + 0.2f * Random.Range(4, 9);

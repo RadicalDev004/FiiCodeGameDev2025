@@ -78,10 +78,6 @@ public class PourBottles : Editable
         {
             mapping[arr[i]] = i;
         }
-        foreach (var kvp in mapping)
-        {
-            Debug.Log($"{kvp.Key} -> {kvp.Value}");
-        }
 
         Translate(b1.transform, PouringPos[index1].transforms[mapping[3 - index2]], time);
 
@@ -117,7 +113,6 @@ public class PourBottles : Editable
         newScale = newScale > 0.001f ? newScale : 0.001f;
         float newPos = MaxPos - MaxFill + newScale;
 
-        Debug.LogWarning(percent + " " + newScale + " " + newPos);
         Tween.LocalScale(B.transform, new Vector3(B.transform.localScale.x, newScale, B.transform.localScale.z), seconds, 0, Tween.EaseInOut);
         Tween.LocalPosition(B.transform, new Vector3(B.transform.localPosition.x, newPos, B.transform.localPosition.z), seconds, 0, Tween.EaseInOut);
     }
