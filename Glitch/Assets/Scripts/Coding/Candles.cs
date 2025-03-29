@@ -9,7 +9,6 @@ public class Candles : Editable
     [Header("Particular")]
     public List<ParticleSystem> CandlesParticles = new();
     public List<float> BurnRates = new();
-    public List<float> CorrectDurations = new();
 
     private void Awake()
     {
@@ -27,7 +26,7 @@ public class Candles : Editable
         List<float> enteredDurations = new();
 
         foreach (string input in code)
-        {
+        {   
 
             if (!float.TryParse(input, out float duration) || duration <= 0)
             {
@@ -35,7 +34,7 @@ public class Candles : Editable
                 return false;
 
             }
-            if (duration < 0 || duration > 10)
+            if (duration < 0 || duration > 20)
             {
                 Debug.LogError("Failed validation at incorrect value " + duration);
                 return false;
@@ -78,28 +77,20 @@ public class Candles : Editable
 
         yield return new WaitForSeconds(1);
 
-        if (durations.SequenceEqual(CorrectDurations))
-        {
+
+        if (checkValid(durations))
             OnGlitchSolve();
-            //foreach (var candle in candleRenderers)
-            //{
-            //    candle.material = CorrectMaterial;
-            //}
-        }
-        else
-        {
-            //idk
-        }
 
         Block = false;
     }
 
-    //private void ResetCandles(List<Vector3> initialScales, List<MeshRenderer> candleRenderers)
-    //{
-    //    for (int i = 0; i < CandlesObj.Count; i++)
-    //    {
-    //        CandlesObj[i].transform.localScale = initialScales[i];
-    //        candleRenderers[i].materials[0] = FireMaterial;
-    //    }
-    //}
+    private bool checkValid(List<float> durations)
+    {
+        if (durations[0] ==  durations[1] / BurnRates[1] &&
+            durations[0] == durations[2] / BurnRates[2] &&
+            durations[0] == durations[3] / BurnRates[3])
+            return true;
+
+        return false;
+    }
 }

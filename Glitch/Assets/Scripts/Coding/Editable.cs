@@ -73,9 +73,15 @@ public class Editable : MonoBehaviour
 
     protected void OnGlitchSolve()
     {
-        Ref.EnemySpawner.SpawnEnemies(0.5f, EnemySpawnAfterComplete);
+        StartCoroutine(delayEnemies());
         playerBehaviour.PlaySolveGlitch();
         ToggleOutline(false);
         Completed = true;
+    }
+
+    private IEnumerator delayEnemies()
+    {
+        yield return new WaitForSeconds(2f);
+        Ref.EnemySpawner.SpawnEnemies(0.5f, EnemySpawnAfterComplete);
     }
 }
