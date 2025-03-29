@@ -67,7 +67,7 @@ public class Inventory : Editable
         }
         else if (code[0] == FunctionItem.functionNames[3])
         {
-            StartCoroutine(ShowPowerUpUI(Instantiate(I_PowerUpOrg, I_PowerUpOrg.transform.parent), PowerupSprites[2], 60));
+            StartCoroutine(ShowPowerUpUI(Instantiate(I_PowerUpOrg, I_PowerUpOrg.transform.parent), PowerupSprites[3], 60));
             StartCoroutine(AttackSpeedIncrease(60));
         }
 
@@ -79,11 +79,11 @@ public class Inventory : Editable
     public void CreateinventoryCode()
     {
         string fnc = string.Join("", Functions.Select(kvp => kvp.Value > 0 ? $"  {kvp.Key} x{kvp.Value}\r\n" : ""));
-        ExecutableCode = "\r\n<color=black>/* you have:\r\n" +
+        ExecutableCode = "\r\n<color=#c2c2c2>/* you have:\r\n" +
             $"{fnc}" +
             "\r\n*/</color>\r\n\r\n" +
             "use_powerup(<e></e> );\r\n\r\n" +
-            "<color=#031700>/* use collected functions to help you during battle */</color>\r\n";
+            "<color=#44cd8b>/* use collected functions to help you during battle */</color>\r\n";
     }
 
     private IEnumerator ShowPowerUpUI(Image img, Sprite sprt, float timer)

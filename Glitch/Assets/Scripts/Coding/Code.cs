@@ -117,7 +117,7 @@ public class Code : MonoBehaviour
         int currentIndex = 0;
 
         editedText = Regex.Replace(editedText, @"\s+", "");
-
+        editedText = editedText.ToLower();
 
         foreach (string existing in ExistingCode)
         {
@@ -126,6 +126,7 @@ public class Code : MonoBehaviour
             int pos = editedText.IndexOf(existingL, currentIndex);
             if (pos == -1)
             {
+                //Debug.LogError("<noparse>Compiler error at " + existingL.Replace("<", "＜").Replace(">", "＞") + " | " + editedText[currentIndex..].Replace("<", "＜").Replace(">", "＞") + " | " + editedText.IndexOf(existingL, currentIndex) + "</noparse>");
                 return null;
             }
 

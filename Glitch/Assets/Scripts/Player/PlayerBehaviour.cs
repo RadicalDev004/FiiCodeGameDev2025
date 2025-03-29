@@ -16,10 +16,12 @@ public class PlayerBehaviour : MonoBehaviour
     private UI UI;
     private MapManager mapManager;
     public bool isEpressed = false;
+    public Animator StaffAnimator;
     [Header("Health")]
     public float MaxHealth;
     public Slider S_HealthSlider;
     public float CurrentHealth;
+    private Coroutine Heal;
     [Header("Projectiles")]
     public Projectile OrgProjectile;
     public float Lifetime = 3, Size = 1, Speed = 0.5f, Damage = 15;
@@ -47,7 +49,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         CheckForEditableObject();
 
-        if (Input.GetKeyDown(KeyCode.E) && editableToAccess != null && !Code.IsOpen && !(editableToAccess is Enemy && !ManaSystem.Instance.HasFullMana()) && !mapManager.isActive)
+        if (Input.GetKeyDown(KeyCode.E) && editableToAccess != null && !Code.IsOpen && !(editableToAccess is Enemy && !ManaSystem.Instance.HasFullMana()) && !MapManager.IsOpen)
         {
             if (!editableToAccess.Block)
             {
@@ -58,9 +60,9 @@ public class PlayerBehaviour : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.M) && !Code.IsOpen)
+        if (Input.GetKeyDown(KeyCode.M) && !Code.IsOpen && !MapManager.IsOpen)
         {
-            mapManager.GetComponent<MapManager>().ToggleMap();
+            mapManager.ToggleMap(true);
         }
 
         if (Input.GetMouseButtonDown(0) && Time.timeScale > 0 && !isCoolDown)
@@ -141,11 +143,12 @@ public class PlayerBehaviour : MonoBehaviour
 
     private IEnumerator ShootingProjectileCor(float animTime)
     {
+        StaffAnimator.SetTrigger("shoot");
         isCoolDown = true;
         Vector3 initialPos = MagicStaff.transform.localPosition;
         Quaternion initialRot = MagicStaff.transform.localRotation;
-        Tween.LocalPosition(MagicStaff.transform, StaffAnimation.localPosition, animTime, 0, Tween.EaseInOut);
-        Tween.LocalRotation(MagicStaff.transform, StaffAnimation.localRotation, animTime, 0, Tween.EaseInOut);
+        //Tween.LocalPosition(MagicStaff.transform, StaffAnimation.localPosition, animTime, 0, Tween.EaseInOut);
+        //Tween.LocalRotation(MagicStaff.transform, StaffAnimation.localRotation, animTime, 0, Tween.EaseInOut);
         yield return new WaitForSeconds(animTime);
 
         Projectile pj = Instantiate(OrgProjectile, OrgProjectile.transform.parent);
@@ -154,8 +157,8 @@ public class PlayerBehaviour : MonoBehaviour
         pj.transform.SetParent(null);
 
 
-        Tween.LocalPosition(MagicStaff.transform, initialPos, animTime, 0, Tween.EaseInOut);
-        Tween.LocalRotation(MagicStaff.transform, initialRot, animTime, 0, Tween.EaseInOut);
+        //Tween.LocalPosition(MagicStaff.transform, initialPos, animTime, 0, Tween.EaseInOut);
+        //Tween.LocalRotation(MagicStaff.transform, initialRot, animTime, 0, Tween.EaseInOut);
 
 
         yield return new WaitForSeconds(CooldownTimer - animTime);
@@ -165,16 +168,32 @@ public class PlayerBehaviour : MonoBehaviour
     public void TakeDamage(float amount)
     {
         CurrentHealth -= amount;
-        S_HealthSlider.value = CurrentHealth;
+        Tween.Value(S_HealthSlider.value, CurrentHealth, val => S_HealthSlider.value = val, 1, 0, Tween.EaseInOut);
 
         if (CurrentHealth < 0)
         {
-            //Game Over
+            //TODO Game Over
         }
         if (CurrentHealth > MaxHealth)
         {
             CurrentHealth = MaxHealth;
         }
+
+        if(amount < 0)
+        {
+            if(Heal != null) StopCoroutine(Heal);
+            Heal = StartCoroutine(HealCor());
+        }
     }
 
+    private IEnumerator HealCor()
+    {
+        yield return new WaitForSeconds(20);
+        while(CurrentHealth < MaxHealth)
+        {
+            CurrentHealth += 0.25f;
+            S_HealthSlider.value = CurrentHealth;
+            yield return new WaitForSeconds(1);
+        }
+    }
 }
