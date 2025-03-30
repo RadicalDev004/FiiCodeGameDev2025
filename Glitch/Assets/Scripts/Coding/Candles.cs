@@ -86,9 +86,10 @@ public class Candles : Editable
 
     private bool checkValid(List<float> durations)
     {
-        if (durations[0] ==  durations[1] / BurnRates[1] &&
-            durations[0] == durations[2] / BurnRates[2] &&
-            durations[0] == durations[3] / BurnRates[3])
+        float div = durations[0] / BurnRates[0];
+        if (div == durations[1] / BurnRates[1] &&
+            div == durations[2] / BurnRates[2] &&
+            div == durations[3] / BurnRates[3])
             return true;
 
         return false;
