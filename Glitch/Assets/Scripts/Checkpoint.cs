@@ -6,7 +6,6 @@ public class Checkpoint : MonoBehaviour
 {
     public Button checkpointButton;
     public Vector3 teleportLocation;
-    public UI _UI;
 
     private void OnTriggerEnter(Collider other)
     {
