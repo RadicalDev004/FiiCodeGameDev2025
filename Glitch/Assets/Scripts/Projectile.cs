@@ -5,6 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public float speed, damage = 10;
+    public GameObject impactParticles;
 
     private void Update()
     {
@@ -24,4 +25,14 @@ public class Projectile : MonoBehaviour
         yield return new WaitForSeconds(lifetime);
         Destroy(gameObject);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("Player"))
+        {
+            Instantiate(impactParticles, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
+    }
+
 }
