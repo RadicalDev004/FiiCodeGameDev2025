@@ -168,7 +168,7 @@ public class PlayerBehaviour : MonoBehaviour
     public void TakeDamage(float amount)
     {
         CurrentHealth -= amount;
-        Tween.Value(S_HealthSlider.value, CurrentHealth, val => S_HealthSlider.value = val, 1, 0, Tween.EaseInOut);
+        Tween.Value(S_HealthSlider.value, CurrentHealth, val => S_HealthSlider.value = val, 0.5f, 0, Tween.EaseInOut);
 
         if (CurrentHealth < 0)
         {
@@ -177,6 +177,11 @@ public class PlayerBehaviour : MonoBehaviour
         if (CurrentHealth > MaxHealth)
         {
             CurrentHealth = MaxHealth;
+        }
+
+        if(amount > 0)
+        {
+            Ref.UI.OnHit();
         }
 
         if(amount < 0)

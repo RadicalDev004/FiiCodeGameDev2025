@@ -1,3 +1,4 @@
+using Pixelplacement;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class EnemyBehaviour : MonoBehaviour
     public float givenManaPerHit, Dist;
     public bool Healing = false, Attacking = false;
     public int Difficulty = -1;
+    private Animator EnemyAnimator;
     public GameObject AttackRangeObj;
     public float AttackObjLocalScaleFactor = 4;
     private PlayerBehaviour PlayerBehaviour;
@@ -22,7 +24,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     void Start()
     {
-        PlayerBehaviour = Ref.PlayerBehaviour;        
+        PlayerBehaviour = Ref.PlayerBehaviour;      
+        EnemyAnimator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -60,8 +63,10 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if(other.TryGetComponent(out Projectile proj))
         {
+
             UpdateHealthSlider(-proj.damage);
             ManaSystem.Instance.AddMana(givenManaPerHit);
+            EnemySpawner.AllEnemies.Remove(this);
             Destroy(proj.gameObject);
         }
     }
@@ -70,13 +75,24 @@ public class EnemyBehaviour : MonoBehaviour
     {
         CurrentHealth += value;
 
+        if(value < 0)
+        {
+            EnemyAnimator.SetInteger("hit", Random.Range(0, 3));
+        }
+
         if (CurrentHealth <= 0)
         {
             Death();
             return;
         }
 
-        S_Health.value = CurrentHealth;
+        Tween.Value(S_Health.value, CurrentHealth, value => S_Health.value = value, 0.5f, 0, Tween.EaseInOut);
+        Invoke(nameof(ResetHitInfo), 0.1f);
+    }
+
+    private void ResetHitInfo()
+    {
+        EnemyAnimator.SetInteger("hit",-1);
     }
 
     public void Create(float MaxHealth, float Speed, float Damage, float AttackSpeed,float AttackRange, bool Healing, int Difficulty = 0, bool updateCode = true)
@@ -134,21 +150,26 @@ public class EnemyBehaviour : MonoBehaviour
     private IEnumerator AttackCor(float duration)
     {
         AttackRangeObj.SetActive(true);
-        AttackRangeObj.transform.localScale = new(AttackObjLocalScaleFactor * AttackRange, AttackRangeObj.transform.localScale.y, AttackObjLocalScaleFactor * AttackRange);
+        AttackRangeObj.transform.localScale = new(AttackObjLocalScaleFactor * AttackRange, AttackObjLocalScaleFactor * AttackRange, AttackObjLocalScaleFactor * AttackRange);
+
+        EnemyAnimator.SetTrigger(Random.Range(0, 2) == 0 ? "attack1" : "attack2");
+        EnemyAnimator.SetFloat("attackSpeed", 1 / duration);
 
         AttackRangeObj.GetComponent<MeshRenderer>().material.color = new Color32(255, 0, 0, 0);
-        StartCoroutine(ChangeAlpha(AttackRangeObj.GetComponent<MeshRenderer>().material, duration));
+        StartCoroutine(ChangeAlpha(AttackRangeObj.GetComponent<MeshRenderer>().material, duration, 0.7f));
         yield return new WaitForSeconds(duration);
+        
 
         if(Vector3.Distance(transform.position, PlayerBehaviour.transform.position) <= AttackRange * BaseAttackRange)
         {
             PlayerBehaviour.TakeDamage(Damage);
         }
         AttackRangeObj.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
         Attacking = false;
     }
 
-    private IEnumerator ChangeAlpha(Material mat, float duration)
+    private IEnumerator ChangeAlpha(Material mat, float duration, float end = 1)
     {
         if (mat == null) yield break;
 
@@ -159,12 +180,12 @@ public class EnemyBehaviour : MonoBehaviour
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            float alpha = Mathf.Lerp(startAlpha, 1f, elapsed / duration);
+            float alpha = Mathf.Lerp(startAlpha, end, elapsed / duration);
             mat.color = new Color(color.r, color.g, color.b, alpha);
             yield return null;
         }
 
-        color.a = 1f;
+        color.a = end;
         mat.color = color;
     }
 }

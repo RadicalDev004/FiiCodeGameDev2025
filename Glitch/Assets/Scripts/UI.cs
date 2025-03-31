@@ -1,11 +1,14 @@
-﻿using System.Collections;
+﻿using Pixelplacement;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
     public GameObject I_PressE, I_NotEnoughMana, I_Checkpoint, I_ZombiesAlive;
+    public Image I_Hit;
     public float fadeDuration = 1f;
+    private Coroutine ShowHit;
 
     private CanvasGroup checkpointCanvasGroup;
 
@@ -75,5 +78,19 @@ public class UI : MonoBehaviour
         }
 
         canvasGroup.alpha = endAlpha;  
+    }
+
+    public void OnHit()
+    {
+        if(ShowHit != null) StopCoroutine(ShowHit);
+
+        ShowHit = StartCoroutine(OnHitCor(0.15f));
+    }
+    private IEnumerator OnHitCor(float duration)
+    {
+        Tween.Color(I_Hit, new Color32(255, 255, 255, 25), duration, 0, Tween.EaseInOut);
+        yield return new WaitForSeconds(duration);
+        Tween.Color(I_Hit, new Color32(255, 255, 255, 0), duration, 0, Tween.EaseInOut);
+        yield return new WaitForSeconds(duration);
     }
 }

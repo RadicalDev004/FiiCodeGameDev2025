@@ -67,8 +67,8 @@ public class MapManager : MonoBehaviour
 
     public bool AreZombiesAlive()
     {
-        GameObject[] zombies = GameObject.FindGameObjectsWithTag("Enemy");
-        if (zombies.Length > 0)
+        //GameObject[] zombies = GameObject.FindGameObjectsWithTag("Enemy");
+        if (EnemySpawner.AllEnemies.Count > 0)
             return true;
         else
             return false;

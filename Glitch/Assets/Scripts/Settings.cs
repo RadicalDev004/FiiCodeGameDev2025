@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Settings : MonoBehaviour
 {
-    public GameObject Tab_Settings;
+    public CanvasGroup Tab_Settings;
+    public BoolSlider BS_Arrow, BS_EnemyRadar;
+
     public static bool IsOpen = false;
 
     void Update()
@@ -18,7 +20,9 @@ public class Settings : MonoBehaviour
     public void ToggleSettings(bool state)
     {
         IsOpen = state;
-        Tab_Settings.SetActive(state);
+        Tab_Settings.alpha = state ? 1 : 0;
+        Tab_Settings.interactable = state;
+        Tab_Settings.blocksRaycasts = state;
 
         if (!Code.IsOpen && !MapManager.IsOpen)
         {
@@ -27,5 +31,26 @@ public class Settings : MonoBehaviour
             Cursor.lockState = state ? CursorLockMode.None : CursorLockMode.Locked;
             Time.timeScale = state ? 0 : 1;
         }       
+    }
+
+    private void OnEnable()
+    {
+        BS_Arrow.OnPress += ManageArrow;
+        BS_EnemyRadar.OnPress += ManageEnemyRadar;
+    }
+    private void OnDisable()
+    {
+        BS_Arrow.OnPress -= ManageArrow;
+        BS_EnemyRadar.OnPress -= ManageEnemyRadar;
+    }
+
+    public void ManageArrow(bool state)
+    {
+        GuideArrow.Toggle = state;
+    }
+
+    public void ManageEnemyRadar(bool state)
+    {
+        EnemyRadar.isActive = state;
     }
 }

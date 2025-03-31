@@ -48,7 +48,7 @@ public class TutorialGlitch : Editable
             {
                 if (Completed)
                 {
-                    gameObject.SetActive(false);
+                    GetComponent<MeshRenderer>().enabled = false;
                     yield break;
                 }
                 GlitchMaterial.SetTexture("_MainTex", GlitchSprites[i]);

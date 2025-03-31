@@ -108,9 +108,10 @@ public class Movement : MonoBehaviour
         MovementInput = PlayerInput.Main.Move.ReadValue<Vector2>();
         move = Cam.forward * MovementInput.y + Cam.right * MovementInput.x;
         move.y = 0;
+        move = AdjustVelocityToSlope(move);
         Controller.Move(speed * SprintAdditive * Time.deltaTime * move);
 
-        //velocity = AdjustVelocityToSlope(velocity);
+        
         velocity.y += gravity * Time.deltaTime;
 
         if(MovementInput.x != 0 || MovementInput.y != 0)

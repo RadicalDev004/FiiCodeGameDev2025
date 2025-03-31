@@ -29,6 +29,9 @@ public class Ref : MonoBehaviour
     public EnemySpawner _EnemySpawner;
     public static EnemySpawner EnemySpawner { get { return Instance._EnemySpawner; } }
 
+    public EnemyRadar _EnemyRadar;
+    public static EnemyRadar EnemyRadar { get { return Instance._EnemyRadar; } }
+
 
     public static Ref Instance;
 

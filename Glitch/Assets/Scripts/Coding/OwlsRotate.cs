@@ -45,8 +45,8 @@ public class OwlsRotate : Editable
     private IEnumerator OwlAnimations(float duration, GameObject o1, GameObject o2)
     {
         Block = true;
-        Tween.LocalRotation(o1.transform, o1.transform.localRotation * Quaternion.Euler(0, 90, 0), duration, 0, Tween.EaseInOut);
-        Tween.LocalRotation(o2.transform, o2.transform.localRotation * Quaternion.Euler(0, 90, 0), duration, 0, Tween.EaseInOut);
+        Tween.LocalRotation(o1.transform, o1.transform.localRotation * Quaternion.Euler(0, 90, 0), duration, 0, Tween.EaseInOutStrong);
+        Tween.LocalRotation(o2.transform, o2.transform.localRotation * Quaternion.Euler(0, 90, 0), duration, 0, Tween.EaseInOutStrong);
         yield return new WaitForSeconds(duration);
 
         List<float> currRot = new() { Owls[0].transform.localEulerAngles.y % 360, Owls[1].transform.localEulerAngles.y % 360, Owls[2].transform.localEulerAngles.y % 360, Owls[3].transform.localEulerAngles.y % 360 };
@@ -68,13 +68,17 @@ public class OwlsRotate : Editable
         {
             if (currRot[i] == CorrectAnswers[i])
             {
-                Materials[i].EnableKeyword("_EMISSION");
-                Materials[i].SetColor("_EmissionColor", Materials[i].GetColor("_Color") * 2.0f);
+                Owls[i].transform.GetChild(0).GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+                Owls[i].transform.GetChild(0).GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", Materials[i].GetColor("_Color") * 2.0f);
+                Owls[i].transform.GetChild(1).GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+                Owls[i].transform.GetChild(1).GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", Materials[i].GetColor("_Color") * 2.0f);
             }
             else
             {
-                Materials[i].DisableKeyword("_EMISSION");
-                Materials[i].SetColor("_EmissionColor", Color.black);
+                Owls[i].transform.GetChild(0).GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+                Owls[i].transform.GetChild(0).GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", Color.black);
+                Owls[i].transform.GetChild(1).GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+                Owls[i].transform.GetChild(1).GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", Color.black);
             }
         }
     }

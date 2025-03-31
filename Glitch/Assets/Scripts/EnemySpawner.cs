@@ -6,6 +6,7 @@ public class EnemySpawner : MonoBehaviour
 {
     public GameObject OriginalEnemy;
     private PlayerBehaviour PlayerBehaviour;
+    public static List<EnemyBehaviour> AllEnemies = new();
 
     public float yOffsetUp, yOffsetDown;
 
@@ -104,6 +105,8 @@ public class EnemySpawner : MonoBehaviour
     {
         Debug.LogError("new enemy pos: " + position);
         GameObject newEnemy = Instantiate(OriginalEnemy, position, Quaternion.identity, OriginalEnemy.transform.parent);
+        AllEnemies.Add(newEnemy.GetComponent<EnemyBehaviour>());
+        Ref.EnemyRadar.AddRadar(newEnemy.GetComponent<EnemyBehaviour>());
         newEnemy.SetActive(true);
         newEnemy.GetComponent<EnemyBehaviour>().Create(MaxHealth, Speed, Damage, AttackSpeed, AttackRange, Healing, Difficulty);
         newEnemy.tag = "Enemy";
