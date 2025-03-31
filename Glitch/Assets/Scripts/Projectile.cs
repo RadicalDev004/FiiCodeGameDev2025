@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,13 +26,13 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.CompareTag("Player"))
+        private void OnTriggerEnter(Collider other)
         {
-            Instantiate(impactParticles, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            if (!other.CompareTag("Player"))
+            {
+                Instantiate(impactParticles, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
         }
-    }
 
 }
