@@ -22,6 +22,7 @@ public class PlayerBehaviour : MonoBehaviour
     public Slider S_HealthSlider;
     public float CurrentHealth;
     private Coroutine Heal;
+
     [Header("Projectiles")]
     public Projectile OrgProjectile;
     public float Lifetime = 3, Size = 1, Speed = 0.5f, Damage = 15;
