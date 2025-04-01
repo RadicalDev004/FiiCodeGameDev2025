@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GS 1
+  m_Name: Zr
   m_Shader: {fileID: 4800000, guid: 0406db5a14f94604a8c57ccfbc9f3b46, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -46,7 +46,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 4c1e7e02333b2ed498d5352ea339f699, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3848e167e5fb5fc449466e9960ca323d, type: 3}
         m_Scale: {x: 1.03, y: 4.43}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:

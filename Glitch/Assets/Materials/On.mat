@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GS
+  m_Name: On
   m_Shader: {fileID: 4800000, guid: 0406db5a14f94604a8c57ccfbc9f3b46, type: 3}
   m_Parent: {fileID: 2100000, guid: 8e62f5a8b09143e46afdc1c50e537ef7, type: 2}
   m_ModifiedSerializedProperties: 0
@@ -45,11 +45,21 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 9bddfe25094c2404caf86a256b339d95, type: 3}
+        m_Scale: {x: 1.03, y: 4.43}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: c0744f0e6c3dddd4b8bd758faba1a054, type: 3}
         m_Scale: {x: 2, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats: []
-    m_Colors: []
+    m_Floats:
+    - _CameraFadingEnabled: 0
+    - _DistortionEnabled: 0
+    - _FlipbookBlending: 0
+    - _SoftParticlesEnabled: 0
+    m_Colors:
+    - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
+    - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
