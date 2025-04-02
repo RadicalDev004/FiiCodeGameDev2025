@@ -47,7 +47,7 @@ public class Code : MonoBehaviour
 
     public void Create(Editable CurrEditable)
     {
-
+        AudioManager.Play("Code_Open");
         Debug.Log("Creating Code Environment");
         IsOpen = true;
 

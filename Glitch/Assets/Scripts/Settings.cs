@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
     public CanvasGroup Tab_Settings;
+    public Slider S_Volume;
     public BoolSlider BS_Arrow, BS_EnemyRadar;
 
     public static bool IsOpen = false;
+
 
     void Update()
     {
@@ -37,6 +40,9 @@ public class Settings : MonoBehaviour
     {
         BS_Arrow.OnPress += ManageArrow;
         BS_EnemyRadar.OnPress += ManageEnemyRadar;
+
+        S_Volume.value = PlayerPrefs.GetFloat("Volume");
+        AudioManager.UpdateVolume();
     }
     private void OnDisable()
     {
@@ -52,5 +58,11 @@ public class Settings : MonoBehaviour
     public void ManageEnemyRadar(bool state)
     {
         EnemyRadar.isActive = state;
+    }
+
+    public void UpdateVolume()
+    {
+        PlayerPrefs.SetFloat("Volume", S_Volume.value);
+        AudioManager.UpdateVolume();
     }
 }

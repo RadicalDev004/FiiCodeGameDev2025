@@ -23527,6 +23527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Tab_Settings: {fileID: 827100207}
+  S_Volume: {fileID: 2048507837}
   BS_Arrow: {fileID: 2054260447}
   BS_EnemyRadar: {fileID: 740825594}
 --- !u!114 &637296073
@@ -69438,12 +69439,12 @@ MonoBehaviour:
   - name: Code_Open
     clip: {fileID: 8300000, guid: ce8fc4d537bc6714283e0ae1b076fa61, type: 3}
     loop: 0
-    RespectVolume: 0
+    RespectVolume: 1
     source: {fileID: 0}
   - name: Code_Close
     clip: {fileID: 8300000, guid: 5419028c83c9dc248a10cebe7bfa504f, type: 3}
     loop: 0
-    RespectVolume: 0
+    RespectVolume: 1
     source: {fileID: 0}
 --- !u!4 &1998463882
 Transform:
@@ -75092,7 +75093,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 450870251}
   m_FillRect: {fileID: 135862740}
   m_HandleRect: {fileID: 450870250}
@@ -75103,7 +75104,19 @@ MonoBehaviour:
   m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 637296072}
+        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
+        m_MethodName: UpdateVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2049229431
 GameObject:
   m_ObjectHideFlags: 0

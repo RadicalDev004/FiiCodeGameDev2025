@@ -54,7 +54,6 @@ public class PlayerBehaviour : MonoBehaviour
         {
             if (!editableToAccess.Block)
             {
-                AudioManager.Play("Code_Open");
                 Time.timeScale = 0;
                 editableToAccess.CreateTerminal();
                 UI.TogglePressE(false);
