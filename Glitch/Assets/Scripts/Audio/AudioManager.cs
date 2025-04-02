@@ -1,4 +1,4 @@
-using System;
+    using System;
 using Unity.VisualScripting;
 using UnityEngine;
 public class AudioManager : MonoBehaviour
@@ -59,10 +59,13 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySound(string name)
     {
+        Debug.Log("se incearca: " + name);
+
         Sound d = Array.Find(sounds, sound => sound.name == name);
         if (d == null)
             return;
 
+        Debug.Log("se playeaza: " + name);
         //d.source.pitch = 1f;
         d.source.Play();
     }

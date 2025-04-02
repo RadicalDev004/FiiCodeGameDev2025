@@ -13,18 +13,14 @@ public class Ref : MonoBehaviour
     public Movement _Movement;
     public static Movement Movement { get { return Instance._Movement; } }
 
-
     public LookPC _LookPC;
     public static LookPC LookPC { get { return Instance._LookPC; } }
-
 
     public Code _Code;
     public static Code Code { get { return Instance._Code; } }
 
-
     public UI _UI;
     public static UI UI { get { return Instance._UI; } }
-
 
     public EnemySpawner _EnemySpawner;
     public static EnemySpawner EnemySpawner { get { return Instance._EnemySpawner; } }
@@ -32,6 +28,8 @@ public class Ref : MonoBehaviour
     public EnemyRadar _EnemyRadar;
     public static EnemyRadar EnemyRadar { get { return Instance._EnemyRadar; } }
 
+    public AudioManager _AudioManager;
+    public static AudioManager AudioManager { get { return Instance._AudioManager; } }
 
     public static Ref Instance;
 
