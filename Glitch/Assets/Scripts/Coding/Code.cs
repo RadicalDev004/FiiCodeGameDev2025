@@ -47,6 +47,7 @@ public class Code : MonoBehaviour
 
     public void Create(Editable CurrEditable)
     {
+
         Debug.Log("Creating Code Environment");
         IsOpen = true;
 
@@ -103,6 +104,8 @@ public class Code : MonoBehaviour
 
     public void Close()
     {
+        AudioManager.Play("Code_Close");
+
         gameObject.SetActive(false);
         LookPC.isPaused = false;
         Movement.IsPaused = false;
