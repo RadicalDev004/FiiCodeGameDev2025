@@ -31,8 +31,10 @@ public class Ref : MonoBehaviour
     public AudioManager _AudioManager;
     public static AudioManager AudioManager { get { return Instance._AudioManager; } }
 
-    public static Ref Instance;
+    public MapManager _MapManager;
+    public static MapManager MapManager { get { return Instance._MapManager; } }
 
+    public static Ref Instance;
 
     private void OnEnable()
     {

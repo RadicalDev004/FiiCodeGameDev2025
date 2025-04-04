@@ -20,7 +20,7 @@ public class Inventory : Editable
         if(!Code.IsOpen && Input.GetKeyDown(KeyCode.Q)) 
         {
             CreateinventoryCode();
-            CreateTerminal();
+            StartCoroutine(ToggleTerminal(true));
         }
     }
 

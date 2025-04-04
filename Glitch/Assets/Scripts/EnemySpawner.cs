@@ -6,7 +6,7 @@ public class EnemySpawner : MonoBehaviour
 {
     public GameObject OriginalEnemy;
     private PlayerBehaviour PlayerBehaviour;
-    public static List<EnemyBehaviour> AllEnemies = new();
+    public List<EnemyBehaviour> AllEnemies = new();
 
     public float yOffsetUp, yOffsetDown;
 

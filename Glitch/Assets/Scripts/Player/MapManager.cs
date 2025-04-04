@@ -6,9 +6,8 @@ using UnityEngine.SceneManagement;
 public class MapManager : MonoBehaviour
 {
     public GameObject mapUI; 
-    private Dictionary<Button, Vector3> teleportLocations = new();
+    public Dictionary<Button, Vector3> teleportLocations = new();
     public static bool IsOpen = false;
-
 
     public void ToggleMap(bool state)
     {
@@ -43,7 +42,7 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    void TeleportPlayer(Button button)
+    public void TeleportPlayer(Button button)
     {
         if(!AreZombiesAlive())
         {
@@ -68,9 +67,13 @@ public class MapManager : MonoBehaviour
     public bool AreZombiesAlive()
     {
         //GameObject[] zombies = GameObject.FindGameObjectsWithTag("Enemy");
-        if (EnemySpawner.AllEnemies.Count > 0)
+        if (Ref.EnemySpawner.AllEnemies.Count > 0)
+        {
+            Debug.Log(Ref.EnemySpawner.AllEnemies.Count);
             return true;
-        else
+        }
+        else    
             return false;
+
     }
 }

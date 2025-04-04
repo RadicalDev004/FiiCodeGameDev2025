@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
-    public GameObject I_PressE, I_NotEnoughMana, I_Checkpoint, I_ZombiesAlive;
+    public GameObject I_PressE, I_NotEnoughMana, I_Checkpoint, I_ZombiesAlive, I_Admin;
     public Image I_Hit;
     public float fadeDuration = 1f;
     private Coroutine ShowHit;
 
     private CanvasGroup checkpointCanvasGroup;
+
+    private bool adminOn = false;
 
     void Start()
     {
@@ -29,6 +31,21 @@ public class UI : MonoBehaviour
     public void ToggleNotEnughMana(bool state)
     {
         I_NotEnoughMana.SetActive(state);
+    }
+
+    public void ToggleAdmin()
+    {
+        adminOn = !adminOn;
+
+        if(adminOn)
+            Cursor.lockState = CursorLockMode.None;
+        else
+            if(!Code.IsOpen && !Settings.IsOpen && !MapManager.IsOpen)
+                Cursor.lockState = CursorLockMode.Locked;
+            else 
+                Cursor.lockState = CursorLockMode.None;
+
+        I_Admin.SetActive(adminOn);
     }
 
     public void ToggleCheckpointText()

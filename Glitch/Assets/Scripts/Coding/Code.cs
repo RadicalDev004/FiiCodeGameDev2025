@@ -9,18 +9,17 @@ using UnityEngine.UI;
 
 public class Code : MonoBehaviour
 {
-    [TextArea(10,10)]
+    [TextArea(10, 10)]
     public string ExecutableCode;
     public Editable CurrentEditable;
 
-    //public TMP_Text T_Code;
     public TMP_Text T_ErrText;
     public TMP_InputField In_Editable;
     public TMP_Text T_Hint;
     public Button B_Close;
     public Button B_Reset;
     public static bool IsOpen = false;
-
+    
     public int EditableCount = 0;
 
     public List<string> ExistingCode = new();
@@ -35,21 +34,15 @@ public class Code : MonoBehaviour
     {
         B_Close.onClick.AddListener(delegate
         {
-            Close();
+            CurrentEditable.CloseTerminal();
             OnValidate = null;
         });
-        B_Reset.onClick.AddListener(delegate
-        {
-            
-            Create(CurrentEditable);
-        });
+        B_Reset.onClick.AddListener(delegate { Create(CurrentEditable); });
     }
 
     public void Create(Editable CurrEditable)
     {
-        AudioManager.Play("Code_Open");
         Debug.Log("Creating Code Environment");
-        IsOpen = true;
 
         CurrentEditable = CurrEditable;
         In_Editable.text = string.Empty;
@@ -59,7 +52,6 @@ public class Code : MonoBehaviour
         Validate = CurrentEditable.ValidateCode;
 
         string pattern = @"<e>(.*?)</e>";
-
         MatchCollection matches = Regex.Matches(ExecutableCode, pattern);
 
         int LastIndex = 0;
@@ -86,32 +78,21 @@ public class Code : MonoBehaviour
     }
 
     public void RunCode()
-    {       
+    {
         List<string> edited = ExtractEditedCode(In_Editable.text.ToLower());
-        //Debug.LogWarning("Running code with " + string.Join(", ", edited));
-        if (edited == null) T_ErrText.text = "Compiler Error!";
-        else if(!Validate(edited)) T_ErrText.text = "Validation Error!";
+
+        if (edited == null)
+            T_ErrText.text = "Compiler Error!";
+        else if (!Validate(edited))
+            T_ErrText.text = "Validation Error!";
         else
         {
-            Close();
             T_ErrText.text = string.Empty;
             OnValidate?.Invoke(edited);
-            return;
+            CurrentEditable.CloseTerminal(); // Acum Editable închide UI-ul
         }
 
         StartCoroutine(ResetErrtext(2));
-    }
-
-    public void Close()
-    {
-        AudioManager.Play("Code_Close");
-
-        gameObject.SetActive(false);
-        LookPC.isPaused = false;
-        Movement.IsPaused = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Time.timeScale = 1;
-        IsOpen = false;
     }
 
     public List<string> ExtractEditedCode(string editedText)
@@ -119,8 +100,7 @@ public class Code : MonoBehaviour
         List<string> newAddedCode = new();
         int currentIndex = 0;
 
-        editedText = Regex.Replace(editedText, @"\s+", "");
-        editedText = editedText.ToLower();
+        editedText = Regex.Replace(editedText, @"\s+", "").ToLower();
 
         foreach (string existing in ExistingCode)
         {
@@ -128,18 +108,17 @@ public class Code : MonoBehaviour
 
             int pos = editedText.IndexOf(existingL, currentIndex);
             if (pos == -1)
-            {
-                //Debug.LogError("<noparse>Compiler error at " + existingL.Replace("<", "＜").Replace(">", "＞") + " | " + editedText[currentIndex..].Replace("<", "＜").Replace(">", "＞") + " | " + editedText.IndexOf(existingL, currentIndex) + "</noparse>");
                 return null;
-            }
 
             string editedSegment = editedText[currentIndex..pos];
-            if(editedSegment != string.Empty) newAddedCode.Add(editedSegment);
+            if (!string.IsNullOrEmpty(editedSegment))
+                newAddedCode.Add(editedSegment);
 
             currentIndex = pos + existingL.Length;
         }
 
-        if(editedText[currentIndex..] != string.Empty) newAddedCode.Add(editedText[currentIndex..]);
+        if (!string.IsNullOrEmpty(editedText[currentIndex..]))
+            newAddedCode.Add(editedText[currentIndex..]);
 
         return newAddedCode;
     }
@@ -155,7 +134,6 @@ public class Code : MonoBehaviour
         if (list1.Count != list2.Count) return false;
 
         int diffCount = 0;
-
         for (int i = 0; i < list1.Count; i++)
         {
             if (!EqualityComparer<T>.Default.Equals(list1[i], list2[i]))
@@ -164,7 +142,6 @@ public class Code : MonoBehaviour
                 if (diffCount > 1) return false;
             }
         }
-
         return true;
     }
 }

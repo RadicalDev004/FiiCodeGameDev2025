@@ -41,7 +41,7 @@ public class Settings : MonoBehaviour
         BS_Arrow.OnPress += ManageArrow;
         BS_EnemyRadar.OnPress += ManageEnemyRadar;
 
-        S_Volume.value = PlayerPrefs.GetFloat("Volume");
+        //S_Volume.value = PlayerPrefs.GetFloat("Volume");
         AudioManager.UpdateVolume();
     }
     private void OnDisable()

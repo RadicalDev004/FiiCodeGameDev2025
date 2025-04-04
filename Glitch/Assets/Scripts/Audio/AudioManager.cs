@@ -25,6 +25,9 @@ public class AudioManager : MonoBehaviour
             s.source.playOnAwake = false;
         }
     }
+
+
+
     void Update()
     {
        

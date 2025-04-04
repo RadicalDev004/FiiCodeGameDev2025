@@ -50,12 +50,17 @@ public class PlayerBehaviour : MonoBehaviour
     {
         CheckForEditableObject();
 
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            UI.ToggleAdmin();
+        }    
+
         if (Input.GetKeyDown(KeyCode.E) && editableToAccess != null && !Code.IsOpen && !(editableToAccess is Enemy && !ManaSystem.Instance.HasFullMana()) && !MapManager.IsOpen)
         {
             if (!editableToAccess.Block)
             {
-                Time.timeScale = 0;
-                editableToAccess.CreateTerminal();
+                //Time.timeScale = 0;
+                editableToAccess.OpenTerminal();
                 UI.TogglePressE(false);
             }
 
@@ -201,5 +206,13 @@ public class PlayerBehaviour : MonoBehaviour
             S_HealthSlider.value = CurrentHealth;
             yield return new WaitForSeconds(1);
         }
+    }
+
+    public Editable GetEditable()
+    {
+        if(editableToAccess != null)
+            return editableToAccess;
+        else
+            return null;
     }
 }

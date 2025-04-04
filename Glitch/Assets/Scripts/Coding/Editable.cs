@@ -1,3 +1,4 @@
+using Pixelplacement;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Editable : MonoBehaviour
 {
@@ -31,39 +33,74 @@ public class Editable : MonoBehaviour
         UI = Ref.UI;
         ExecutableCode = ExecutableCode.ToLower();
 
-        if(UseOutline)
+        if (UseOutline)
             Outline = GetComponent<Outline>();
     }
 
-    public void CreateTerminal()
+    public void OpenTerminal()
     {
-       
-        LookPC.isPaused = true;
-        Movement.IsPaused = true;
-        Cursor.lockState = CursorLockMode.None;
-        Code.gameObject.SetActive(true);
-        Code.Create(this);
+        StartCoroutine(ToggleTerminal(true));
+    }
 
-        Time.timeScale = 0;
-        Code.OnValidate += SaveCode;
+    public void CloseTerminal()
+    {
+        StartCoroutine(ToggleTerminal(false));
+    }
+
+    public IEnumerator ToggleTerminal(bool open)
+    {
+        LookPC.isPaused = open;
+        Movement.IsPaused = open;
+        Cursor.lockState = open ? CursorLockMode.None : CursorLockMode.Locked;
+
+        if (open)
+        {
+            AudioManager.Play("Code_Open");
+            Cursor.lockState = CursorLockMode.None;
+            Code.gameObject.SetActive(true);
+            Code.transform.GetChild(0).localScale = Vector3.zero;
+            Tween.LocalScale(Code.transform.GetChild(0), Vector3.one, 0.3f, 0f, Tween.EaseInOut);
+            Code.Create(this);
+            Time.timeScale = 0;
+            Code.OnValidate += SaveCode;
+            Code.IsOpen = true;
+        }
+        else
+        {
+            AudioManager.Play("Code_Close");
+            Cursor.lockState = CursorLockMode.Locked;
+            Tween.LocalScale(Code.transform.GetChild(0), Vector3.zero, 0.3f, 0f, Tween.EaseInOut);
+            yield return new WaitForSecondsRealtime(0.3f);
+            Code.gameObject.SetActive(false);
+            Time.timeScale = 1;
+            Code.IsOpen = false;
+        }
+    }
+
+    private IEnumerator ScaleUI(Transform obj, Vector3 from, Vector3 to, float duration)
+    {
+        float elapsed = 0;
+        while (elapsed < duration)
+        {
+            obj.localScale = Vector3.Lerp(from, to, elapsed / duration);
+            elapsed += Time.unscaledDeltaTime;
+            yield return null;
+        }
+        obj.localScale = to;
     }
 
     public void ToggleOutline(bool state)
     {
         if (!UseOutline || Outline == null) return;
-
         Outline.enabled = state;
     }
 
     public void SaveCode(List<string> newCode)
     {
         Code.OnValidate -= SaveCode;
-
         string pattern = @"<e>(.*?)</e>";
         int ind = 0;
-
-        string updatedText = Regex.Replace(ExecutableCode, pattern, match => $"<e>{ReplaceValue(newCode, ref ind)}</e>");
-        ExecutableCode = updatedText;
+        ExecutableCode = Regex.Replace(ExecutableCode, pattern, match => $"<e>{ReplaceValue(newCode, ref ind)}</e>");
     }
 
     static string ReplaceValue(List<string> newCode, ref int ind)
@@ -71,7 +108,7 @@ public class Editable : MonoBehaviour
         return newCode.Count > ind ? newCode[ind++] : null;
     }
 
-    protected void OnGlitchSolve()
+    public void OnGlitchSolve()
     {
         StartCoroutine(delayEnemies());
         playerBehaviour.PlaySolveGlitch();
