@@ -19,8 +19,8 @@ TagManager:
   - EnemyHitbox
   - EnemyTrigger
   - Projectile
-  - 
-  - 
+  - Player
+  - ignoreLight
   - 
   - 
   - 

@@ -34,6 +34,9 @@ public class Ref : MonoBehaviour
     public MapManager _MapManager;
     public static MapManager MapManager { get { return Instance._MapManager; } }
 
+    public Tutorial _Tutorial;
+    public static Tutorial Tutorial {  get { return Instance._Tutorial; } }
+
     public static Ref Instance;
 
     private void OnEnable()

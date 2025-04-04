@@ -16,7 +16,7 @@ public class BoolSlider : MonoBehaviour
 
     public Action<bool> OnPress;
 
-    void Start()
+    void Awake()
     {
         if (!PlayerPrefs.HasKey(ppName))
         {

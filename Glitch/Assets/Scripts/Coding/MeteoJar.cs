@@ -41,7 +41,9 @@ public class MeteoJar : Editable
         int ind2 = KeyElementToInt(combine);
 
         AllPartileSystems.ForEach(elem => elem.SetActive(false));
-        if(ind > -1) AllPartileSystems[ind].SetActive(true);  
+        if(ind > -1) AllPartileSystems[ind].SetActive(true);
+
+        if (CurrentWords.Contains(combine)) return true;
         
         if(ind2 > -1)
         {
@@ -119,6 +121,6 @@ public class MeteoJar : Editable
     {
         ExecutableCode = $"\r\n delcare: {string.Join(", ", CurrentWords)};" +
             "\r\n\r\n combine(<e></e> , <e></e>);" +
-            "\r\n\r\n<color=#44cd8b>/* use the combine function to get new elements. */</color>\r\n";
+            "\r\n\r\n<color=#44cd8b>/* use the combine function to get new elements (you can use elemetns twice). */</color>\r\n";
     }
 }

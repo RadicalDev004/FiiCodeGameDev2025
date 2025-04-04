@@ -138,6 +138,8 @@ public class EnemyBehaviour : MonoBehaviour
     {
         for(int i = 0; i <= Difficulty; i++)
         {
+            if (!RandomChance.Percent(70 - 10 * Difficulty)) continue;
+
             FunctionItem fi = Instantiate(OrgFunctionItem, OrgFunctionItem.transform.parent);
             fi.transform.SetParent(null);
             fi.gameObject.SetActive(true);

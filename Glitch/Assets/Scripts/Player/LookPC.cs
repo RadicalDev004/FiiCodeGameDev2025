@@ -26,19 +26,12 @@ public class LookPC : MonoBehaviour
 
         if (isPaused == false)
         {
-            //x = Input.GetAxis("Mouse X") * sensitivity;
-            //y = Input.GetAxis("Mouse Y") * sensitivity;
-
             yRot -= Input.GetAxis("Mouse Y") * sensitivity;
             XRot += Input.GetAxis("Mouse X") * sensitivity;
 
             yRot = Mathf.Clamp(yRot, -90f, 90f);
 
             Camera.transform.eulerAngles = new Vector3 (yRot, XRot, 0);
-
-            //Camera.transform.localRotation = Quaternion.Euler(yRot, -XRot, 0);
-            //Camera.transform.Rotate(Vector3.up * x);
-            //SpraySystem.transform.localRotation = Camera.transform.localRotation;
         }       
     }
 }

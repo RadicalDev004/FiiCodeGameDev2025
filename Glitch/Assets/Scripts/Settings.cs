@@ -11,6 +11,10 @@ public class Settings : MonoBehaviour
 
     public static bool IsOpen = false;
 
+    private void Start()
+    {
+        AudioManager.UpdateVolume();
+    }
 
     void Update()
     {
@@ -39,10 +43,7 @@ public class Settings : MonoBehaviour
     private void OnEnable()
     {
         BS_Arrow.OnPress += ManageArrow;
-        BS_EnemyRadar.OnPress += ManageEnemyRadar;
-
-        //S_Volume.value = PlayerPrefs.GetFloat("Volume");
-        AudioManager.UpdateVolume();
+        BS_EnemyRadar.OnPress += ManageEnemyRadar;       
     }
     private void OnDisable()
     {

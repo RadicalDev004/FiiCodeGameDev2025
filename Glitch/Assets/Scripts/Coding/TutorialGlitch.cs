@@ -51,7 +51,7 @@ public class TutorialGlitch : Editable
                     GetComponent<MeshRenderer>().enabled = false;
                     yield break;
                 }
-                GlitchMaterial.SetTexture("_MainTex", GlitchSprites[i]);
+                GlitchMaterial.SetTexture("_BaseMap", GlitchSprites[i]);
                 yield return new WaitForSeconds(0.2f);
             }
             

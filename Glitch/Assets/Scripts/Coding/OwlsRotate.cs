@@ -69,9 +69,9 @@ public class OwlsRotate : Editable
             if (currRot[i] == CorrectAnswers[i])
             {
                 Owls[i].transform.GetChild(0).GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
-                Owls[i].transform.GetChild(0).GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", Materials[i].GetColor("_Color") * 2.0f);
+                Owls[i].transform.GetChild(0).GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", Materials[i].GetColor("_BaseColor") * 2.0f);
                 Owls[i].transform.GetChild(1).GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
-                Owls[i].transform.GetChild(1).GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", Materials[i].GetColor("_Color") * 2.0f);
+                Owls[i].transform.GetChild(1).GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", Materials[i].GetColor("_BaseColor") * 2.0f);
             }
             else
             {

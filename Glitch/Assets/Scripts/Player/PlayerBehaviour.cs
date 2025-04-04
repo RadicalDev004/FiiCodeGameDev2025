@@ -28,6 +28,7 @@ public class PlayerBehaviour : MonoBehaviour
     public float Lifetime = 3, Size = 1, Speed = 0.5f, Damage = 15;
     public float CooldownTimer = 1;
     private bool isCoolDown = false;
+    public static bool EnabledProjectiles = true;
 
     public List<ParticleSystem> GlitchSolve = new();
 
@@ -71,7 +72,7 @@ public class PlayerBehaviour : MonoBehaviour
             mapManager.ToggleMap(true);
         }
 
-        if (Input.GetMouseButtonDown(0) && Time.timeScale > 0 && !isCoolDown)
+        if (Input.GetMouseButtonDown(0) && Time.timeScale > 0 && !isCoolDown && EnabledProjectiles)
         {
             StartCoroutine(ShootingProjectileCor(0.2f));
         }

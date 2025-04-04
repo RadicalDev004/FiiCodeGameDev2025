@@ -30,6 +30,7 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
+    - _DstBlendAlpha: 10
     - _Metallic: 0
     - _Smoothness: 1
     m_Colors:
