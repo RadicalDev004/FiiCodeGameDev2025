@@ -39,6 +39,7 @@ public class Editable : MonoBehaviour
 
     public void OpenTerminal()
     {
+        if (MapManager.IsOpen || Settings.IsOpen) return;
         StartCoroutine(ToggleTerminal(true));
     }
 

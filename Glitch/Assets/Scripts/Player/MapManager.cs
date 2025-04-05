@@ -2,6 +2,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Pixelplacement;
+using TMPro;
+using System.Collections;
 
 public class MapManager : MonoBehaviour
 {
@@ -11,9 +14,15 @@ public class MapManager : MonoBehaviour
 
     public void ToggleMap(bool state)
     {
+        if (state && (Settings.IsOpen || Code.IsOpen)) return;
+
         IsOpen = state;
-        mapUI.SetActive(IsOpen);
-        //Cursor.visible = isActive;
+
+       if (state) mapUI.SetActive(true);
+
+        mapUI.transform.GetChild(0).localScale = Vector3.one * (state ? 0 : 1);
+        Tween.LocalScale(mapUI.transform.GetChild(0), Vector3.one * (state ? 1 : 0), 0.2f, 0, Tween.EaseInOut);
+
         if (IsOpen)
         {
             LookPC.isPaused = state;
@@ -23,12 +32,19 @@ public class MapManager : MonoBehaviour
         }
         else
         {
-            LookPC.isPaused = state;
-            Movement.IsPaused = state;
-            Cursor.lockState= CursorLockMode.Locked;
-            Time.timeScale = 1f;
+            StartCoroutine(ResetMapAfterCloseCor(0.2f));
         }
        
+    }
+
+    private IEnumerator ResetMapAfterCloseCor(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        mapUI.SetActive(false);
+        LookPC.isPaused = false;
+        Movement.IsPaused = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1;
     }
 
     public void UnlockCheckpoint(Button button, Vector3 worldPosition)

@@ -1,3 +1,4 @@
+using Pixelplacement;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +19,7 @@ public class Settings : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyUp(KeyCode.Escape))
+        if(Input.GetKeyUp(KeyCode.Escape) && !IsOpen)
         {
             ToggleSettings(true);
         }
@@ -27,18 +28,38 @@ public class Settings : MonoBehaviour
     public void ToggleSettings(bool state)
     {
         IsOpen = state;
-        Tab_Settings.alpha = state ? 1 : 0;
+        if (state)
+            Tab_Settings.alpha = 1;
+        else
+            StartCoroutine(ResetSettingsAlphaAfterCloseCor(0.2f));
+
         Tab_Settings.interactable = state;
         Tab_Settings.blocksRaycasts = state;
 
+        Tab_Settings.transform.GetChild(0).localScale = Vector3.one * (state ? 0 : 1);
+        Tween.LocalScale(Tab_Settings.transform.GetChild(0), Vector3.one * (state  ? 1 : 0), 0.2f, 0, Tween.EaseInOut);
+
         if (!Code.IsOpen && !MapManager.IsOpen)
         {
-            LookPC.isPaused = state;
-            Movement.IsPaused = state;
-            Cursor.lockState = state ? CursorLockMode.None : CursorLockMode.Locked;
-            Time.timeScale = state ? 0 : 1;
+            StartCoroutine(ResetAvailabilityAlphaAfterCloseCor(0.2f));
         }       
     }
+
+    private IEnumerator ResetSettingsAlphaAfterCloseCor(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        Tab_Settings.alpha = 0;
+    }
+
+    private IEnumerator ResetAvailabilityAlphaAfterCloseCor(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        LookPC.isPaused = IsOpen;
+        Movement.IsPaused = IsOpen;
+        Cursor.lockState = IsOpen ? CursorLockMode.None : CursorLockMode.Locked;
+        Time.timeScale = IsOpen ? 0 : 1;
+    }
+
 
     private void OnEnable()
     {

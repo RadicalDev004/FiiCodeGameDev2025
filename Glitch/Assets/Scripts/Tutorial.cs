@@ -22,6 +22,11 @@ public class Tutorial : MonoBehaviour
     void Start()
     {
         GhostAnimator.gameObject.SetActive(false);
+        if(Enabled)
+        {
+            float en = PlayerPrefs.GetFloat("Tutorial");
+            Enabled = en == 1;
+        }
         if (!Enabled) return;
         StartCoroutine(ShowTutorial(InitialTime, InBetweenTime));
     }

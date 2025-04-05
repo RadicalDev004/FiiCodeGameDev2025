@@ -17,7 +17,7 @@ public class Inventory : Editable
 
     void Update()
     {
-        if(!Code.IsOpen && Input.GetKeyDown(KeyCode.Q)) 
+        if(!Settings.IsOpen && !MapManager.IsOpen && !Code.IsOpen && Input.GetKeyDown(KeyCode.Q)) 
         {
             CreateinventoryCode();
             StartCoroutine(ToggleTerminal(true));

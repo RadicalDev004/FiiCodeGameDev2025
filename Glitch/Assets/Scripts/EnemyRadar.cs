@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyRadar : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class EnemyRadar : MonoBehaviour
     public Transform Cam;
     public Dictionary<EnemyBehaviour, RectTransform> AllRadars = new();
     public static bool isActive;
+
+    public float MinDist = 0.1f, MaxDist = 1.5f;
 
     private void Update()
     {
@@ -39,6 +42,10 @@ public class EnemyRadar : MonoBehaviour
             if (angle < 0) angle += 360f;
 
             pair.Value.rotation = Quaternion.Euler(0, 0, angle);
+
+            Color c = pair.Value.transform.GetChild(0).GetComponent<Image>().color;
+            c.a = DistanceToAlpha(Vector3.Distance(Ref.PlayerBehaviour.gameObject.transform.position, enemyPos)) / 255;
+            pair.Value.transform.GetChild(0).GetComponent<Image>().color = c;
         }
         foreach (var key in keysToRemove)
         {
@@ -52,5 +59,13 @@ public class EnemyRadar : MonoBehaviour
         newRadar.gameObject.SetActive(true);
         newRadar.SetAsFirstSibling();
         AllRadars.Add(enemy, newRadar);
+    }
+
+    public float DistanceToAlpha(float distance)
+    {
+        if(distance < MinDist) distance = MinDist;
+        if(distance > MaxDist) distance = MaxDist;
+
+        return Mathf.Lerp(255f, 25f, Mathf.InverseLerp(MinDist, MaxDist, distance));
     }
 }
