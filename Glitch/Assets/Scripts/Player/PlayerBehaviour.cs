@@ -29,7 +29,10 @@ public class PlayerBehaviour : MonoBehaviour
     public float CooldownTimer = 1;
     private bool isCoolDown = false;
     public static bool EnabledProjectiles = true;
+    public MeshRenderer StaffStone;
+    public static int GlitchesSolved;
 
+    [Header("Other")]
     public List<ParticleSystem> GlitchSolve = new();
 
     private float lastSeenEditableTime = 0f;

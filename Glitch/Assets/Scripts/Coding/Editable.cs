@@ -60,7 +60,7 @@ public class Editable : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Code.gameObject.SetActive(true);
             Code.transform.GetChild(0).localScale = Vector3.zero;
-            Tween.LocalScale(Code.transform.GetChild(0), Vector3.one, 0.3f, 0f, Tween.EaseInOut);
+            Tween.LocalScale(Code.transform.GetChild(0), Vector3.one, 0.2f, 0f, Tween.EaseInOut);
             Code.Create(this);
             Time.timeScale = 0;
             Code.OnValidate += SaveCode;
@@ -70,8 +70,8 @@ public class Editable : MonoBehaviour
         {
             AudioManager.Play("Code_Close");
             Cursor.lockState = CursorLockMode.Locked;
-            Tween.LocalScale(Code.transform.GetChild(0), Vector3.zero, 0.3f, 0f, Tween.EaseInOut);
-            yield return new WaitForSecondsRealtime(0.3f);
+            Tween.LocalScale(Code.transform.GetChild(0), Vector3.zero, 0.2f, 0f, Tween.EaseInOut);
+            yield return new WaitForSecondsRealtime(0.2f);
             Code.gameObject.SetActive(false);
             Time.timeScale = 1;
             Code.IsOpen = false;
@@ -115,6 +115,8 @@ public class Editable : MonoBehaviour
         playerBehaviour.PlaySolveGlitch();
         ToggleOutline(false);
         Completed = true;
+        PlayerBehaviour.GlitchesSolved++;
+        Ref.PlayerBehaviour.StaffStone.material.SetFloat("_FresnelPower", 1 - 0.13f * PlayerBehaviour.GlitchesSolved);
     }
 
     private IEnumerator delayEnemies()

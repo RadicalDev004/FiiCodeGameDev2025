@@ -32,19 +32,16 @@ public class MapManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(ResetMapAfterCloseCor(0.2f));
+            Ref.ActionAfterTime(0.2f, delegate
+            {
+                mapUI.SetActive(false);
+                LookPC.isPaused = false;
+                Movement.IsPaused = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                Time.timeScale = 1;
+            });
         }
        
-    }
-
-    private IEnumerator ResetMapAfterCloseCor(float time)
-    {
-        yield return new WaitForSecondsRealtime(time);
-        mapUI.SetActive(false);
-        LookPC.isPaused = false;
-        Movement.IsPaused = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Time.timeScale = 1;
     }
 
     public void UnlockCheckpoint(Button button, Vector3 worldPosition)

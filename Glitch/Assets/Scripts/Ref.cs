@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,5 +43,16 @@ public class Ref : MonoBehaviour
     private void OnEnable()
     {
         Instance = this;
+    }
+
+
+    public static void ActionAfterTime(float time, Action action)
+    {
+        Instance.StartCoroutine(ActionAfterTimeCor(time, action));
+    }
+    private static IEnumerator ActionAfterTimeCor(float time, Action action)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        action?.Invoke();
     }
 }

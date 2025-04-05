@@ -1,4 +1,5 @@
 using Pixelplacement;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,36 +29,37 @@ public class Settings : MonoBehaviour
     public void ToggleSettings(bool state)
     {
         IsOpen = state;
-        if (state)
-            Tab_Settings.alpha = 1;
-        else
-            StartCoroutine(ResetSettingsAlphaAfterCloseCor(0.2f));
-
         Tab_Settings.interactable = state;
         Tab_Settings.blocksRaycasts = state;
 
         Tab_Settings.transform.GetChild(0).localScale = Vector3.one * (state ? 0 : 1);
-        Tween.LocalScale(Tab_Settings.transform.GetChild(0), Vector3.one * (state  ? 1 : 0), 0.2f, 0, Tween.EaseInOut);
+        Tween.LocalScale(Tab_Settings.transform.GetChild(0), Vector3.one * (state ? 1 : 0), 0.2f, 0, Tween.EaseInOut);
 
-        if (!Code.IsOpen && !MapManager.IsOpen)
+        if (state)
+        { 
+            Tab_Settings.alpha = 1;
+
+            LookPC.isPaused = true;
+            Movement.IsPaused = true;
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0;
+        }
+        else
         {
-            StartCoroutine(ResetAvailabilityAlphaAfterCloseCor(0.2f));
-        }       
-    }
+            Ref.ActionAfterTime(0.2f, delegate { Tab_Settings.alpha = 0; });
+            if (!Code.IsOpen && !MapManager.IsOpen)
+            {
 
-    private IEnumerator ResetSettingsAlphaAfterCloseCor(float time)
-    {
-        yield return new WaitForSecondsRealtime(time);
-        Tab_Settings.alpha = 0;
-    }
+                Ref.ActionAfterTime(0.2f, delegate {
+                    LookPC.isPaused = false;
+                    Movement.IsPaused = false;
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Time.timeScale = 1;
+                });
+            }
+        }                    
 
-    private IEnumerator ResetAvailabilityAlphaAfterCloseCor(float time)
-    {
-        yield return new WaitForSecondsRealtime(time);
-        LookPC.isPaused = IsOpen;
-        Movement.IsPaused = IsOpen;
-        Cursor.lockState = IsOpen ? CursorLockMode.None : CursorLockMode.Locked;
-        Time.timeScale = IsOpen ? 0 : 1;
+             
     }
 
 
@@ -87,4 +89,5 @@ public class Settings : MonoBehaviour
         PlayerPrefs.SetFloat("Volume", S_Volume.value);
         AudioManager.UpdateVolume();
     }
+
 }
