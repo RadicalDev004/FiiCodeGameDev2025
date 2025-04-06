@@ -153,6 +153,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private IEnumerator ShootingProjectileCor(float animTime)
     {
+        AudioManager.Play("Projectile_Cast");
         StaffAnimator.SetTrigger("shoot");
         isCoolDown = true;
         Vector3 initialPos = MagicStaff.transform.localPosition;

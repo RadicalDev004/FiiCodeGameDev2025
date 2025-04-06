@@ -30,6 +30,7 @@ public class Projectile : MonoBehaviour
         {
             if (!other.CompareTag("Player"))
             {
+                AudioManager.Play("Projectile_Hit");
                 Instantiate(impactParticles, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }

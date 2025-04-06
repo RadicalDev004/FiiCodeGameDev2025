@@ -14173,6 +14173,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1998463881}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Code_Button
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 935387677}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -32406,6 +32418,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1998463881}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Code_Button
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 1119702791}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -33605,7 +33629,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1791
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -42217,6 +42241,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1998463881}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Code_Button
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 935387677}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -44065,6 +44101,7 @@ GameObject:
   - component: {fileID: 1207870145}
   - component: {fileID: 1207870149}
   - component: {fileID: 1207870148}
+  - component: {fileID: 1207870151}
   m_Layer: 5
   m_Name: In_Code
   m_TagString: Untagged
@@ -44262,6 +44299,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1207870144}
   m_CullTransparentMesh: 1
+--- !u!114 &1207870151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207870144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79aa4d90015ca5149a2639cf471ce007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1218179782
 GameObject:
   m_ObjectHideFlags: 0
@@ -72075,6 +72124,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1998463881}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Code_Button
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1119702791}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -72930,7 +72991,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1656315141}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1998463881}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Code_Button
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1656315141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92915,6 +92988,31 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Code_Close
     clip: {fileID: 8300000, guid: d43938ae6a37a6d48a8b5b998711e8cd, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+  - name: Projectile_Cast
+    clip: {fileID: 8300000, guid: 896b6178be8c91d49b35c74f09be7468, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+  - name: Projectile_Hit
+    clip: {fileID: 8300000, guid: 1dc2e1d9fa993ec47a57d701dda4e6a4, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+  - name: Code_Button
+    clip: {fileID: 8300000, guid: 74d583cc54caf474db00773b6c6e31c2, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+  - name: Code_Type
+    clip: {fileID: 8300000, guid: 9523b1c8a2e8cb24e885c165b7140412, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+  - name: Code_Delete
+    clip: {fileID: 8300000, guid: 4e56a1cdb793d0140843f05e0254bd60, type: 3}
     loop: 0
     RespectVolume: 1
     source: {fileID: 0}
