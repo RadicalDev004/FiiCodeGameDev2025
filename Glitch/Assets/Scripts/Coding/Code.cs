@@ -89,7 +89,7 @@ public class Code : MonoBehaviour
         {
             T_ErrText.text = string.Empty;
             OnValidate?.Invoke(edited);
-            CurrentEditable.CloseTerminal(); // Acum Editable închide UI-ul
+            CurrentEditable.CloseTerminal(); 
         }
 
         StartCoroutine(ResetErrtext(2));
