@@ -29163,7 +29163,7 @@ MonoBehaviour:
   Ongoing: 0
   RotationCorrectionSpeed: 1
   GhostAnimator: {fileID: 4054939594599563626}
-  LookAt: {fileID: 0}
+  LookAt: {fileID: 1548063681}
   Camera: {fileID: 963194225}
   Replies:
   - You're in just in time!
@@ -90600,6 +90600,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Eye: {fileID: 5071207010014345312}
+  LookSpeed: 2
+  LookAwaySpeed: 0.5
 --- !u!1 &1896978713
 GameObject:
   m_ObjectHideFlags: 0

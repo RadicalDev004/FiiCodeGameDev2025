@@ -61,6 +61,8 @@ public class Enemy : Editable
             return false;
         }
 
+        if (code.SequenceEqual(Ref.Code.AddedCode)) return true;
+
         EnemyBehaviour.Create(EnemyBehaviour.MaxHealth, values[0], values[1], values[2], values[3], bool.Parse(code[4]), EnemyBehaviour.Difficulty, false);
 
 
