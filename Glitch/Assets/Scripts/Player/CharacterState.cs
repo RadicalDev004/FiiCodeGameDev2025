@@ -22,7 +22,7 @@ public class CharacterState : MonoBehaviour
     void Update()
     {     
 
-        if (Movement.IsPaused) return;
+        if (Movement.isPaused) return;
 
 
     }

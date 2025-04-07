@@ -36,7 +36,10 @@ public class Ref : MonoBehaviour
     public static MapManager MapManager { get { return Instance._MapManager; } }
 
     public Tutorial _Tutorial;
-    public static Tutorial Tutorial {  get { return Instance._Tutorial; } }
+    public static Tutorial Tutorial { get { return Instance._Tutorial; } }
+
+    public MagicBook _MagicBook;
+    public static MagicBook MagicBook { get { return Instance._MagicBook; } }
 
     public static Ref Instance;
 

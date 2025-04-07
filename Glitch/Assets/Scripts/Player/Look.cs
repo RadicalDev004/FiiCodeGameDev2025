@@ -19,7 +19,7 @@ public class Look : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Movement.IsPaused) return;
+        if(Movement.isPaused) return;
 
         Vector3 dir = Player.transform.position - new Vector3(Camera.transform.position.x, Player.transform.position.y, Camera.transform.position.z);  
         Orientation.forward = dir.normalized;

@@ -7,16 +7,19 @@ using UnityEngine;
 public class MagicBook : MonoBehaviour
 {
     public GameObject Eye;
-    private bool isLookingAway = false;
+    public bool isLookingAway = false, StopLookingAway = false;
     public float LookSpeed = 2f, LookAwaySpeed = 0.5f;
+    public float InitialRotY, InitialRotX;
+    public GameObject Pupil;
+    public Material AngryEye;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        InitialRotX = Eye.transform.eulerAngles.x;
+        InitialRotY = Eye.transform.eulerAngles.y;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         Vector3 toEye = Eye.transform.position - Ref.PlayerBehaviour.playerCamera.transform.position;
@@ -31,18 +34,19 @@ public class MagicBook : MonoBehaviour
             Vector3 targetEuler = targetRotation.eulerAngles;
 
 
-            Vector3 euler = Eye.transform.eulerAngles;
+            Vector3 euler = targetEuler;
 
             euler.x = NormalizeAngle(euler.x);
-            euler.y = NormalizeAngle(euler.y);
+            //euler.y = NormalizeAngle(euler.y);
 
             euler.x = Mathf.Clamp(euler.x, -40f, 40f);
-            euler.y = Mathf.Clamp(euler.y, -40f, 40f);
+            euler.y = Mathf.Clamp(euler.y, InitialRotY - 40f, InitialRotY + 40f);
 
-            Quaternion clampedRotation = Quaternion.Euler(targetEuler);
+            Quaternion clampedRotation = Quaternion.Euler(euler);
             Eye.transform.rotation = Quaternion.Slerp(Eye.transform.rotation, clampedRotation, Time.deltaTime * LookSpeed);
+
         }
-        else if(!isLookingAway)
+        else if(!isLookingAway && !StopLookingAway)
         {
             isLookingAway = true;
             LookAway();
@@ -84,5 +88,15 @@ public class MagicBook : MonoBehaviour
         Debug.Log(currRot + " " + cadran);
 
         Tween.LocalRotation(Eye.transform, rot, LookAwaySpeed, 0, Tween.EaseOutStrong);
+    }
+
+    public void GetAngry()
+    {
+        Debug.Log("Angry boss");
+        
+        var renderer = Pupil.GetComponent<MeshRenderer>();
+        var mats = renderer.materials;
+        mats[0] = AngryEye;
+        renderer.materials = mats;
     }
 }

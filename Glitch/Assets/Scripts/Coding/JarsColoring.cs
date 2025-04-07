@@ -64,8 +64,8 @@ public class JarsColoring : Editable
     private IEnumerator JarsAnimation(float seconds)
     {
         Block = true;
-        Debug.Log("Old Color: " + ToEdit.color);
-        Debug.Log("New color " + new Color(FillJar2, 0, FillJar1, 255));
+        //Debug.Log("Old Color: " + ToEdit.color);
+        //Debug.Log("New color " + new Color(FillJar2, 0, FillJar1, 255));
         Tween.Color(ToEdit, new Color32((byte)FillJar2, 0, (byte)FillJar1, 255), seconds, 0, Tween.EaseInOut);
         EditLiquid(Jar1, FillJar1 / 255 * 100, seconds);
         EditLiquid(Jar2, FillJar2 / 255 * 100, seconds);
@@ -90,7 +90,7 @@ public class JarsColoring : Editable
         newScale = newScale > 0.01f ? newScale : 0.01f;
         float newPos = MaxPos - MaxFill + newScale;        
         
-        Debug.LogWarning(percent + " " + newScale + " " + newPos);
+        //Debug.LogWarning(percent + " " + newScale + " " + newPos);
         Tween.LocalScale(jar.transform, new Vector3(jar.transform.localScale.x, newScale, jar.transform.localScale.z), seconds, 0, Tween.EaseInOut);
         Tween.LocalPosition(jar.transform, new Vector3(jar.transform.localPosition.x, newPos, jar.transform.localPosition.z), seconds, 0, Tween.EaseInOut);
     }
