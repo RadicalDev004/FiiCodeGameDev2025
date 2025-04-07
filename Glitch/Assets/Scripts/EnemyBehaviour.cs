@@ -67,7 +67,8 @@ public class EnemyBehaviour : MonoBehaviour
             UpdateHealthSlider(-proj.damage);
             ManaSystem.Instance.AddMana(givenManaPerHit);
             Ref.EnemySpawner.AllEnemies.Remove(this);
-            Destroy(proj.gameObject);
+            if(!Projectile.PassThrough)
+                Destroy(proj.gameObject);
         }
     }
 

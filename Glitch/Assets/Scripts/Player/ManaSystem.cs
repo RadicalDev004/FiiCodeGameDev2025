@@ -9,6 +9,8 @@ public class ManaSystem : MonoBehaviour
     private float currentMana = 0;
     private float maxMana = 1;
 
+    public static float ExtraManaPerHit;
+
     private void Awake()
     {
         if (Instance == null)
@@ -18,9 +20,11 @@ public class ManaSystem : MonoBehaviour
 
     public void AddMana(float amount)
     {
+        if (BossCrystal.C5) return;
+
         if(currentMana < maxMana)
         {
-            currentMana += amount;
+            currentMana += amount + amount * ExtraManaPerHit * 25 / 100;
             OnManaChanged?.Invoke(currentMana);
 
             Debug.Log("current mana: " +  currentMana);

@@ -109,7 +109,7 @@ public class Movement : MonoBehaviour
         move = Cam.forward * MovementInput.y + Cam.right * MovementInput.x;
         move.y = 0;
         move = AdjustVelocityToSlope(move);
-        Controller.Move(speed * SprintAdditive * Time.deltaTime * move);
+        Controller.Move((BossCrystal.C2 ? speed / 2 : speed) * SprintAdditive * Time.deltaTime * move);
 
         
         velocity.y += gravity * Time.deltaTime;

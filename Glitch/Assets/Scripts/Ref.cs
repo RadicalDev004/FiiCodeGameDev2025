@@ -41,6 +41,10 @@ public class Ref : MonoBehaviour
     public MagicBook _MagicBook;
     public static MagicBook MagicBook { get { return Instance._MagicBook; } }
 
+    public Inventory _Inventory;
+    public static Inventory Inventory { get { return Instance._Inventory; } }   
+
+
     public static Ref Instance;
 
     private void OnEnable()
