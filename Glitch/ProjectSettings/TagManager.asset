@@ -9,6 +9,8 @@ TagManager:
   - CheckpointUI
   - Enemy
   - IgnoreOutline
+  - bossProjectile
+  - boss
   layers:
   - Default
   - TransparentFX

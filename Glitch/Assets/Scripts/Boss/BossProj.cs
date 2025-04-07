@@ -1,16 +1,15 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class BossProj : MonoBehaviour
 {
-    public float speed, damage = 10;
+    public float speed, damage = 20;
     public GameObject impactParticles;
-    public static bool PassThrough = false;
 
     private void Update()
     {
-        transform.Translate((BossCrystal.C3 ? speed / 2 : speed) * Time.deltaTime * Vector3.forward);
+        transform.Translate(speed * Time.deltaTime * Vector3.forward);
     }
 
     public void Shoot(float lifetime, float speed, float size, float damage)
@@ -29,13 +28,14 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player"))
-        {
-            AudioManager.Play("Projectile_Hit");
-            Instantiate(impactParticles, transform.position, Quaternion.identity);
-            if(!PassThrough)
-                Destroy(gameObject);
-        }
-    }
+        if (other.CompareTag("boss"))
+            return;
 
+        if (other.TryGetComponent(out PlayerBehaviour pb))
+        {
+            pb.TakeDamage(damage);
+        }
+        Instantiate(impactParticles, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
 }

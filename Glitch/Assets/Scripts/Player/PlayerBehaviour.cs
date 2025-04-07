@@ -22,6 +22,7 @@ public class PlayerBehaviour : MonoBehaviour
     public Slider S_HealthSlider;
     public float CurrentHealth;
     private Coroutine Heal;
+    public float ScaleInitialHealthSlider;
 
     [Header("Projectiles")]
     public Projectile OrgProjectile;
@@ -31,6 +32,7 @@ public class PlayerBehaviour : MonoBehaviour
     public static bool EnabledProjectiles = true;
     public MeshRenderer StaffStone;
     public static int GlitchesSolved;
+    public static float ProjectileSizeIncrease;
 
     [Header("Other")]
     public List<ParticleSystem> GlitchSolve = new();
@@ -48,6 +50,7 @@ public class PlayerBehaviour : MonoBehaviour
         CurrentHealth = MaxHealth;
         S_HealthSlider.maxValue = MaxHealth;
         S_HealthSlider.value = CurrentHealth;
+        ScaleInitialHealthSlider = S_HealthSlider.GetComponent<RectTransform>().sizeDelta.x / 4;
     }
 
     void Update()
@@ -164,7 +167,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         Projectile pj = Instantiate(OrgProjectile, OrgProjectile.transform.parent);
         pj.gameObject.SetActive(true);
-        pj.Shoot(Lifetime, Speed, Size, Damage);
+        pj.Shoot(Lifetime, Speed, Size + ProjectileSizeIncrease * Size / 15, Damage);
         pj.transform.SetParent(null);
 
 
@@ -220,4 +223,14 @@ public class PlayerBehaviour : MonoBehaviour
         else
             return null;
     }
+
+    public void IncreaseMaxHealth()
+    {
+        MaxHealth += 50;
+        S_HealthSlider.maxValue = MaxHealth;
+        S_HealthSlider.value = MaxHealth;
+        CurrentHealth = MaxHealth;
+
+        S_HealthSlider.GetComponent<RectTransform>().sizeDelta += new Vector2(ScaleInitialHealthSlider, 0f);
+    }    
 }

@@ -20,12 +20,12 @@ public class MagicBook : MonoBehaviour
     }
 
 
-    void Update()
+    void LateUpdate()
     {
         Vector3 toEye = Eye.transform.position - Ref.PlayerBehaviour.playerCamera.transform.position;
         float angleToEye = Vector3.Angle(Ref.PlayerBehaviour.playerCamera.transform.forward, toEye);
 
-        if(angleToEye > 3)
+        if(StopLookingAway || angleToEye > 3)
         {
             isLookingAway = false;
             Vector3 directionToPlayer = Ref.PlayerBehaviour.transform.position - Eye.transform.position;
