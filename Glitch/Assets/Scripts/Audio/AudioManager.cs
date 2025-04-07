@@ -5,6 +5,7 @@ public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
     public static AudioManager Instance;
+    [Range(0f, 1f)]
 
 #if UNITY_ANDROID
     public static bool IsPc = false;
@@ -39,7 +40,7 @@ public class AudioManager : MonoBehaviour
         {
             if (s.RespectVolume)
             {
-                s.source.volume = (float)PlayerPrefs.GetFloat("Volume");
+                s.source.volume = (float)PlayerPrefs.GetFloat("Volume") * s.VolumeMultiplier;
             }
         }
     }
@@ -62,13 +63,13 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySound(string name)
     {
-        Debug.Log("se incearca: " + name);
+        //Debug.Log("se incearca: " + name);
 
         Sound d = Array.Find(sounds, sound => sound.name == name);
         if (d == null)
             return;
 
-        Debug.Log("se playeaza: " + name);
+        //Debug.Log("se playeaza: " + name);
         //d.source.pitch = 1f;
         d.source.Play();
     }

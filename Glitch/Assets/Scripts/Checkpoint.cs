@@ -19,6 +19,7 @@ public class Checkpoint : MonoBehaviour
 
             if (Ref.UI != null && gameObject.name != "Tutorial")
             {
+                AudioManager.Play("Checkpoint_Unlocked");
                 Ref.UI.ToggleCheckpointText();
             }
 

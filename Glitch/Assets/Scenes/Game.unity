@@ -52281,8 +52281,8 @@ Transform:
   m_GameObject: {fileID: 856366872}
   serializedVersion: 2
   m_LocalRotation: {x: 0.08179402, y: 0.08179399, z: 0.70236015, w: 0.7023601}
-  m_LocalPosition: {x: -1.5262, y: 0.0322, z: 0.3648}
-  m_LocalScale: {x: 0.02, y: 1.4768487, z: 0.020000001}
+  m_LocalPosition: {x: -0.27825, y: 0.0322, z: 0.03043}
+  m_LocalScale: {x: 0.02, y: 0.19570167, z: 0.020000001}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8978582445730429504}
@@ -90093,7 +90093,7 @@ Transform:
   m_GameObject: {fileID: 1456631536}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.24192178, z: 0, w: -0.9702958}
-  m_LocalPosition: {x: -3.752, y: 3.633, z: 6.051}
+  m_LocalPosition: {x: -1.383, y: 1.303, z: -5.727}
   m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -129599,36 +129599,133 @@ MonoBehaviour:
     loop: 0
     RespectVolume: 1
     source: {fileID: 0}
+    VolumeMultiplier: 1
   - name: Code_Close
     clip: {fileID: 8300000, guid: d43938ae6a37a6d48a8b5b998711e8cd, type: 3}
     loop: 0
     RespectVolume: 1
     source: {fileID: 0}
+    VolumeMultiplier: 1
   - name: Projectile_Cast
     clip: {fileID: 8300000, guid: 896b6178be8c91d49b35c74f09be7468, type: 3}
     loop: 0
     RespectVolume: 1
     source: {fileID: 0}
+    VolumeMultiplier: 0.5
   - name: Projectile_Hit
     clip: {fileID: 8300000, guid: 1dc2e1d9fa993ec47a57d701dda4e6a4, type: 3}
     loop: 0
     RespectVolume: 1
     source: {fileID: 0}
+    VolumeMultiplier: 0.5
   - name: Code_Button
     clip: {fileID: 8300000, guid: 74d583cc54caf474db00773b6c6e31c2, type: 3}
     loop: 0
     RespectVolume: 1
     source: {fileID: 0}
+    VolumeMultiplier: 1
   - name: Code_Type
     clip: {fileID: 8300000, guid: 9523b1c8a2e8cb24e885c165b7140412, type: 3}
     loop: 0
     RespectVolume: 1
     source: {fileID: 0}
+    VolumeMultiplier: 1
   - name: Code_Delete
     clip: {fileID: 8300000, guid: 4e56a1cdb793d0140843f05e0254bd60, type: 3}
     loop: 0
     RespectVolume: 1
     source: {fileID: 0}
+    VolumeMultiplier: 1
+  - name: Step1
+    clip: {fileID: 8300000, guid: 2098c3aa4afdd6140a4bee296e3a7fa3, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.2
+  - name: Step2
+    clip: {fileID: 8300000, guid: bc72cca6003614242ab2ab95536a46f3, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.2
+  - name: Step3
+    clip: {fileID: 8300000, guid: 368d936b9f0ea6f41b8ce52fcb52d210, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.2
+  - name: Step4
+    clip: {fileID: 8300000, guid: e2caf68883ea59342bd8a27bd89bd829, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.2
+  - name: Step5
+    clip: {fileID: 8300000, guid: 84b575e9bb281b344a6d81d6da622339, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.2
+  - name: Step6
+    clip: {fileID: 8300000, guid: a92996f6f1f2c7947b8921e0cf227cf8, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.2
+  - name: Jump
+    clip: {fileID: 8300000, guid: a07af33c601d060489d5c2d8c71fcd83, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.3
+  - name: Land
+    clip: {fileID: 8300000, guid: 8bc22edeb4fc0414cb93eb8d6705e130, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.3
+  - name: Run1
+    clip: {fileID: 8300000, guid: c16d6b617f7f3ec478b7fcd8cd86ec99, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.2
+  - name: Run2
+    clip: {fileID: 8300000, guid: 2bb3ac4db472e744999abfc8c55d2064, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.2
+  - name: Run3
+    clip: {fileID: 8300000, guid: 0e2159394f0b83a45a0906afd9fd93cc, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.2
+  - name: Run4
+    clip: {fileID: 8300000, guid: b443833149e27dd4d96f1e48cc32d51d, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.2
+  - name: Run5
+    clip: {fileID: 8300000, guid: 67b2b99e6da497c4bb5759f1ed5fa26a, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.2
+  - name: Checkpoint_Unlocked
+    clip: {fileID: 8300000, guid: eda001bf8538ac64aa1e806a7dcc6573, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 1
+  - name: Puzzle_Solved
+    clip: {fileID: 8300000, guid: 1ef5339e0d004a249a858e8c72e41875, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 1
 --- !u!4 &1998463882
 Transform:
   m_ObjectHideFlags: 0
@@ -277422,8 +277519,8 @@ MonoBehaviour:
   EnemySpawnAfterComplete: 000000000000000000000000
   Outline: {fileID: 0}
   CorrectAnswer:
-  - -26
-  - -24
+  - -21
+  - -19
   - 1.05
   - 1.2
 --- !u!65 &8978582445730429508

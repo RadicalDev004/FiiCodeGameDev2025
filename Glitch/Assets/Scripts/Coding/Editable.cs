@@ -111,6 +111,7 @@ public class Editable : MonoBehaviour
 
     public void OnGlitchSolve()
     {
+        AudioManager.Play("Puzzle_Solved");
         StartCoroutine(delayEnemies());
         playerBehaviour.PlaySolveGlitch();
         ToggleOutline(false);
