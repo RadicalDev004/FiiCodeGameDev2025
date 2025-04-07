@@ -62,7 +62,7 @@ public class OwlsRotate : Editable
 
     public void SetUpEyes()
     {
-        Debug.Log("setting up owl eyes");
+        //Debug.Log("setting up owl eyes");
         List<float> currRot = new() { Owls[0].transform.localEulerAngles.y % 360, Owls[1].transform.localEulerAngles.y % 360, Owls[2].transform.localEulerAngles.y % 360, Owls[3].transform.localEulerAngles.y % 360 };
         for (int i = 0; i <= 3; i++)
         {

@@ -51,7 +51,7 @@ public class Editable : MonoBehaviour
     public IEnumerator ToggleTerminal(bool open)
     {
         LookPC.isPaused = open;
-        Movement.IsPaused = open;
+        Movement.isPaused = open;
         Cursor.lockState = open ? CursorLockMode.None : CursorLockMode.Locked;
 
         if (open)

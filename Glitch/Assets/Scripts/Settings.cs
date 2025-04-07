@@ -40,7 +40,7 @@ public class Settings : MonoBehaviour
             Tab_Settings.alpha = 1;
 
             LookPC.isPaused = true;
-            Movement.IsPaused = true;
+            Movement.isPaused = true;
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
         }
@@ -52,7 +52,7 @@ public class Settings : MonoBehaviour
 
                 Ref.ActionAfterTime(0.2f, delegate {
                     LookPC.isPaused = false;
-                    Movement.IsPaused = false;
+                    Movement.isPaused = false;
                     Cursor.lockState = CursorLockMode.Locked;
                     Time.timeScale = 1;
                 });

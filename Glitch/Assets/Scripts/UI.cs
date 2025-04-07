@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UI : MonoBehaviour
 {
     public GameObject I_PressE, I_NotEnoughMana, I_Checkpoint, I_ZombiesAlive, I_Admin;
-    public Image I_Hit;
+    public Image I_Hit, I_Blackout;
     public float fadeDuration = 1f;
     private Coroutine ShowHit;
 
@@ -109,5 +109,14 @@ public class UI : MonoBehaviour
         yield return new WaitForSeconds(duration);
         Tween.Color(I_Hit, new Color32(255, 255, 255, 0), duration, 0, Tween.EaseInOut);
         yield return new WaitForSeconds(duration);
+    }
+
+    public void DoBlackOut(float time)
+    {
+        Tween.Color(I_Blackout, Color.black, time, 0, Tween.EaseIn);
+    }
+    public void RecoverBlackOut(float time)
+    {
+        Tween.Color(I_Blackout, Color.clear, time, 0, Tween.EaseIn);
     }
 }

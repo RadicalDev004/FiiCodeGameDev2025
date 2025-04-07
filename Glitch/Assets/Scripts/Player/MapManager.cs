@@ -26,7 +26,7 @@ public class MapManager : MonoBehaviour
         if (IsOpen)
         {
             LookPC.isPaused = state;
-            Movement.IsPaused = state;
+            Movement.isPaused = state;
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0f;
         }
@@ -36,7 +36,7 @@ public class MapManager : MonoBehaviour
             {
                 mapUI.SetActive(false);
                 LookPC.isPaused = false;
-                Movement.IsPaused = false;
+                Movement.isPaused = false;
                 Cursor.lockState = CursorLockMode.Locked;
                 Time.timeScale = 1;
             });

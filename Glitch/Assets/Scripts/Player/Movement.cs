@@ -22,7 +22,7 @@ public class Movement : MonoBehaviour
     public Vector3 LastPos = Vector3.zero;
 
     private bool StopAudio = true, Jumping = false;
-    public static bool IsPaused = false;
+    public static bool isPaused = false;
     public static int SprintAdditive;
 
     public float RayDist;
@@ -32,7 +32,7 @@ public class Movement : MonoBehaviour
         //Cam = Camera.main.transform;
         Controller = GetComponent<CharacterController>();
         PlayerInput = new();
-        IsPaused = false;
+        isPaused = false;
         StaffAnimator = Ref.PlayerBehaviour.StaffAnimator;
     }
     private void Start()
@@ -51,7 +51,7 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        if (IsPaused)
+        if (isPaused)
             return;
 
         isGrounded = Controller.isGrounded;
