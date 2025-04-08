@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class JigsawPuzzle : Editable
 {
+    [Header("Particular")]
     public List<GameObject> PuzzlePieces = new();
     public List<GameObject> CorrectPuzzleLocations = new();
     public List<bool> Answers = new();

@@ -10,6 +10,7 @@ public class GuideArrow : MonoBehaviour
     private Editable CurrEditable;
     private int Index = 0;
     public static bool Toggle = true;
+    public static bool Ended = false;
     
 
     void Start()
@@ -20,6 +21,11 @@ public class GuideArrow : MonoBehaviour
     
     void Update()
     {
+        if (Ended)
+        {
+            Toggle = false;
+            return;
+        }
         if (!Toggle)
         {
             Arrow.SetActive(false);
@@ -33,7 +39,7 @@ public class GuideArrow : MonoBehaviour
         {
             CurrEditable = AllPuzzles[++Index];
             if(CurrEditable == null)
-                Toggle = false;
+                Ended = true;
         }
 
         Arrow.transform.LookAt(CurrEditable.transform);

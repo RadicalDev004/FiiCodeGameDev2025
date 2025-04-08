@@ -14,6 +14,7 @@ public class TutorialGlitch : Editable
     {
         StartCoroutine(Animation());
         ValidateCode = Validate;
+        GlitchMaterial = GetComponent<MeshRenderer>().material;
     }
 
     public bool Validate(List<string> code)
