@@ -105,10 +105,21 @@ public class EnemySpawner : MonoBehaviour
     {
         Debug.LogError("new enemy pos: " + position);
         GameObject newEnemy = Instantiate(OriginalEnemy, position, Quaternion.identity, OriginalEnemy.transform.parent);
+
         AllEnemies.Add(newEnemy.GetComponent<EnemyBehaviour>());
+
         Ref.EnemyRadar.AddRadar(newEnemy.GetComponent<EnemyBehaviour>());
         newEnemy.SetActive(true);
         newEnemy.GetComponent<EnemyBehaviour>().Create(MaxHealth, Speed, Damage, AttackSpeed, AttackRange, Healing, Difficulty);
         newEnemy.tag = "Enemy";
+    }
+
+    public void RemoveAllEnemies()
+    {
+        foreach(var enm in AllEnemies)
+        {
+            Destroy(enm.gameObject);
+        }
+        AllEnemies.Clear();
     }
 }

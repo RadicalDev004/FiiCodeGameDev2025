@@ -20,7 +20,7 @@ public class ManaUI : MonoBehaviour
         }
     }
 
-    private void UpdateManaUI(float manaPercent)
+    public void UpdateManaUI(float manaPercent)
     {
         Debug.LogError("Updating mana to " + manaPercent);
         StartCoroutine(ChangeManaUIAnimation(manaPercent, 1));

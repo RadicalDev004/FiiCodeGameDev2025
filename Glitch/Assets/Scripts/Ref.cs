@@ -42,7 +42,13 @@ public class Ref : MonoBehaviour
     public static MagicBook MagicBook { get { return Instance._MagicBook; } }
 
     public Inventory _Inventory;
-    public static Inventory Inventory { get { return Instance._Inventory; } }   
+    public static Inventory Inventory { get { return Instance._Inventory; } }
+
+    public ManaUI _ManaUI;
+    public static ManaUI ManaUI { get { return Instance._ManaUI; } }
+
+    public SaveSystem _SaveSystem;
+    public static SaveSystem SaveSystem { get { return Instance._SaveSystem; } }
 
 
     public static Ref Instance;

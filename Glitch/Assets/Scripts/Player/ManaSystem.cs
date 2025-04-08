@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class ManaSystem : MonoBehaviour
@@ -6,7 +7,8 @@ public class ManaSystem : MonoBehaviour
     public static ManaSystem Instance;
     public event Action<float> OnManaChanged;
 
-    private float currentMana = 0;
+    public float currentMana = 0;
+
     private float maxMana = 1;
 
     public static float ExtraManaPerHit;

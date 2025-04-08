@@ -76,13 +76,13 @@ public class JigsawPuzzle : Editable
     private IEnumerator MovePiece(int ind, Vector2 pos, float time)
     {
         Vector3 initialPos = PuzzlePieces[ind].transform.localPosition;
-        Tween.LocalPosition(PuzzlePieces[ind].transform, PuzzlePieces[ind].transform.localPosition + new Vector3(0, 0.2f, 0), time, 0, Tween.EaseInOut);
+        Tween.LocalPosition(PuzzlePieces[ind].transform, PuzzlePieces[ind].transform.localPosition + new Vector3(0, 0.2f, 0), time, 0, Tween.EaseInOut, obeyTimescale: true);
         yield return new WaitForSeconds(time);
 
-        Tween.LocalPosition(PuzzlePieces[ind].transform, new Vector3(pos.x, 0.2f, pos.y), time, 0, Tween.EaseInOut);
+        Tween.LocalPosition(PuzzlePieces[ind].transform, new Vector3(pos.x, 0.2f, pos.y), time, 0, Tween.EaseInOut, obeyTimescale: true);
         yield return new WaitForSeconds(time);
 
-        Tween.LocalPosition(PuzzlePieces[ind].transform, new Vector3(pos.x, 0, pos.y), time, 0, Tween.EaseInOut);
+        Tween.LocalPosition(PuzzlePieces[ind].transform, new Vector3(pos.x, 0, pos.y), time, 0, Tween.EaseInOut, obeyTimescale: true);
         yield return new WaitForSeconds(time);
 
         if (Mathf.Abs(CorrectPuzzleLocations[ind].transform.localPosition.x - pos.x) < 0.002f && Mathf.Abs(CorrectPuzzleLocations[ind].transform.localPosition.z - pos.y) < 0.002f)

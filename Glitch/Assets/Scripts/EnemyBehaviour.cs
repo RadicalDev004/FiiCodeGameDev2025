@@ -66,7 +66,7 @@ public class EnemyBehaviour : MonoBehaviour
 
             UpdateHealthSlider(-proj.damage);
             ManaSystem.Instance.AddMana(givenManaPerHit);
-            Ref.EnemySpawner.AllEnemies.Remove(this);
+            
             if(!Projectile.PassThrough)
                 Destroy(proj.gameObject);
         }
@@ -77,12 +77,13 @@ public class EnemyBehaviour : MonoBehaviour
         CurrentHealth += value;
 
         if(value < 0)
-        {
+        {            
             EnemyAnimator.SetInteger("hit", Random.Range(0, 3));
         }
 
         if (CurrentHealth <= 0)
         {
+            Ref.EnemySpawner.AllEnemies.Remove(this);
             Death();
             return;
         }

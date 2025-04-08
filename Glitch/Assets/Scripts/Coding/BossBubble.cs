@@ -6,6 +6,7 @@ using UnityEngine;
 public class BossBubble : Editable
 {
     public int MaximumGlitches = 15;
+    public Vector3 InitialPos;
     public Transform AnimationPos;
     public Vector3 MovePlayerTo;
     public float AnimationTime = 5;
@@ -13,6 +14,7 @@ public class BossBubble : Editable
     public GameObject Book1, Book2;
     private void Awake()
     {
+        InitialPos = transform.position;
         ValidateCode = Validate;
         GenerateCode();
     }
@@ -36,9 +38,11 @@ public class BossBubble : Editable
             return false;
         }
 
-        //TODO: start final boss
         Tween.LocalPosition(transform, AnimationPos.localPosition, AnimationTime, 0, Tween.EaseInOut, obeyTimescale: true);
         StartCoroutine(MovePlayerCor(AnimationTime));
+
+        ToggleOutline(false);
+        Completed = true;
 
         return true;
     }
@@ -52,7 +56,6 @@ public class BossBubble : Editable
 
     private IEnumerator MovePlayerCor(float time)
     {
-        tag = "Untagged";
         Ref.PlayerBehaviour.GetComponent<CharacterController>().enabled = false;
         Movement.isPaused = true;
         Ref.MagicBook.StopLookingAway = true;
@@ -87,5 +90,18 @@ public class BossBubble : Editable
         Movement.isPaused = false;
         LookPC.isPaused = false;
         Ref.UI.RecoverBlackOut(0.5f);
+    }
+
+    public void ResetState()
+    {
+        if(!Completed) return;
+
+        Book1.GetComponent<MagicBook>().StopLookingAway = false;
+        Book1.SetActive(true);
+        Book2.GetComponent<FinalBoss>().ResetState();
+        Book2.SetActive(false);
+        transform.position = InitialPos;
+        Completed = false;
+        GenerateCode();
     }
 }
