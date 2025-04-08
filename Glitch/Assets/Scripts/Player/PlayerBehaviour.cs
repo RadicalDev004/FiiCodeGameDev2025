@@ -18,11 +18,12 @@ public class PlayerBehaviour : MonoBehaviour
     public bool isEpressed = false;
     public Animator StaffAnimator;
     [Header("Health")]
-    public float MaxHealth;
+    public float MaxHealth, InitialMaxHealth;
     public Slider S_HealthSlider;
     public float CurrentHealth;
     private Coroutine Heal;
     public float ScaleInitialHealthSlider;
+    public static bool isDead = false;
 
     [Header("Projectiles")]
     public Projectile OrgProjectile;
@@ -44,6 +45,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Awake()
     {
+        InitialMaxHealth = MaxHealth;
         UI = Ref.UI;
         mapManager = UI.gameObject.GetComponent<MapManager>();
 
@@ -181,12 +183,21 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        if (isDead) return;
         CurrentHealth -= amount;
-        Tween.Value(S_HealthSlider.value, CurrentHealth, val => S_HealthSlider.value = val, 0.5f, 0, Tween.EaseInOut);
+        if(CurrentHealth < 0)  CurrentHealth = 0;
+        var a = Tween.Value(S_HealthSlider.value, CurrentHealth, val => S_HealthSlider.value = val, 0.5f, 0, Tween.EaseInOut);
 
-        if (CurrentHealth < 0)
+        if (CurrentHealth == 0)
         {
-            //TODO Game Over
+            isDead = true;
+            //Tween.Stop(a.targetInstanceID);
+            Ref.ActionAfterTime(0.5f, delegate
+            {
+                Ref.SaveSystem.LoadState();
+            });
+            
+            return;
         }
         if (CurrentHealth > MaxHealth)
         {
@@ -204,6 +215,7 @@ public class PlayerBehaviour : MonoBehaviour
             Heal = StartCoroutine(HealCor());
         }
     }
+
 
     private IEnumerator HealCor()
     {
@@ -233,4 +245,16 @@ public class PlayerBehaviour : MonoBehaviour
 
         S_HealthSlider.GetComponent<RectTransform>().sizeDelta += new Vector2(ScaleInitialHealthSlider, 0f);
     }    
+
+    public void ResetHealth(float curr)
+    {
+        if (Heal != null) StopCoroutine(Heal);
+        S_HealthSlider.GetComponent<RectTransform>().sizeDelta = new(4 * ScaleInitialHealthSlider, S_HealthSlider.GetComponent<RectTransform>().sizeDelta.y);
+        MaxHealth = InitialMaxHealth;
+        S_HealthSlider.maxValue = MaxHealth;
+        S_HealthSlider.value = curr;
+        Debug.LogError("Resetting health " + curr + " " + S_HealthSlider.value);
+        CurrentHealth = curr;
+        isDead = false;
+    }
 }

@@ -26,9 +26,9 @@ public class FinalBoss : MonoBehaviour
     public Coroutine ShootProjCor;
 
 
-    void Awake()
+    void OnEnable()
     {
-
+        Shield.SetActive(true);
         S_Shield.maxValue = MaxShield;
         ShieldHealth = 0;
 
@@ -45,11 +45,7 @@ public class FinalBoss : MonoBehaviour
         });
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
     public void SpawnCrystals(int cnt)
     {
@@ -150,5 +146,16 @@ public class FinalBoss : MonoBehaviour
     {
         ShootProjCor = StartCoroutine(ShootProjectilesCor(1));
         if (Phase < 2) return;
+    }
+
+    public void ResetState()
+    {
+        foreach(var cr in CrystalList)
+        {
+            Destroy(cr);
+        }
+        CrystalList.Clear();
+
+        Phase = 1;
     }
 }

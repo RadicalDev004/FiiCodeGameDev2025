@@ -109,15 +109,22 @@ public class Editable : MonoBehaviour
         return newCode.Count > ind ? newCode[ind++] : null;
     }
 
-    public void OnGlitchSolve()
+    public void OnGlitchSolve(bool redo = false)
     {
+        Debug.Log("ON GLITCH COMPLETE");
         AudioManager.Play("Puzzle_Solved");
         StartCoroutine(delayEnemies());
         playerBehaviour.PlaySolveGlitch();
         ToggleOutline(false);
         Completed = true;
-        PlayerBehaviour.GlitchesSolved++;
-        Ref.PlayerBehaviour.StaffStone.material.SetFloat("_FresnelPower", 1 - 0.13f * PlayerBehaviour.GlitchesSolved);
+
+        if(!redo)
+        {
+            PlayerBehaviour.GlitchesSolved++;
+            Ref.PlayerBehaviour.StaffStone.material.SetFloat("_FresnelPower", 1 - 0.13f * PlayerBehaviour.GlitchesSolved);
+            Ref.SaveSystem.SaveState();
+            SaveSystem.LatestSolvedGlitch = this;
+        }                
     }
 
     private IEnumerator delayEnemies()

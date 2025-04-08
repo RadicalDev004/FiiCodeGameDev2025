@@ -12,6 +12,8 @@ public class FunctionItem : MonoBehaviour
     private Rigidbody Rigidbody;
     public bool isLegendary;
 
+    public static List<FunctionItem> AllDroppedItems = new();
+
 
     public void Create(bool isLegendary = false)
     {
@@ -23,7 +25,9 @@ public class FunctionItem : MonoBehaviour
         Rigidbody.AddForce(new Vector3(Random.Range(0.3f,0.75f), Random.Range(0.5f, 1.5f), Random.Range(0.3f, 0.75f)), ForceMode.Impulse);
 
         Name = fnc.ToLower();
-        T_Name.text = $"{(isLegendary ? "<color=orange>" : "")}{fnc}{(isLegendary ? "</color>" : "")};";        
+        T_Name.text = $"{(isLegendary ? "<color=orange>" : "")}{fnc};{(isLegendary ? "</color>" : "")}";
+
+        AllDroppedItems.Add(this);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,7 +38,17 @@ public class FunctionItem : MonoBehaviour
                 inventory.CollectLegendaryFunction(Name);
             else
                 inventory.CollectFunction(Name);
+            AllDroppedItems.Remove(this);
             Destroy(gameObject);
         }
+    }
+
+    public static void ClearAllItems()
+    {
+        foreach(var item in AllDroppedItems)
+        {
+            Destroy(item.gameObject);
+        }
+        AllDroppedItems.Clear();
     }
 }
