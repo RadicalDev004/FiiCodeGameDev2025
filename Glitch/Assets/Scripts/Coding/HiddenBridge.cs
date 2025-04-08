@@ -5,14 +5,17 @@ using UnityEngine;
 public class HiddenBridge : MonoBehaviour
 {
     private MeshRenderer meshRenderer;
+    private MeshCollider meshCollider;
     private BoxCollider boxCollider;
 
     void Start()
     {
         boxCollider = GetComponent<BoxCollider>();
-        meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer = transform.parent.GetChild(1).GetComponent<MeshRenderer>();
+        meshCollider = transform.parent.GetChild(1).GetComponent<MeshCollider>();
+
         meshRenderer.enabled = false;
-        boxCollider.enabled = true;
+        meshCollider.enabled = false;
         boxCollider.isTrigger = true;
     }
 
@@ -22,8 +25,10 @@ public class HiddenBridge : MonoBehaviour
         {
             Debug.Log("Am detectat un proiectil");
             meshRenderer.enabled = true;
+            meshCollider.enabled = true;
             boxCollider.isTrigger = false;
-            Destroy(other.gameObject); // optional daca vrei  ca proiectilu sa nu treaca prin el da na merge
+
+            //Destroy(other.gameObject); // optional daca vrei  ca proiectilu sa nu treaca prin el da na merge
         }
     }
 }
