@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
@@ -10,12 +11,16 @@ public class Settings : MonoBehaviour
     public CanvasGroup Tab_Settings;
     public Slider S_Volume;
     public BoolSlider BS_Arrow, BS_EnemyRadar;
+    public bool isMainMenu = false;
 
     public static bool IsOpen = false;
 
     private void Start()
     {
-        AudioManager.UpdateVolume();
+        Debug.Log(Time.timeScale);
+        Movement.isPaused = false;
+        LookPC.isPaused = false;
+        LoadVolume();
     }
 
     void Update()
@@ -39,15 +44,19 @@ public class Settings : MonoBehaviour
         { 
             Tab_Settings.alpha = 1;
 
-            LookPC.isPaused = true;
-            Movement.isPaused = true;
-            Cursor.lockState = CursorLockMode.None;
-            Time.timeScale = 0;
+            if(!isMainMenu)
+            {
+                LookPC.isPaused = true;
+                Movement.isPaused = true;
+                Cursor.lockState = CursorLockMode.None;
+                Time.timeScale = 0;
+            }
+            
         }
         else
         {
             Ref.ActionAfterTime(0.2f, delegate { Tab_Settings.alpha = 0; });
-            if (!Code.IsOpen && !MapManager.IsOpen)
+            if (!Code.IsOpen && !MapManager.IsOpen && !isMainMenu)
             {
 
                 Ref.ActionAfterTime(0.2f, delegate {
@@ -84,10 +93,20 @@ public class Settings : MonoBehaviour
         EnemyRadar.isActive = state;
     }
 
+    public void LoadVolume()
+    {
+        S_Volume.value = PlayerPrefs.GetFloat("Volume");
+        AudioManager.UpdateVolume();
+    }
+
     public void UpdateVolume()
     {
         PlayerPrefs.SetFloat("Volume", S_Volume.value);
         AudioManager.UpdateVolume();
     }
 
+    public void ChangeScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
 }

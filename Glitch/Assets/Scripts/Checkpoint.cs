@@ -45,11 +45,13 @@ public class Checkpoint : MonoBehaviour
 
     private IEnumerator hoverCheckpoint()
     {
+        if (checkpointObj == null) yield break;
         Vector3 finalPos = checkpointObj.transform.localPosition + new Vector3(0, 1f, 0);
         checkpointObj.transform.GetChild(0).GetComponent<Light>().enabled = true;
 
         Tween.LocalPosition(checkpointObj.transform, finalPos, 3, 0, Tween.EaseInOut);
         Tween.LocalScale(checkpointObj.transform, new Vector3(20f, 20f, 20f), 3, 0, Tween.EaseInOut);
+        Tween.Rotate(checkpointObj.transform, new Vector3(0, 0, 360), Space.Self, 3, 0, Tween.EaseInOut);
 
         yield return new WaitForSeconds(2f);
     }

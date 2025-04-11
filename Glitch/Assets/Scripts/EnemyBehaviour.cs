@@ -1,6 +1,7 @@
 using Pixelplacement;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +22,8 @@ public class EnemyBehaviour : MonoBehaviour
     public FunctionItem OrgFunctionItem;
     public SkinnedMeshRenderer Body;
     public List<Material> Stages = new();
+    public Material DeathMat;
+    public bool isDead;
 
     void Start()
     {
@@ -30,7 +33,9 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void Update()
     {
+        if (isDead) return;
         Canvas.transform.LookAt(PlayerBehaviour.gameObject.transform.position);
+        
         Dist = Vector3.Distance(transform.position, PlayerBehaviour.transform.position);
         if ( Dist <= AttackRange * BaseAttackRange && !Attacking)
         {
@@ -74,6 +79,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void UpdateHealthSlider(float value)
     {
+        //if (isDead) return;
         CurrentHealth += value;
 
         if(value < 0)
@@ -84,8 +90,14 @@ public class EnemyBehaviour : MonoBehaviour
         if (CurrentHealth <= 0)
         {
             Ref.EnemySpawner.AllEnemies.Remove(this);
-            Death();
-            return;
+            GetComponentInChildren<Outline>().enabled = false;
+            Destroy(GetComponentInChildren<Outline>());
+            Destroy(GetComponent<Rigidbody>());
+            Destroy(GetComponent<BoxCollider>());
+            Ref.ActionAfterTime(0.5f, delegate
+            {
+                Death();
+            });
         }
 
         Tween.Value(S_Health.value, CurrentHealth, value => S_Health.value = value, 0.5f, 0, Tween.EaseInOut);
@@ -138,17 +150,49 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void Death()
     {
-        for(int i = 0; i <= Difficulty; i++)
-        {
-            if (!RandomChance.Percent(70 - 10 * Difficulty)) continue;
+        isDead = true;
 
-            FunctionItem fi = Instantiate(OrgFunctionItem, OrgFunctionItem.transform.parent);
-            fi.transform.SetParent(null);
-            fi.gameObject.SetActive(true);
-            fi.Create();
-        }
-        Destroy(gameObject);
+        Material[] newMaterials = new Material[1];
+        newMaterials[0] = DeathMat;
+        Body.materials = newMaterials;
+        Body.materials[0].SetFloat("_Dissolve", 0);
+
+        var col = Difficulty switch
+        {
+            0 => Color.green,
+            1 => Color.blue,
+            2 => Color.magenta,
+            3 => Color.red,
+            4 => Color.yellow,
+            _ => Color.white,
+        };
+
+        Canvas.SetActive(false);
+        StopAllCoroutines();
+        AttackRangeObj.SetActive(false);
+        EnemyAnimator.SetBool("die", true);
+        
+
+        Body.materials[0].SetColor("_Emission", col);
+        Tween.Value(Body.materials[0].GetFloat("_Dissolve"), 0.8f, val => Body.materials[0].SetFloat("_Dissolve", val), 1, 0, Tween.EaseIn);
+
+        Ref.ActionAfterTime(1, delegate
+        {
+            for (int i = 0; i <= Difficulty; i++)
+            {
+                if (!RandomChance.Percent(70 - 10 * Difficulty)) continue;
+
+                FunctionItem fi = Instantiate(OrgFunctionItem, OrgFunctionItem.transform.parent);
+                fi.transform.SetParent(null);
+                fi.gameObject.SetActive(true);
+                fi.Create();
+            }
+
+            Destroy(gameObject);
+        }, true);
+        
     }
+
 
     private IEnumerator AttackCor(float duration)
     {
@@ -161,7 +205,6 @@ public class EnemyBehaviour : MonoBehaviour
         AttackRangeObj.GetComponent<MeshRenderer>().material.color = new Color32(255, 0, 0, 0);
         StartCoroutine(ChangeAlpha(AttackRangeObj.GetComponent<MeshRenderer>().material, duration, 0.7f));
         yield return new WaitForSeconds(duration);
-        
 
         if(Vector3.Distance(transform.position, PlayerBehaviour.transform.position) <= AttackRange * BaseAttackRange)
         {

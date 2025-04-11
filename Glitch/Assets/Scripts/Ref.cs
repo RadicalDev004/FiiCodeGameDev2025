@@ -59,13 +59,14 @@ public class Ref : MonoBehaviour
     }
 
 
-    public static void ActionAfterTime(float time, Action action)
+    public static void ActionAfterTime(float time, Action action, bool respectTimeScale = false)
     {
-        Instance.StartCoroutine(ActionAfterTimeCor(time, action));
+        Instance.StartCoroutine(ActionAfterTimeCor(time, action, respectTimeScale));
     }
-    private static IEnumerator ActionAfterTimeCor(float time, Action action)
+    private static IEnumerator ActionAfterTimeCor(float time, Action action, bool respectTimeScale)
     {
-        yield return new WaitForSecondsRealtime(time);
+        if (respectTimeScale) yield return new WaitForSeconds(time);
+        else yield return new WaitForSecondsRealtime(time);
         action?.Invoke();
     }
 }
