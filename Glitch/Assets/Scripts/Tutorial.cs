@@ -14,6 +14,10 @@ public class Tutorial : MonoBehaviour
     public GameObject Camera;
     [TextArea(5, 5)]
     public List<string> Replies = new();
+    [TextArea(5, 5)]
+    public List<string> Repl1 = new();
+    [TextArea(5, 5)]
+    public List<string> Repl2 = new();
     public TMP_Text T_Think;
     public float InitialTime = 3, InBetweenTime = 3;
     public int StepToGiveItems;
@@ -73,6 +77,43 @@ public class Tutorial : MonoBehaviour
             T_Think.text = item;
             yield return new WaitForSeconds(time);
             i++;
+        }
+
+        Ongoing = false;
+        LookPC.isPaused = false;
+        GhostAnimator.SetTrigger("endTutorial");
+
+        yield return new WaitForSeconds(2);
+        GhostAnimator.gameObject.SetActive(false);
+    }
+
+    public void ShowGenericInfo(List<string> info, float initial, float time)
+    {
+        if (!Enabled) return;
+
+        float en = PlayerPrefs.GetInt("Tutorial");
+        Enabled = en == 1;
+
+        if (!Enabled) return;
+        StartCoroutine(ShowGenericInfoCor(info, initial, time));
+    }
+    private IEnumerator ShowGenericInfoCor(List<string> info, float initial, float time)
+    {
+        GhostAnimator.SetTrigger("reset");
+        GhostAnimator.gameObject.SetActive(true);
+        foreach (var it in ObjectsToGive)
+        {
+            it.SetActive(false);
+
+        }
+
+        yield return new WaitForSeconds(initial);
+        Ongoing = true;
+
+        foreach (var item in info)
+        {
+            T_Think.text = item;
+            yield return new WaitForSeconds(time);
         }
 
         Ongoing = false;

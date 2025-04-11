@@ -9,7 +9,7 @@ using UnityEngine.Windows;
 public class StarConstellation : Editable
 {
     public List<Transform> StarPositions;
-    public LineRenderer LinePrefab;
+    public LineRenderer LinePrefab, LinePrefabCorrect;
     public Transform LinesParent;
 
     private List<List<(int, int)>> correctSolutions = new()
@@ -17,7 +17,7 @@ public class StarConstellation : Editable
         new List<(int, int)> { (1, 2), (2, 7), (6, 7), (1, 6), (6, 10), (10, 13), (13, 15) },
         new List<(int, int)> { (8, 11), (8, 9), (9, 11), (9, 12), (11, 14), (12, 14) }
     };
-
+    public bool[] sol;
     private Dictionary<int, Transform> starsByNumber = new();
     private List<(int, int)> currentConnections = new();
     private List<LineRenderer> currentLines = new();
@@ -59,23 +59,26 @@ public class StarConstellation : Editable
         }
 
         // 1 2 // 0 -1 // -1 0 // 1 
-        if (numar1 > 0)
+        if (numar1 > starsByNumber.Count || numar2 > starsByNumber.Count)
         {
-            if (numar1 > starsByNumber.Count || numar2 > starsByNumber.Count)
-            {
-                Debug.LogError("Failed validation at incorrect value 1 or 2");
-                return false;
-            }
+            Debug.LogError("Failed validation at incorrect value 1 or 2");
+            return false;
+        }
+        if (numar1 < -starsByNumber.Count || numar2 < -starsByNumber.Count)
+        {
+            Debug.LogError("Failed validation at incorrect value 1 or 2");
+            return false;
+        }
+
+        if (!currentConnections.Contains(numar1 < numar2 ? (numar1, numar2) : (numar2, numar1)))
+        {
+            
             Connect(numar1, numar2);
         }
         else
         {
-            if (numar1 < -starsByNumber.Count || numar2 < -starsByNumber.Count)
-            {
-                Debug.LogError("Failed validation at incorrect value 1 or 2");
-                return false;
-            }
-            Remove(-numar1, -numar2);
+            
+            Remove(numar1, numar2);
         }
 
 
@@ -88,7 +91,7 @@ public class StarConstellation : Editable
     }
 
 
-    private void Connect(int a, int b)
+    private void Connect(int a, int b, bool correct = false)
     {
         if (currentConnections.Contains((a, b)) || currentConnections.Contains((b, a)))
             return;
@@ -96,7 +99,7 @@ public class StarConstellation : Editable
         Vector3 posA = starsByNumber[a].position + new Vector3(-0.0008f, 0f, 0f);
         Vector3 posB = starsByNumber[b].position + new Vector3(-0.0008f, 0f, 0f);
 
-        var lr = Instantiate(LinePrefab, LinesParent);
+        var lr = Instantiate(correct ? LinePrefabCorrect : LinePrefab, LinesParent);
         lr.SetPosition(0, posA);
         lr.SetPosition(1, posB);
 
@@ -105,8 +108,16 @@ public class StarConstellation : Editable
     }
 
 
-    private void Remove(int a, int b)
+
+    private void Remove(int a, int b, bool over = false)
     {
+        int j = 0;
+        foreach (var solution in correctSolutions)
+        {
+            if (sol[j] && solution.Contains(a < b ? (a, b) : (b,a)) && !over) return;
+            j++;
+        }
+
         for (int i = 0; i < currentConnections.Count; i++)
         {
             var conn = currentConnections[i];
@@ -123,7 +134,8 @@ public class StarConstellation : Editable
 
     private bool CheckSolution()
     {
-        return correctSolutions.Any(solution =>
+        int i = 0;
+        foreach(var solution in correctSolutions)
         {
             var solutionSet = new HashSet<(int, int)>(solution);
             var currentSet = new HashSet<(int, int)>(
@@ -133,9 +145,23 @@ public class StarConstellation : Editable
             var normalizedSolution = new HashSet<(int, int)>(
                 solution.Select(p => p.Item1 < p.Item2 ? p : (p.Item2, p.Item1))
             );
+            if(currentSet.IsSupersetOf(normalizedSolution) && !sol[i])
+            {
+                sol[i] = true;
+                foreach(var conn in currentSet)
+                {
+                    Remove(conn.Item1, conn.Item2, true);
+                    Connect(conn.Item1, conn.Item2, true);
+                }
+            }
+            i++;
+        }
 
-            return currentSet.SetEquals(normalizedSolution);
-        });
+        foreach(var sl in sol)
+        {
+            if (!sl) return false;
+        }
+        return true;
     }
 
 

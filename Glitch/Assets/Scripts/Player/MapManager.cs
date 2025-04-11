@@ -11,6 +11,7 @@ public class MapManager : MonoBehaviour
     public GameObject mapUI; 
     public Dictionary<Button, Vector3> teleportLocations = new();
     public static bool IsOpen = false;
+    
 
     public void ToggleMap(bool state)
     {
@@ -52,6 +53,14 @@ public class MapManager : MonoBehaviour
             teleportLocations[button] = worldPosition;
             button.onClick.AddListener(() => TeleportPlayer(button));
             button.gameObject.SetActive(true);
+        }
+        if(teleportLocations.Count == 4)
+        {
+            Ref.Tutorial.ShowGenericInfo(Ref.Tutorial.Repl1, Ref.Tutorial.InitialTime, Ref.Tutorial.InBetweenTime);
+        }
+        if (teleportLocations.Count == 9)
+        {
+            Ref.Tutorial.ShowGenericInfo(Ref.Tutorial.Repl2, Ref.Tutorial.InitialTime, Ref.Tutorial.InBetweenTime);
         }
     }
 
