@@ -31,7 +31,7 @@ public class JarsColoring : Editable
         List<float> values = new();
         for (int i = 0; i < 2; i++)
         {
-            if (float.TryParse(code[i], out float value))
+            if (float.TryParse(code[i], out  float value))
             {
                 values.Add(value);
             }

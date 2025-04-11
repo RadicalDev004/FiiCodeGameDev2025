@@ -23,8 +23,8 @@ TagManager:
   - Projectile
   - Player
   - ignoreLight
-  - 
-  - 
+  - Linie
+  - Stea
   - 
   - 
   - 
@@ -50,4 +50,7 @@ TagManager:
     locked: 0
   - name: part
     uniqueID: 493723149
+    locked: 0
+  - name: lineStele
+    uniqueID: 3402900083
     locked: 0

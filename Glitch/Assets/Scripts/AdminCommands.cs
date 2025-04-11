@@ -11,7 +11,6 @@ public class AdminCommands : MonoBehaviour
 {
     [SerializeField] private TMP_InputField speedInput;
     [SerializeField] private TMP_InputField jumpInput;
-    [SerializeField] private TMP_InputField checkpointInput;
     [SerializeField] private List<Checkpoint> checkpoints = new List<Checkpoint>();
     public void SolveCurrentPuzzle()
     {
