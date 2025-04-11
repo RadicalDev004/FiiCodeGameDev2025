@@ -50,7 +50,9 @@ public class Ref : MonoBehaviour
     public SaveSystem _SaveSystem;
     public static SaveSystem SaveSystem { get { return Instance._SaveSystem; } }
 
-
+    public List<PuzzleCompleteEffect> _PuzzleCompleteEffect;
+    public static List<PuzzleCompleteEffect> PuzzleEffects { get { return Instance._PuzzleCompleteEffect; }
+    }
     public static Ref Instance;
 
     private void OnEnable()

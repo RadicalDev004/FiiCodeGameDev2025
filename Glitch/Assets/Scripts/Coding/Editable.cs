@@ -114,7 +114,12 @@ public class Editable : MonoBehaviour
         Debug.Log("ON GLITCH COMPLETE");
         AudioManager.Play("Puzzle_Solved");
         StartCoroutine(delayEnemies());
-        playerBehaviour.PlaySolveGlitch();
+        //playerBehaviour.PlaySolveGlitch();
+        PuzzleCompleteEffect[] effects = PuzzleCompleteEffect.Instance.GetComponents<PuzzleCompleteEffect>();
+        foreach (PuzzleCompleteEffect effect in effects)
+        {
+            effect.StartAnimation();
+        }
         ToggleOutline(false);
         Completed = true;
 
