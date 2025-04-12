@@ -42,7 +42,7 @@ public class AudioManager : MonoBehaviour
         {
             if (s.RespectVolume)
             {
-                s.source.volume = (float)PlayerPrefs.GetFloat("Volume") * s.VolumeMultiplier;
+                s.source.volume = (float)(!s.SoundEffect ? PlayerPrefs.GetFloat("Volume") : PlayerPrefs.GetFloat("SoundEffects")) * s.VolumeMultiplier;
             }
         }
     }

@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class Settings : MonoBehaviour
 {
     public CanvasGroup Tab_Settings;
-    public Slider S_Volume;
+    public Slider S_Volume, S_Effects;
     public BoolSlider BS_Arrow, BS_EnemyRadar;
     public bool isMainMenu = false;
 
@@ -21,6 +21,7 @@ public class Settings : MonoBehaviour
         Movement.isPaused = false;
         LookPC.isPaused = false;
         LoadVolume();
+        LoadEffects();
     }
 
     void Update()
@@ -98,6 +99,7 @@ public class Settings : MonoBehaviour
 
     public void LoadVolume()
     {
+        if (!PlayerPrefs.HasKey("Volume")) PlayerPrefs.SetFloat("Volume", 0.5f);
         S_Volume.value = PlayerPrefs.GetFloat("Volume");
         AudioManager.UpdateVolume();
     }
@@ -105,6 +107,19 @@ public class Settings : MonoBehaviour
     public void UpdateVolume()
     {
         PlayerPrefs.SetFloat("Volume", S_Volume.value);
+        AudioManager.UpdateVolume();
+    }
+
+    public void LoadEffects()
+    {
+        if (!PlayerPrefs.HasKey("SoundEffects")) PlayerPrefs.SetFloat("SoundEffects", 0.5f);
+        S_Effects.value = PlayerPrefs.GetFloat("SoundEffects");
+        AudioManager.UpdateVolume();
+    }
+
+    public void UpdateEffects()
+    {
+        PlayerPrefs.SetFloat("SoundEffects", S_Effects.value);
         AudioManager.UpdateVolume();
     }
 

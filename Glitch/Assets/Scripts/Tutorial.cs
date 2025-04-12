@@ -22,6 +22,8 @@ public class Tutorial : MonoBehaviour
     public float InitialTime = 3, InBetweenTime = 3;
     public int StepToGiveItems;
     public List<GameObject> ObjectsToGive = new();
+    public GameObject GhostParent;
+    public BoolSlider Toggle;
 
     void Start()
     {
@@ -32,13 +34,14 @@ public class Tutorial : MonoBehaviour
             Debug.LogWarning("Tutorial" +en);
             Enabled = en == 1;
         }
-        if (!Enabled) return;
+        GhostParent.transform.localPosition = Enabled ? Vector3.zero : Vector3.one * 999;
+        //if (!Enabled) return;
         StartCoroutine(ShowTutorial(InitialTime, InBetweenTime));
     }
 
     private void LateUpdate()
     {
-        if(Ongoing)
+        if(Ongoing && Enabled)
         {
             LookPC.isPaused = true;
             Vector3 direction = LookAt.transform.position - Camera.transform.position;
@@ -122,5 +125,27 @@ public class Tutorial : MonoBehaviour
 
         yield return new WaitForSeconds(2);
         GhostAnimator.gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        Toggle.OnPress += OnToggle;
+    }
+    private void OnDisable()
+    {
+        Toggle.OnPress -= OnToggle;
+    }
+    public void OnToggle(bool state)
+    {
+        Enabled = state;
+        if (!state)
+        {
+            foreach (var it in ObjectsToGive)
+            {
+                it.SetActive(true);
+            }
+            PlayerBehaviour.EnabledProjectiles = true;
+        }
+        GhostParent.transform.localPosition = state ? Vector3.zero : Vector3.one * 999;
     }
 }

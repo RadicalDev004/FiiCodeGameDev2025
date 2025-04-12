@@ -64,7 +64,12 @@ public class StarConstellation : Editable
             Debug.LogError("Failed validation at incorrect value 1 or 2");
             return false;
         }
-        if (numar1 < -starsByNumber.Count || numar2 < -starsByNumber.Count)
+        if (numar1 < 0 || numar2 < 0)
+        {
+            Debug.LogError("Failed validation at incorrect value 1 or 2");
+            return false;
+        }
+        if(numar1 == numar2)
         {
             Debug.LogError("Failed validation at incorrect value 1 or 2");
             return false;
@@ -72,7 +77,7 @@ public class StarConstellation : Editable
 
         if (!currentConnections.Contains(numar1 < numar2 ? (numar1, numar2) : (numar2, numar1)))
         {
-            
+            Debug.LogWarning("Adding line star " + numar1 + " , " + numar2);
             Connect(numar1, numar2);
         }
         else
@@ -96,6 +101,8 @@ public class StarConstellation : Editable
         if (currentConnections.Contains((a, b)) || currentConnections.Contains((b, a)))
             return;
 
+        Debug.LogError("Adding line star " + a + " , " + b);
+
         Vector3 posA = starsByNumber[a].position + new Vector3(-0.0008f, 0f, 0f);
         Vector3 posB = starsByNumber[b].position + new Vector3(-0.0008f, 0f, 0f);
 
@@ -104,7 +111,7 @@ public class StarConstellation : Editable
         lr.SetPosition(1, posB);
 
         currentLines.Add(lr);
-        currentConnections.Add((a, b));
+        currentConnections.Add(a < b ? (a, b) : (b,a));
     }
 
 
@@ -114,7 +121,11 @@ public class StarConstellation : Editable
         int j = 0;
         foreach (var solution in correctSolutions)
         {
-            if (sol[j] && solution.Contains(a < b ? (a, b) : (b,a)) && !over) return;
+            if (sol[j] && solution.Contains(a < b ? (a, b) : (b, a)) && !over)
+            {
+                Debug.Log(a + " , " + b + " no remove " + j);
+                return;
+            }
             j++;
         }
 

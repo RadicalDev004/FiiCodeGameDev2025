@@ -13,6 +13,7 @@ public class Sound
     public bool loop;
 
     public bool RespectVolume;
+    public bool SoundEffect = true;
 
     [HideInInspector]
     public AudioSource source;
