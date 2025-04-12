@@ -1,8 +1,10 @@
     using System;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
+    private static List<string> pausedSounds = new List<string>();
     public Sound[] sounds;
     public static AudioManager Instance;
     [Range(0f, 1f)]
@@ -210,5 +212,31 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Entering game from level scene will lead to loss of Audio and is not reccomended!");
         }
 
+    }
+
+    public static void PauseAll()
+    {
+        pausedSounds.Clear(); // Resetãm lista
+        foreach (Sound s in Instance.sounds)
+        {
+            if (s.source.isPlaying)
+            {
+                s.source.Pause();
+                pausedSounds.Add(s.name);
+            }
+        }
+    }
+
+    public static void UnPauseAll()
+    {
+        foreach (string soundName in pausedSounds)
+        {
+            Sound s = Array.Find(Instance.sounds, sound => sound.name == soundName);
+            if (s != null)
+            {
+                s.source.UnPause();
+            }
+        }
+        pausedSounds.Clear();
     }
 }

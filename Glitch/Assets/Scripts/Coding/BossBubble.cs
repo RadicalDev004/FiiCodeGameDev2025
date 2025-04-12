@@ -90,7 +90,13 @@ public class BossBubble : Editable
         Movement.isPaused = false;
         LookPC.isPaused = false;
         Ref.UI.RecoverBlackOut(0.5f);
-    }
+
+        BackgroundMusic.Instance.StopBackgroundMusic();
+
+        yield return new WaitForSeconds(2f);
+
+        BackgroundMusic.Instance.PlayBossTrack();
+}
 
     public void ResetState()
     {

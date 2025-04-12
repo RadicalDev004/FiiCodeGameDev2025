@@ -46,15 +46,18 @@ public class Settings : MonoBehaviour
 
             if(!isMainMenu)
             {
+                AudioManager.PauseAll();
                 LookPC.isPaused = true;
                 Movement.isPaused = true;
                 Cursor.lockState = CursorLockMode.None;
                 Time.timeScale = 0;
             }
-            
+
         }
         else
         {
+            AudioManager.UnPauseAll();
+
             Ref.ActionAfterTime(0.2f, delegate { Tab_Settings.alpha = 0; });
             if (!Code.IsOpen && !MapManager.IsOpen && !isMainMenu)
             {

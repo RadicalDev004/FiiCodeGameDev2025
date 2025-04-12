@@ -132610,7 +132610,7 @@ Transform:
   m_GameObject: {fileID: 1456631536}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.24192178, z: 0, w: -0.9702958}
-  m_LocalPosition: {x: -1.23, y: 1.38, z: -6.29}
+  m_LocalPosition: {x: -2.79, y: 2.24, z: 5.14}
   m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -185806,7 +185806,7 @@ Transform:
   m_GameObject: {fileID: 1956349162}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071069, y: -0, z: 0.000000029336658, w: 0.70710677}
-  m_LocalPosition: {x: 6.252, y: -7.9425583, z: 5.991}
+  m_LocalPosition: {x: 6.265, y: -7.9635, z: 7.176}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -187790,6 +187790,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1998463882}
   - component: {fileID: 1998463881}
+  - component: {fileID: 1998463883}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -187942,6 +187943,48 @@ MonoBehaviour:
     RespectVolume: 1
     source: {fileID: 0}
     VolumeMultiplier: 1
+  - name: Background_Music1
+    clip: {fileID: 8300000, guid: 31e31bb23675f26489efc0d7816509ec, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.05
+  - name: Background_Music2
+    clip: {fileID: 8300000, guid: a4e43477bbafa1d4f932ba14e1c8a69c, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.05
+  - name: Background_Music3
+    clip: {fileID: 8300000, guid: 4c15b24dcbfcec04686c391ad02868d0, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.05
+  - name: Background_Music4
+    clip: {fileID: 8300000, guid: fffc0f67f88a1f048ab5307f919494e8, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.05
+  - name: Background_Music5
+    clip: {fileID: 8300000, guid: 04559a96988033041b59abe2460ca212, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.05
+  - name: Background_Music6
+    clip: {fileID: 8300000, guid: c8dd6460b4cb0d9488bc9fab8deb189c, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.05
+  - name: Boss_Music
+    clip: {fileID: 8300000, guid: c375e19d559eb7c4ea2fb7988e639cdf, type: 3}
+    loop: 0
+    RespectVolume: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.3
 --- !u!4 &1998463882
 Transform:
   m_ObjectHideFlags: 0
@@ -187957,6 +188000,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1998463883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998463880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e4acfabb1bfa904b9260091ab6a9ab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicTrackNames:
+  - Background_Music1
+  - Background_Music2
+  - Background_Music3
+  - Background_Music4
+  - Background_Music5
+  - Background_Music6
+  bossMusic: Boss_Music
+  isBossFight: 0
 --- !u!1 &2000461427
 GameObject:
   m_ObjectHideFlags: 0
