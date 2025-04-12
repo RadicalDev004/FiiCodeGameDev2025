@@ -28,16 +28,27 @@ public class Tutorial : MonoBehaviour
     void Start()
     {
         GhostAnimator.gameObject.SetActive(false);
-        if(Enabled)
+        if (Enabled)
         {
             float en = PlayerPrefs.GetInt("Tutorial");
-            Debug.LogWarning("Tutorial" +en);
+            Debug.LogWarning("Tutorial" + en);
             Enabled = en == 1;
+        }
+        if(!Enabled) 
+        {
+            foreach (var it in ObjectsToGive)
+            {
+                it.SetActive(true);
+            }
+            PlayerBehaviour.EnabledProjectiles = true;
+        }
+        else
+        {
+            StartCoroutine(ShowTutorial(InitialTime, InBetweenTime));
         }
         GhostParent.transform.localPosition = Enabled ? Vector3.zero : Vector3.one * 999;
         //if (!Enabled) return;
-        StartCoroutine(ShowTutorial(InitialTime, InBetweenTime));
-    }
+         }
 
     private void LateUpdate()
     {

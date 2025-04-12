@@ -88313,13 +88313,13 @@ MonoBehaviour:
     , <e></e>);
 
 
-    <color=#031700>/* big = 8 units, medium = 5 units, small =
+    <color=#44CD8B>/* big = 8 units, medium = 5 units, small =
     3 units, target line = 4 units */</color>
 
 
 '
-  HintText: Try to get the middle bottle liquid level to the red target liine by
-    pouring from one flask to another.
+  HintText: Try to get the middle bottle liquid level to the red target line by pouring
+    from one flask to another.
   Completed: 0
   Block: 0
   UseOutline: 1
@@ -189511,47 +189511,96 @@ MonoBehaviour:
     RespectVolume: 1
     SoundEffect: 0
     source: {fileID: 0}
-    VolumeMultiplier: 0.05
+    VolumeMultiplier: 1
   - name: Background_Music2
     clip: {fileID: 8300000, guid: a4e43477bbafa1d4f932ba14e1c8a69c, type: 3}
     loop: 0
     RespectVolume: 1
     SoundEffect: 0
     source: {fileID: 0}
-    VolumeMultiplier: 0.05
+    VolumeMultiplier: 1
   - name: Background_Music3
     clip: {fileID: 8300000, guid: 4c15b24dcbfcec04686c391ad02868d0, type: 3}
     loop: 0
     RespectVolume: 1
     SoundEffect: 0
     source: {fileID: 0}
-    VolumeMultiplier: 0.05
+    VolumeMultiplier: 1
   - name: Background_Music4
     clip: {fileID: 8300000, guid: fffc0f67f88a1f048ab5307f919494e8, type: 3}
     loop: 0
     RespectVolume: 1
     SoundEffect: 0
     source: {fileID: 0}
-    VolumeMultiplier: 0.05
+    VolumeMultiplier: 1
   - name: Background_Music5
     clip: {fileID: 8300000, guid: 04559a96988033041b59abe2460ca212, type: 3}
     loop: 0
     RespectVolume: 1
     SoundEffect: 0
     source: {fileID: 0}
-    VolumeMultiplier: 0.05
+    VolumeMultiplier: 1
   - name: Background_Music6
     clip: {fileID: 8300000, guid: c8dd6460b4cb0d9488bc9fab8deb189c, type: 3}
     loop: 0
     RespectVolume: 1
     SoundEffect: 0
     source: {fileID: 0}
-    VolumeMultiplier: 0.05
+    VolumeMultiplier: 1
   - name: Boss_Music
     clip: {fileID: 8300000, guid: c375e19d559eb7c4ea2fb7988e639cdf, type: 3}
     loop: 0
     RespectVolume: 1
     SoundEffect: 0
+    source: {fileID: 0}
+    VolumeMultiplier: 0.7
+  - name: Enemy_Take_Damage1
+    clip: {fileID: 8300000, guid: 6a9874912a33c9342bfac0d5e59644fc, type: 3}
+    loop: 0
+    RespectVolume: 1
+    SoundEffect: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.3
+  - name: Enemy_Take_Damage2
+    clip: {fileID: 8300000, guid: bdb8b2e234a727c448c6ab2e6ddb0faf, type: 3}
+    loop: 0
+    RespectVolume: 1
+    SoundEffect: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.3
+  - name: Enemy_Attack1
+    clip: {fileID: 8300000, guid: dface40eb12c58d43826f38e33f3562c, type: 3}
+    loop: 0
+    RespectVolume: 1
+    SoundEffect: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.3
+  - name: Enemy_Attack2
+    clip: {fileID: 8300000, guid: aca58cb8ac34bdc40909f19fb62a00f5, type: 3}
+    loop: 0
+    RespectVolume: 1
+    SoundEffect: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.3
+  - name: Enemy_Attack3
+    clip: {fileID: 8300000, guid: fd1c68c4898a10d419b2813fa4d3d332, type: 3}
+    loop: 0
+    RespectVolume: 1
+    SoundEffect: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.3
+  - name: Enemy_Death1
+    clip: {fileID: 8300000, guid: eeb0e1cc3c84a7a45852c34bc2ee1d11, type: 3}
+    loop: 0
+    RespectVolume: 1
+    SoundEffect: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 0.3
+  - name: Enemy_Death2
+    clip: {fileID: 8300000, guid: 74fdefbb2b651c04ea5047c2fa4a0fa7, type: 3}
+    loop: 0
+    RespectVolume: 1
+    SoundEffect: 1
     source: {fileID: 0}
     VolumeMultiplier: 0.3
 --- !u!4 &1998463882

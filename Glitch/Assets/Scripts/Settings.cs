@@ -22,6 +22,8 @@ public class Settings : MonoBehaviour
         LookPC.isPaused = false;
         LoadVolume();
         LoadEffects();
+
+        Debug.Log("am inceput");
     }
 
     void Update()
@@ -47,6 +49,7 @@ public class Settings : MonoBehaviour
 
             if(!isMainMenu)
             {
+                Debug.Log("nu e main menu");
                 AudioManager.PauseAll();
                 LookPC.isPaused = true;
                 Movement.isPaused = true;
@@ -62,7 +65,7 @@ public class Settings : MonoBehaviour
             Ref.ActionAfterTime(0.2f, delegate { Tab_Settings.alpha = 0; });
             if (!Code.IsOpen && !MapManager.IsOpen && !isMainMenu)
             {
-
+                Debug.Log("e main menu");
                 Ref.ActionAfterTime(0.2f, delegate {
                     LookPC.isPaused = false;
                     Movement.isPaused = false;
@@ -126,5 +129,6 @@ public class Settings : MonoBehaviour
     public void ChangeScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+        IsOpen = false;
     }
 }
