@@ -119,6 +119,7 @@ public class Editable : MonoBehaviour
         foreach (PuzzleCompleteEffect effect in effects)
         {
             effect.StartAnimation();
+            //Debug.Log("se incearca");
         }
         ToggleOutline(false);
         Completed = true;

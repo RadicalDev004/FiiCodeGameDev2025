@@ -27,6 +27,7 @@ public class PuzzleCompleteEffect : MonoBehaviour
 
     IEnumerator SpawnLetters()
     {
+        //Debug.Log("am inceput");
         int visibleCharCount = 0;
         foreach (char c in message)
         {
@@ -50,6 +51,8 @@ public class PuzzleCompleteEffect : MonoBehaviour
 
             glyphs.Add(letterObj);
             letterIndex++;
+
+            Debug.Log(c.ToString());
 
             yield return new WaitForSeconds(spawnDelay);
         }
@@ -94,7 +97,7 @@ public class PuzzleCompleteEffect : MonoBehaviour
         float duration = 1f;
         float elapsed = 0f;
         Vector2 startPos = rt.anchoredPosition;
-        Vector3 startScale = rt.localScale;  // Save the starting scale
+        Vector3 startScale = rt.localScale;
 
         while (elapsed < duration)
         {
@@ -104,7 +107,6 @@ public class PuzzleCompleteEffect : MonoBehaviour
             rt.rotation = Quaternion.Euler(0, 0, elapsed * 360f);
             tmp.alpha = Mathf.Lerp(1f, 0f, elapsed / duration);
 
-            // Shrink the scale over time
             rt.localScale = Vector3.Lerp(startScale, Vector3.zero, elapsed / duration);
 
             elapsed += Time.deltaTime;

@@ -52,7 +52,7 @@ public class StarConstellation : Editable
             Debug.LogError("Validation failed: Invalid input 1 or 2");
             return false;
         }
-        if((numar1 <= 0 && numar2 >= 0) || (numar1 >= 0 && numar2 <= 0))
+        if((numar1 <= 0 || numar2 <= 0) || (numar1 == numar2))
         {
             Debug.LogError("Failed validation at incorrect value 1 or 2");
             return false;
