@@ -22116,7 +22116,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 637296074}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AdminCommands, Assembly-CSharp
         m_MethodName: SolveCurrentPuzzle
         m_Mode: 1
@@ -55045,7 +55045,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 637296074}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AdminCommands, Assembly-CSharp
         m_MethodName: UnlockAll
         m_Mode: 1
@@ -66408,7 +66408,6 @@ GameObject:
   - component: {fileID: 637296071}
   - component: {fileID: 637296072}
   - component: {fileID: 637296073}
-  - component: {fileID: 637296074}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -66474,7 +66473,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -66583,29 +66582,6 @@ MonoBehaviour:
   Cam: {fileID: 963194228}
   MinDist: 0.1
   MaxDist: 1
---- !u!114 &637296074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 637296065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56e950899c03d5a4c9ab284d56031d43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speedInput: {fileID: 657959778}
-  jumpInput: {fileID: 691645081}
-  checkpoints:
-  - {fileID: 723307431}
-  - {fileID: 88783120}
-  - {fileID: 1509754189}
-  - {fileID: 1588944995}
-  - {fileID: 1996926112}
-  - {fileID: 279447430}
-  - {fileID: 101507529}
-  - {fileID: 90943528}
 --- !u!1 &637513921
 GameObject:
   m_ObjectHideFlags: 0
@@ -123798,7 +123774,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 637296074}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AdminCommands, Assembly-CSharp
         m_MethodName: KillAllEnemies
         m_Mode: 1
@@ -184047,7 +184023,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 637296074}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AdminCommands, Assembly-CSharp
         m_MethodName: SetSpeedJump
         m_Mode: 1
@@ -190739,55 +190715,6 @@ MonoBehaviour:
     SoundEffect: 0
     source: {fileID: 0}
     VolumeMultiplier: 0.7
-  - name: Enemy_Take_Damage1
-    clip: {fileID: 8300000, guid: 6a9874912a33c9342bfac0d5e59644fc, type: 3}
-    loop: 0
-    RespectVolume: 1
-    SoundEffect: 1
-    source: {fileID: 0}
-    VolumeMultiplier: 0.3
-  - name: Enemy_Take_Damage2
-    clip: {fileID: 8300000, guid: bdb8b2e234a727c448c6ab2e6ddb0faf, type: 3}
-    loop: 0
-    RespectVolume: 1
-    SoundEffect: 1
-    source: {fileID: 0}
-    VolumeMultiplier: 0.3
-  - name: Enemy_Attack1
-    clip: {fileID: 8300000, guid: dface40eb12c58d43826f38e33f3562c, type: 3}
-    loop: 0
-    RespectVolume: 1
-    SoundEffect: 1
-    source: {fileID: 0}
-    VolumeMultiplier: 0.3
-  - name: Enemy_Attack2
-    clip: {fileID: 8300000, guid: aca58cb8ac34bdc40909f19fb62a00f5, type: 3}
-    loop: 0
-    RespectVolume: 1
-    SoundEffect: 1
-    source: {fileID: 0}
-    VolumeMultiplier: 0.3
-  - name: Enemy_Attack3
-    clip: {fileID: 8300000, guid: fd1c68c4898a10d419b2813fa4d3d332, type: 3}
-    loop: 0
-    RespectVolume: 1
-    SoundEffect: 1
-    source: {fileID: 0}
-    VolumeMultiplier: 0.3
-  - name: Enemy_Death1
-    clip: {fileID: 8300000, guid: eeb0e1cc3c84a7a45852c34bc2ee1d11, type: 3}
-    loop: 0
-    RespectVolume: 1
-    SoundEffect: 1
-    source: {fileID: 0}
-    VolumeMultiplier: 0.3
-  - name: Enemy_Death2
-    clip: {fileID: 8300000, guid: 74fdefbb2b651c04ea5047c2fa4a0fa7, type: 3}
-    loop: 0
-    RespectVolume: 1
-    SoundEffect: 1
-    source: {fileID: 0}
-    VolumeMultiplier: 0.3
 --- !u!4 &1998463882
 Transform:
   m_ObjectHideFlags: 0

@@ -86,7 +86,7 @@ public class EnemyBehaviour : MonoBehaviour
         {
             EnemyAnimator.SetInteger("hit", Random.Range(0, 3));
             int r = Random.Range(1, 3);
-            AudioManager.Play("Enemy_Take_Damage" + r);
+            //AudioManager.Play("Enemy_Take_Damage" + r);
         }
 
         if (CurrentHealth <= 0)
@@ -175,7 +175,7 @@ public class EnemyBehaviour : MonoBehaviour
         EnemyAnimator.SetBool("die", true);
 
         int r = Random.Range(1, 3);
-        AudioManager.Play("Enemy_Death" + r);
+        //AudioManager.Play("Enemy_Death" + r);
 
         Body.materials[0].SetColor("_Emission", col);
         Tween.Value(Body.materials[0].GetFloat("_Dissolve"), 0.8f, val => Body.materials[0].SetFloat("_Dissolve", val), 3f, 0, Tween.EaseIn);
@@ -207,7 +207,7 @@ public class EnemyBehaviour : MonoBehaviour
         EnemyAnimator.SetFloat("attackSpeed", 1 / duration);
 
         int r = Random.Range(1, 4);
-        AudioManager.Play("Enemy_Attack" + r);
+        //AudioManager.Play("Enemy_Attack" + r);
 
         AttackRangeObj.GetComponent<MeshRenderer>().material.color = new Color32(255, 0, 0, 0);
         StartCoroutine(ChangeAlpha(AttackRangeObj.GetComponent<MeshRenderer>().material, duration, 0.7f));
