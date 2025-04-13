@@ -50,7 +50,7 @@ public class BossBubble : Editable
     public void GenerateCode()
     {
         ExecutableCode = $"\r\n<color=white>resolved_glitches = {PlayerBehaviour.GlitchesSolved};</color>"
-            + "\r\n\r\ntake_to_final_boss = <e>false</e>;"
+            + "\r\n\r\ninspect_book = <e>false</e>;"
             + "\r\n\r\n<color=#44cd8b>/* you can try to defeat the evil book only after you have resolved all glitches */</color>\r\n";
     }
 

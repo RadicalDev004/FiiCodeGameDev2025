@@ -47,7 +47,7 @@ public class MapManager : MonoBehaviour
 
     public void UnlockCheckpoint(Button button, Vector3 worldPosition)
     {
-        Debug.Log(button.name + " s-a activat");
+        //Debug.Log(button.name + " s-a activat");
         if (!teleportLocations.ContainsKey(button))
         {
             teleportLocations[button] = worldPosition;

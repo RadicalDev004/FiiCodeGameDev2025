@@ -51,8 +51,12 @@ public class Ref : MonoBehaviour
     public static SaveSystem SaveSystem { get { return Instance._SaveSystem; } }
 
     public List<PuzzleCompleteEffect> _PuzzleCompleteEffect;
-    public static List<PuzzleCompleteEffect> PuzzleEffects { get { return Instance._PuzzleCompleteEffect; }
-    }
+    public static List<PuzzleCompleteEffect> PuzzleEffects { get { return Instance._PuzzleCompleteEffect; } }
+
+    public WinManager _WinManager;
+    public static WinManager WinManager { get { return Instance._WinManager; } }
+
+
     public static Ref Instance;
 
     private void OnEnable()

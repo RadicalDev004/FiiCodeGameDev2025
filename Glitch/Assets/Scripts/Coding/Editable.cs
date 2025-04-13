@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public class Editable : MonoBehaviour
 {
     [Header("Editable")]
+    
     [TextArea(15, 15)]
     public string ExecutableCode;
     [TextArea(5, 5)]
@@ -26,6 +27,11 @@ public class Editable : MonoBehaviour
     [HideInInspector]
     public Outline Outline;
 
+    public float TimeSpent;
+    public bool FirstTime;
+    public DateTime OpenTime;
+    public bool IgnoreTime = false;
+
     private void Start()
     {
         playerBehaviour = Ref.PlayerBehaviour;
@@ -40,6 +46,11 @@ public class Editable : MonoBehaviour
     public void OpenTerminal()
     {
         if (MapManager.IsOpen || Settings.IsOpen) return;
+        if(FirstTime)
+        {
+            FirstTime = false;
+            OpenTime = DateTime.Now;
+        }
         StartCoroutine(ToggleTerminal(true));
     }
 
@@ -111,7 +122,9 @@ public class Editable : MonoBehaviour
 
     public void OnGlitchSolve(bool redo = false)
     {
-        Debug.Log("ON GLITCH COMPLETE");
+
+        TimeSpent = (DateTime.Now - OpenTime).Seconds;
+
         AudioManager.Play("Puzzle_Solved");
         StartCoroutine(delayEnemies());
         //playerBehaviour.PlaySolveGlitch();

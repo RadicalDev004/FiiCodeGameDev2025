@@ -52,7 +52,7 @@ public class PuzzleCompleteEffect : MonoBehaviour
             glyphs.Add(letterObj);
             letterIndex++;
 
-            Debug.Log(c.ToString());
+            //Debug.Log(c.ToString());
 
             yield return new WaitForSeconds(spawnDelay);
         }

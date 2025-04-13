@@ -17,13 +17,13 @@ public class Settings : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(Time.timeScale);
+        //Debug.Log(Time.timeScale);
         Movement.isPaused = false;
         LookPC.isPaused = false;
         LoadVolume();
         LoadEffects();
 
-        Debug.Log("am inceput");
+        //Debug.Log("am inceput");
     }
 
     void Update()

@@ -25,6 +25,9 @@ public class FinalBoss : MonoBehaviour
 
     public Coroutine ShootProjCor;
 
+    public GameObject BossBook, BossEye, BossDeath, Canvas;
+    public MeshRenderer BossDeathAnimation;
+
 
     void OnEnable()
     {
@@ -66,6 +69,7 @@ public class FinalBoss : MonoBehaviour
     }
     
 
+
     public void ReShield(float time)
     {
         if(Phase < 5) StartCoroutine(WaitForNextPhase());
@@ -88,8 +92,25 @@ public class FinalBoss : MonoBehaviour
         Health -= damage;
         if (Health <= 0)
         {
-            Destroy(gameObject);
+            DeathAnimation(5);
         }
+    }
+
+    public void DeathAnimation(float time)
+    {
+        BossBook.SetActive(false);
+        BossEye.SetActive(false);
+        Canvas.SetActive(false);
+        Shield.SetActive(false);
+
+        BossDeath.SetActive(true);
+
+        Tween.Value(BossDeathAnimation.materials[0].GetFloat("_Dissolve"), 0.9f, val => BossDeathAnimation.materials[0].SetFloat("_Dissolve", val), time, 0);
+        Ref.ActionAfterTime(time, () =>
+        {
+            Destroy(gameObject);
+            Ref.WinManager.Win();
+        });
     }
 
     public void DeShield()

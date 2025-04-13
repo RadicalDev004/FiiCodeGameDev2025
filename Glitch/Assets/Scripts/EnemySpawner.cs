@@ -17,7 +17,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnEnemies(float radius = 1, params int[] difficulty)
     {
-        Debug.LogWarning("Spawn: " + string.Join(", ", difficulty));
+        //Debug.LogWarning("Spawn: " + string.Join(", ", difficulty));
         int ind = 0;
         while(ind < difficulty.Length)
         {
@@ -103,7 +103,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnEnemy(Vector3 position, int MaxHealth, float Speed, float Damage, float AttackSpeed, float AttackRange, bool Healing, int Difficulty)
     {
-        Debug.LogError("new enemy pos: " + position);
+        //Debug.LogError("new enemy pos: " + position);
         GameObject newEnemy = Instantiate(OriginalEnemy, position, Quaternion.identity, OriginalEnemy.transform.parent);
 
         AllEnemies.Add(newEnemy.GetComponent<EnemyBehaviour>());

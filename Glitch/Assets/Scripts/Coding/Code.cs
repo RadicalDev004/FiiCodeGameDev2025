@@ -42,7 +42,7 @@ public class Code : MonoBehaviour
 
     public void Create(Editable CurrEditable)
     {
-        Debug.Log("Creating Code Environment");
+        //Debug.Log("Creating Code Environment");
 
         CurrentEditable = CurrEditable;
         In_Editable.text = string.Empty;
