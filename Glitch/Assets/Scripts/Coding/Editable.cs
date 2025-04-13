@@ -43,7 +43,7 @@ public class Editable : MonoBehaviour
             Outline = GetComponent<Outline>();
     }
 
-    public void OpenTerminal()
+    virtual public void OpenTerminal()
     {
         if (MapManager.IsOpen || Settings.IsOpen) return;
         if(FirstTime)

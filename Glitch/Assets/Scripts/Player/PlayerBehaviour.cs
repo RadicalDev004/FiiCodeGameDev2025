@@ -45,6 +45,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Awake()
     {
+        GlitchesSolved = 0;
         InitialMaxHealth = MaxHealth;
         UI = Ref.UI;
         mapManager = UI.gameObject.GetComponent<MapManager>();
@@ -57,12 +58,14 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Update()
     {
+        //Debug.Log(GlitchesSolved);
+        //Debug.Log(CurrentHealth.ToString()); 
         CheckForEditableObject();
 
-        //if (Input.GetKeyDown(KeyCode.T))
-        //{
-        //    UI.ToggleAdmin();
-        //}    
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            UI.ToggleAdmin();
+        }    
 
         if (Input.GetKeyDown(KeyCode.E) && editableToAccess != null && !Code.IsOpen && !(editableToAccess is Enemy && !ManaSystem.Instance.HasFullMana()) && !MapManager.IsOpen)
         {

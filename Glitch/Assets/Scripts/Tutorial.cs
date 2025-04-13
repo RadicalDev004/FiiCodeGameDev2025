@@ -115,11 +115,6 @@ public class Tutorial : MonoBehaviour
     {
         GhostAnimator.SetTrigger("reset");
         GhostAnimator.gameObject.SetActive(true);
-        foreach (var it in ObjectsToGive)
-        {
-            it.SetActive(false);
-
-        }
 
         yield return new WaitForSeconds(initial);
         Ongoing = true;

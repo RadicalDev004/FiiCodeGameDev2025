@@ -1,4 +1,5 @@
 using Pixelplacement;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -98,6 +99,19 @@ public class BossBubble : Editable
         BackgroundMusic.Instance.PlayBossTrack();
 }
 
+    public override void OpenTerminal()
+    {
+        GenerateCode();
+        if (MapManager.IsOpen || Settings.IsOpen) return;
+
+        if (FirstTime)
+        {
+            FirstTime = false;
+            OpenTime = DateTime.Now;
+        }
+        StartCoroutine(ToggleTerminal(true));
+    }
+    
     public void ResetState()
     {
         if(!Completed) return;
