@@ -14,6 +14,14 @@ public class UI : MonoBehaviour
 
     private bool adminOn = false;
 
+    private void Awake()
+    {
+        #if UNITY_EDITOR
+                Application.targetFrameRate = 60;
+        #else
+                    Application.targetFrameRate = 144;
+        #endif
+    }
     void Start()
     {
         checkpointCanvasGroup = I_Checkpoint.GetComponent<CanvasGroup>();

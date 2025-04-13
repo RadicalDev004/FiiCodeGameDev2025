@@ -62,10 +62,10 @@ public class PlayerBehaviour : MonoBehaviour
         //Debug.Log(CurrentHealth.ToString()); 
         CheckForEditableObject();
 
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            UI.ToggleAdmin();
-        }    
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    UI.ToggleAdmin();
+        //}    
 
         if (Input.GetKeyDown(KeyCode.E) && editableToAccess != null && !Code.IsOpen && !(editableToAccess is Enemy && !ManaSystem.Instance.HasFullMana()) && !MapManager.IsOpen)
         {
