@@ -22,8 +22,9 @@ public class MyTile : MonoBehaviour
 
     public void RotateTile()
     {
-        Tween.Rotate(transform, new Vector3(90, 0, 0), Space.Self, 0.5f, 0, Tween.EaseInOut);
-        Rotation += (int)transform.eulerAngles.x;
+        Debug.Log("Rotated " + X + " , " + Y);
+        Tween.Rotate(transform, new Vector3(90, 0, 0), Space.Self, 1, 0, Tween.EaseInOut);
+        Rotation = (Rotation + 90) % 360;
     }
 
 

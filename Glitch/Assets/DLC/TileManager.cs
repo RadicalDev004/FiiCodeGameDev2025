@@ -4,6 +4,8 @@ using Pixelplacement;
 using System.Globalization;
 using System.Linq;
 using UnityEngine;
+using TMPro;
+using System;
 
 public class TileManager : Editable
 {
@@ -11,12 +13,18 @@ public class TileManager : Editable
     public List<MyTile> tiles = new();
     public float tileSize = 1;
     public int Side;
+    public TMP_Text T_Level;
+    public int Level;
+    public bool Loading = false;
+    public GameObject LoadingSign;
+    public ParticleSystem Congrats;
 
     [TextArea(15, 15)]
     public string Prompt;
 
     private void Awake()
     {
+        T_Level.text = "Level: " + Level;
         ValidateCode = Validate;
         Ref.ActionAfterTime(2, StartPuzzle);
     }
@@ -65,41 +73,80 @@ public class TileManager : Editable
 
         MyTile mt = tiles.Find(t => t.X == values[0] && t.Y == values[1]);
         mt.RotateTile();
+        Block = true;
 
         bool res = IsPuzzleSolved();
 
-        Ref.ActionAfterTime(1, () => {
-            Debug.LogError("PIPES" + res);
-            if(res)
-                OnGlitchSolve();
+        Ref.ActionAfterTime(2, () => {
+            Block = false;
+            if (res)
+            {
+                if (Level + 1 == 25)
+                {
+                    T_Level.text = "Completed!";
+                    foreach (var tile in tiles)
+                    {
+                        Destroy(tile.gameObject);
+                    }
+                    tiles.Clear();
+                    return;
+                }
+                Level++;
+                T_Level.text = "Level: " + Level;
+                Congrats.Play();
+                Debug.Log(Congrats.isEmitting + " " + Time.timeScale);
+                GenerateGameFromAPI(5 + Level / 5, DifficultyFromLevel(Level));
+            }
         });
 
         return true;
     }
 
+    public void ReloadCurrentLevel()
+    {
+        GenerateGameFromAPI(5 + Level / 5, DifficultyFromLevel(Level));
+    }
+
     public void Receivemap(string json)
     {
+        LoadingSign.SetActive(false);
         Debug.Log(json);
-        PuzzleData data = PuzzleDecoder.ParsePuzzleJson(json);
-        GenerateTiles(data);
+        try
+        {
+            PuzzleData data = PuzzleDecoder.ParsePuzzleJson(json);
+            GenerateTiles(data);
+        }
+        catch (Exception)
+        {
+            ReloadCurrentLevel();
+        }
+        
+        
     }
 
-    public void GenerateGameFromAPI(int tiles, string difficulty)
+    public void GenerateGameFromAPI(int tilesCnt, string difficulty)
     {
-        string prmpt = Prompt;
-        prmpt.Replace("{{size}}", tiles.ToString());
-        prmpt.Replace("{{difficulty}}", difficulty);
-        OpenAIChat.RequestChat(prmpt, Receivemap);
-    }
-
-    public void GenerateTiles(PuzzleData pz)
-    {
+        if (Loading) return;
+        
+        LoadingSign.SetActive(true);
+        Loading = true;
+        
         foreach (var tile in tiles)
         {
             Destroy(tile.gameObject);
         }
         tiles.Clear();
 
+        string prmpt = Prompt;
+        prmpt = prmpt.Replace("{{size}}", tilesCnt.ToString());
+        prmpt = prmpt.Replace("{{difficulty}}", difficulty);
+        Debug.Log(prmpt);
+        OpenAIChat.RequestChat(prmpt, Receivemap);
+    }
+
+    public void GenerateTiles(PuzzleData pz)
+    {
+        Congrats.Stop();
         Side = pz.size;
 
         float totalWidth = pz.size * tileSize;
@@ -126,6 +173,7 @@ public class TileManager : Editable
                 GenerateTile(tilePos, x, y, td.type, td.rotation);
             }
         }
+        Loading = false;
     }
 
     public void GenerateTile(Vector3 tilePos, int x, int y, int type, int rot = 0)
@@ -155,9 +203,12 @@ public class TileManager : Editable
     {
         if (x == endX && y == endY) return true;
         visited.Add((x, y));
+        Debug.Log("Visiting " +  x + ", " + y);
 
         MyTile current = tiles.Find(t => t.X == x && t.Y == y);
         if (current == null || current.Type == 0) return false;
+
+        Debug.Log("Options: " + string.Join(", ", GetOpenDirections(current.Type, current.Rotation)));
 
         foreach (int dir in GetOpenDirections(current.Type, current.Rotation))
         {
@@ -182,10 +233,10 @@ public class TileManager : Editable
 
     private readonly Vector2Int[] directions = new Vector2Int[]
     {
-        new Vector2Int(0, 1),
-        new Vector2Int(1, 0),
         new Vector2Int(0, -1),
-        new Vector2Int(-1, 0) 
+        new Vector2Int(-1, 0),
+        new Vector2Int(0, 1),
+        new Vector2Int(1, 0) 
     };
 
     private List<int> GetOpenDirections(int type, int rotation)
@@ -193,13 +244,13 @@ public class TileManager : Editable
 
         List<int> baseDirs = type switch
         {
-            1 => new List<int> { 0, 2 },        // straight
-            2 => new List<int> { 1, 2 },        // elbow
-            3 => new List<int> { 0, 1, 2 },     // T-shape
-            4 => new List<int> { 0, 1, 2, 3 },  // cross
-            5 => new List<int> { 0, 1, 2, 3 },  // start
-            6 => new List<int> { 0, 1, 2, 3 },  // end
-            _ => new List<int>()               // empty
+            1 => new List<int> { 0, 2 },            
+            2 => new List<int> { 0, 3 },            
+            3 => new List<int> { 0, 1, 3 },         
+            4 => new List<int> { 0, 1, 2, 3 },      
+            5 => new List<int> { 0, 1, 2, 3 },      
+            6 => new List<int> { 0, 1, 2, 3 },      
+            _ => new List<int>()                   
         };
 
 
@@ -214,4 +265,10 @@ public class TileManager : Editable
         return baseDirs;
     }
 
+    public string DifficultyFromLevel(int lvl)
+    {
+        if (lvl < 10) return "easy";
+        if (lvl < 20) return "medium";
+        return "hard";
+    }
 }
