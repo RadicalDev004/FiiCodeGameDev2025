@@ -12,7 +12,7 @@ public class OpenAIChat : MonoBehaviour
     private static readonly string part1 = "sk-proj-";
     private static readonly string part2 = "GB8GBCyw83bdLmsjWvhQKYjEb4yuo3UxkuAXkmVTrph3WSYt5j6vpfhLVlm6B32zOGWGyF_ffHT3BlbkFJg9nCvR2rsXgx_UR8OBLijHwF5Cw-1Kg6-7vgao4gCrtVnfbDcpmvfBNWucMGwdBDfye7dNs7AA";
     private static readonly string apiKey = part1 + part2;
-    private List<Message> messageHistory;
+    private List<Message> messageHistory =new();
 
     [Header("Optional UI")]
     public TMP_InputField inputField;
@@ -22,7 +22,7 @@ public class OpenAIChat : MonoBehaviour
 
     private const string apiUrl = "https://api.openai.com/v1/chat/completions";
 
-    private void Start()
+    private void Awake()
     {
         if (Instance == null)
             Instance = this;
@@ -106,12 +106,12 @@ public class OpenAIChat : MonoBehaviour
         }
     }
 
-    public void ResetChatHistory(string systemPrompt = null)
+    public static void ResetChatHistory(string systemPrompt = null)
     {
-        messageHistory.Clear();
+        Instance.messageHistory.Clear();
         if (!string.IsNullOrEmpty(systemPrompt))
         {
-            messageHistory.Add(new Message
+            Instance.messageHistory.Add(new Message
             {
                 role = "system",
                 content = systemPrompt

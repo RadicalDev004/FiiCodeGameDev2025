@@ -11,10 +11,12 @@ public class MapManager : MonoBehaviour
     public GameObject mapUI; 
     public Dictionary<Button, Vector3> teleportLocations = new();
     public static bool IsOpen = false;
+    public static bool Block = false;
     
 
     public void ToggleMap(bool state)
     {
+        if (Block) return;
         if (state && (Settings.IsOpen || Code.IsOpen || Ref.Tutorial.Ongoing)) return;
 
         IsOpen = state;

@@ -56,6 +56,9 @@ public class Ref : MonoBehaviour
     public WinManager _WinManager;
     public static WinManager WinManager { get { return Instance._WinManager; } }
 
+    public PcNpc _PcNpc;
+    public static PcNpc PcNpc { get { return Instance._PcNpc; } }
+
 
     public static Ref Instance;
 

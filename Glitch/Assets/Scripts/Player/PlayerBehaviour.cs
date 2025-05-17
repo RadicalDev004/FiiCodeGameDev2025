@@ -118,12 +118,20 @@ public class PlayerBehaviour : MonoBehaviour
         int layer = LayerMask.NameToLayer("Projectile");
         int layerMask = ~(1 << layer);
 
+        Ref.PcNpc.ToggleWrite(false);
         if (Physics.Raycast(ray, out RaycastHit hit, interactionRange, layerMask))
         {
             if (!hit.collider.CompareTag("Editable"))
+            {
+                if (hit.collider.TryGetComponent(out PcNpc pc))
+                {
+                    pc.ToggleWrite(true);
+                }
                 return;
+            }
 
-            Editable newEditable = hit.collider.GetComponent<Editable>() ?? hit.collider.transform.parent.GetComponent<Editable>();
+            Editable newEditable = hit.collider.GetComponent<Editable>() ?? hit.collider.transform.parent.GetComponent<Editable>();                        
+
             if (newEditable != null && !newEditable.Completed)
             {
                 if (editableToAccess != newEditable)
