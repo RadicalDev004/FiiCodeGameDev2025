@@ -14,6 +14,7 @@ public class PuzzleTimerConfig
     [TextArea(10, 10)]
     public string instructions;
     public string puzzleName;
+    public int questionsAvailable = 2;
     public float timeThreshold = 60f;
     public bool hintTriggered = false;
 }
@@ -31,6 +32,7 @@ public class TimerManager : MonoBehaviour
 
     [Header("Debug View (Read-Only)")]
     [SerializeField] private List<PuzzleTimerDisplay> debugTimers = new();
+
 
     void Awake()
     {
@@ -64,6 +66,12 @@ public class TimerManager : MonoBehaviour
         Debug.Log($"Started timing for {puzzleName}");
     }
 
+    public void AskAi()
+    {
+        string ask = Ref.Tutorial.inputQuestion.text;
+        
+    }
+
     public void StopTimer(string puzzleName)
     {
         activeTimers.Remove(puzzleName);
@@ -85,7 +93,7 @@ public class TimerManager : MonoBehaviour
             Debug.Log($"Hint triggered for {puzzleName}");
             if (Ref.Tutorial != null)
             {
-                Ref.Tutorial.GetHintAI(config.instructions);
+                Ref.Tutorial.GetHintAI(config.instructions, config);
             }
         }
     }

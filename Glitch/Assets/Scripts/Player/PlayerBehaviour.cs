@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using System.Xml.Serialization;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -42,6 +43,7 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float uiHideDelay = 0.3f;
     public GameObject MagicStaff;
     public Transform StaffAnimation;
+    public TMP_InputField inputField_questions;
 
     private void Awake()
     {
@@ -62,14 +64,14 @@ public class PlayerBehaviour : MonoBehaviour
         //Debug.Log(CurrentHealth.ToString()); 
         CheckForEditableObject();
 
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            UI.ToggleAdmin();
-        }
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    UI.ToggleAdmin();
+        //}
 
         if (Input.GetKeyDown(KeyCode.E) && editableToAccess != null && !Code.IsOpen && !(editableToAccess is Enemy && !ManaSystem.Instance.HasFullMana()) && !MapManager.IsOpen)
         {
-            if (!editableToAccess.Block)
+            if (!editableToAccess.Block && !Ref.Tutorial.Ongoing)
             {
                 //Time.timeScale = 0;
                 editableToAccess.OpenTerminal();
@@ -100,17 +102,11 @@ public class PlayerBehaviour : MonoBehaviour
             UI.ToggleNotEnughMana(false);
         }
 
-        if (Input.GetKeyDown(KeyCode.F) && Ref.Tutorial.Ongoing == true)
+        if (Input.GetKeyDown(KeyCode.F) && Ref.Tutorial.Ongoing == true && !inputField_questions.isFocused)
         {
             Ref.Tutorial.StopCurrentTutorial();
             UI.TogglePressF(false);
         }
-
-        if (Ref.Tutorial.Ongoing)
-        {
-            Ref.UI.TogglePressF(true);
-        }
-
     }
 
     private void CheckForEditableObject()
@@ -147,8 +143,10 @@ public class PlayerBehaviour : MonoBehaviour
                 }
                 else
                 {
-                    if(!Ref.Tutorial.GhostAnimator.gameObject.activeInHierarchy)
+                    if (!Ref.Tutorial.GhostAnimator.gameObject.activeInHierarchy)
                         UI.TogglePressE(true);
+                    else
+                        UI.TogglePressE(false);
                 }
                 return;
             }

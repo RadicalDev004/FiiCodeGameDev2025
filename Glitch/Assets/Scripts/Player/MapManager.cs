@@ -15,7 +15,7 @@ public class MapManager : MonoBehaviour
 
     public void ToggleMap(bool state)
     {
-        if (state && (Settings.IsOpen || Code.IsOpen)) return;
+        if (state && (Settings.IsOpen || Code.IsOpen || Ref.Tutorial.Ongoing)) return;
 
         IsOpen = state;
 
