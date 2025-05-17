@@ -194189,6 +194189,20 @@ MonoBehaviour:
     SoundEffect: 0
     source: {fileID: 0}
     VolumeMultiplier: 0.7
+  - name: Type_DLC
+    clip: {fileID: 8300000, guid: baa14e7f3278b8f4995a2466dab4e28a, type: 3}
+    loop: 0
+    RespectVolume: 1
+    SoundEffect: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 1
+  - name: Delete_DLC
+    clip: {fileID: 8300000, guid: da863917641333641b5ae24bdba2b1eb, type: 3}
+    loop: 0
+    RespectVolume: 1
+    SoundEffect: 1
+    source: {fileID: 0}
+    VolumeMultiplier: 1
 --- !u!4 &1998463882
 Transform:
   m_ObjectHideFlags: 0

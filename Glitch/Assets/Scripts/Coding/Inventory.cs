@@ -14,6 +14,8 @@ public class Inventory : Editable
 
     public List<(string, Image)> OtherSprites = new();
 
+    public static bool Blocking = false;
+
     private void Awake()
     {
         ValidateCode = Validate;
@@ -21,7 +23,7 @@ public class Inventory : Editable
 
     void Update()
     {
-        if(!Ref.Tutorial.Ongoing && !Settings.IsOpen && !MapManager.IsOpen && !Code.IsOpen && Input.GetKeyDown(KeyCode.Q)) 
+        if(!Ref.Tutorial.Ongoing && !Settings.IsOpen && !MapManager.IsOpen && !Code.IsOpen && Input.GetKeyDown(KeyCode.Q) && !Blocking) 
         {
             CreateinventoryCode();
             StartCoroutine(ToggleTerminal(true));
