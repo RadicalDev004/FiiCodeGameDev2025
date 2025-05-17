@@ -22,7 +22,11 @@ public class OpenAIChat : MonoBehaviour
 
     private void Awake()
     {
+<<<<<<< HEAD
+        if(Instance == null)
+=======
         if (Instance == null)
+>>>>>>> origin/Andrei2
             Instance = this;
     }
 
@@ -31,6 +35,11 @@ public class OpenAIChat : MonoBehaviour
         Instance.StartCoroutine(Instance.SendChatRequest(message, callback));
     }
 
+<<<<<<< HEAD
+    
+=======
+
+>>>>>>> origin/Andrei2
     IEnumerator SendChatRequest(string userInput, Action<string> callback)
     {
         string jsonBody = JsonUtility.ToJson(new ChatRequest(userInput));
