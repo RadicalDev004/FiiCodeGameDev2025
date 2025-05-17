@@ -21,7 +21,7 @@ public class Inventory : Editable
 
     void Update()
     {
-        if(!Settings.IsOpen && !MapManager.IsOpen && !Code.IsOpen && Input.GetKeyDown(KeyCode.Q)) 
+        if(!Ref.Tutorial.Ongoing && !Settings.IsOpen && !MapManager.IsOpen && !Code.IsOpen && Input.GetKeyDown(KeyCode.Q)) 
         {
             CreateinventoryCode();
             StartCoroutine(ToggleTerminal(true));
@@ -89,7 +89,7 @@ public class Inventory : Editable
         }
         else if (code[0] == FunctionItem.functionNames[4])
         {
-            StartCoroutine(ShowPowerUpUI(Instantiate(I_PowerUpOrg, I_PowerUpOrg.transform.parent), PowerupSprites[3], 60));
+            StartCoroutine(ShowPowerUpUI(Instantiate(I_PowerUpOrg, I_PowerUpOrg.transform.parent), PowerupSprites[4], 60));
             StartCoroutine(ProjectilePassThrough(60));
         }
 

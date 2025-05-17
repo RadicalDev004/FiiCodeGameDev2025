@@ -12,6 +12,7 @@ TagManager:
   - bossProjectile
   - boss
   - checkpoint
+  - ignoreProj
   layers:
   - Default
   - TransparentFX

@@ -29,7 +29,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player") && !other.CompareTag("checkpoint"))
+        if (!other.CompareTag("Player") && !other.CompareTag("checkpoint") && !other.CompareTag("ignoreProj"))
         {
             AudioManager.Play("Projectile_Hit");
             Instantiate(impactParticles, transform.position, Quaternion.identity);

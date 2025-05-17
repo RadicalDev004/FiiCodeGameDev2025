@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
-    public GameObject I_PressE, I_NotEnoughMana, I_Checkpoint, I_ZombiesAlive, I_Admin;
+    public GameObject I_PressE, I_NotEnoughMana, I_Checkpoint, I_ZombiesAlive, I_Admin, I_PressF;
     public Image I_Hit, I_Blackout;
     public float fadeDuration = 1f;
     private Coroutine ShowHit;
@@ -36,6 +36,10 @@ public class UI : MonoBehaviour
         I_PressE.SetActive(state);
     }
 
+    public void TogglePressF(bool state)
+    {
+        I_PressF.SetActive(state);
+    }
     public void ToggleNotEnughMana(bool state)
     {
         I_NotEnoughMana.SetActive(state);

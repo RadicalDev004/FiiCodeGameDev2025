@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pixelplacement;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -143,5 +144,25 @@ public class Code : MonoBehaviour
             }
         }
         return true;
+    }
+
+    public void CloseTerminal()
+    {
+        StartCoroutine(CloseTerminall());
+    }
+
+    public IEnumerator CloseTerminall()
+    {
+        LookPC.isPaused = false;
+        Movement.isPaused = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        AudioManager.Play("Code_Close");
+        Cursor.lockState = CursorLockMode.Locked;
+        Tween.LocalScale(transform.GetChild(0), Vector3.zero, 0.2f, 0f, Tween.EaseInOut);
+        yield return new WaitForSecondsRealtime(0.2f);
+        gameObject.SetActive(false);
+        Time.timeScale = 1;
+        IsOpen = false;
     }
 }
