@@ -1,4 +1,3 @@
-using Mono.Reflection;
 using Pixelplacement.TweenSystem;
 using System.Collections;
 using System.Collections.Generic;
@@ -52,8 +51,7 @@ public class Tutorial : MonoBehaviour
         }
         else
         {
-            //DECOMENTEAZA ASTA  LA FINAL!!!!!!!!!!!!!!!!!!!!!
-            //StartCoroutine(ShowTutorial(InitialTime, InBetweenTime));
+            StartCoroutine(ShowTutorial(InitialTime, InBetweenTime));
         }
         GhostParent.transform.localPosition = Enabled ? Vector3.zero : Vector3.one * 999;
         //if (!Enabled) return;
