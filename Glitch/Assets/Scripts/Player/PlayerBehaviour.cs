@@ -62,10 +62,10 @@ public class PlayerBehaviour : MonoBehaviour
         //Debug.Log(CurrentHealth.ToString()); 
         CheckForEditableObject();
 
-        //if (Input.GetKeyDown(KeyCode.T))
-        //{
-        //    UI.ToggleAdmin();
-        //}    
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            UI.ToggleAdmin();
+        }
 
         if (Input.GetKeyDown(KeyCode.E) && editableToAccess != null && !Code.IsOpen && !(editableToAccess is Enemy && !ManaSystem.Instance.HasFullMana()) && !MapManager.IsOpen)
         {
@@ -99,6 +99,18 @@ public class PlayerBehaviour : MonoBehaviour
             UI.TogglePressE(true);
             UI.ToggleNotEnughMana(false);
         }
+
+        if (Input.GetKeyDown(KeyCode.F) && Ref.Tutorial.Ongoing == true)
+        {
+            Ref.Tutorial.StopCurrentTutorial();
+            UI.TogglePressF(false);
+        }
+
+        if (Ref.Tutorial.Ongoing)
+        {
+            Ref.UI.TogglePressF(true);
+        }
+
     }
 
     private void CheckForEditableObject()
@@ -134,7 +146,10 @@ public class PlayerBehaviour : MonoBehaviour
                     UI.ToggleNotEnughMana(!ManaSystem.Instance.HasFullMana());
                 }
                 else
-                    UI.TogglePressE(true);
+                {
+                    if(!Ref.Tutorial.GhostAnimator.gameObject.activeInHierarchy)
+                        UI.TogglePressE(true);
+                }
                 return;
             }
         }

@@ -1,3 +1,4 @@
+using Mono.Reflection;
 using Pixelplacement.TweenSystem;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ public class Tutorial : MonoBehaviour
     public List<string> Repl1 = new();
     [TextArea(5, 5)]
     public List<string> Repl2 = new();
+    [TextArea(5, 5)]
+    public List<string> ReplyCustom = new();
     public TMP_Text T_Think;
     public float InitialTime = 3, InBetweenTime = 3;
     public int StepToGiveItems;
@@ -44,11 +47,12 @@ public class Tutorial : MonoBehaviour
         }
         else
         {
-            StartCoroutine(ShowTutorial(InitialTime, InBetweenTime));
+            //DECOMENTEAZA ASTA  LA FINAL!!!!!!!!!!!!!!!!!!!!!
+            //StartCoroutine(ShowTutorial(InitialTime, InBetweenTime));
         }
         GhostParent.transform.localPosition = Enabled ? Vector3.zero : Vector3.one * 999;
         //if (!Enabled) return;
-         }
+    }
 
     private void LateUpdate()
     {
@@ -131,6 +135,42 @@ public class Tutorial : MonoBehaviour
 
         yield return new WaitForSeconds(2);
         GhostAnimator.gameObject.SetActive(false);
+    }
+
+    public void StopCurrentTutorial()
+    {
+        Ongoing = false;
+        LookPC.isPaused = false;
+        GhostAnimator.SetTrigger("endTutorial");
+
+        GhostAnimator.gameObject.SetActive(false);
+    }
+
+    private void ProcesezRaspuns(string raspuns)
+    {
+        ReplyCustom.Clear();
+
+        string[] replici = raspuns.Split('#');
+
+        foreach (string replica in replici)
+        {
+            string trimmed = replica.Trim();
+            if (!string.IsNullOrEmpty(trimmed))
+                ReplyCustom.Add(trimmed);
+        }
+
+        ShowGenericInfo(ReplyCustom, InitialTime, InBetweenTime);
+
+        Debug.Log("Replici AI primite: " + string.Join(" | ", ReplyCustom));
+    }
+
+
+    public void GetHintAI(string instructions)
+    {
+        if(Code.IsOpen)
+            Ref.Code.CloseTerminal();
+        OpenAIChat.RequestChat(instructions, ProcesezRaspuns);
+
     }
 
     private void OnEnable()

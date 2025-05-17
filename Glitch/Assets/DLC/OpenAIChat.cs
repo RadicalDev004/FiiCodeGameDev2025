@@ -3,6 +3,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 using TMPro; // or UnityEngine.UI for standard Text
+using System;
 
 public class OpenAIChat : MonoBehaviour
 {
@@ -15,21 +16,24 @@ public class OpenAIChat : MonoBehaviour
     public TMP_InputField inputField;
     public TMP_Text responseText;
 
+    public static OpenAIChat Instance;
+
     private const string apiUrl = "https://api.openai.com/v1/chat/completions";
 
     private void Start()
     {
-        SendMessageToChat("Salut, ce faci?");
+        if (Instance == null)
+            Instance = this;
     }
 
-    public void SendMessageToChat(string message)
+    public static void RequestChat(string message, Action<string> callback)
     {
-        StartCoroutine(SendChatRequest(message));
+        Instance.StartCoroutine(Instance.SendChatRequest(message, callback));
     }
-    
-    IEnumerator SendChatRequest(string userInput)
+
+
+    IEnumerator SendChatRequest(string userInput, Action<string> callback)
     {
-        // Construct request payload
         string jsonBody = JsonUtility.ToJson(new ChatRequest(userInput));
 
         byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonBody);
@@ -51,7 +55,7 @@ public class OpenAIChat : MonoBehaviour
         {
             string jsonResult = request.downloadHandler.text;
             var reply = ParseResponse(jsonResult);
-            Debug.Log(reply);
+            callback?.Invoke(reply);
         }
     }
 
