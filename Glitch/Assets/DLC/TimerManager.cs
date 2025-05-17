@@ -91,7 +91,7 @@ public class TimerManager : MonoBehaviour
             config.hintTriggered = true;
 
             Debug.Log($"Hint triggered for {puzzleName}");
-            if (Ref.Tutorial != null)
+            if (Ref.Tutorial != null && Ref.Tutorial.Enabled)
             {
                 Ref.Tutorial.GetHintAI(config.instructions, config);
             }

@@ -101447,7 +101447,7 @@ MonoBehaviour:
       3 to 5 hints. Output format: Hint one#Hint two#Hint three#...'
     puzzleName: Globe
     questionsAvailable: 2
-    timeThreshold: 5
+    timeThreshold: 15
     hintTriggered: 0
   - instructions: "You are a mysterious AI assistant in a Unity puzzle game. The
       puzzles are script-based and require the player to edit lines of code using
@@ -101462,7 +101462,7 @@ MonoBehaviour:
       to 5 hints. Output format: Hint one#Hint two#Hint three#..."
     puzzleName: TripleBooks
     questionsAvailable: 2
-    timeThreshold: 5
+    timeThreshold: 15
     hintTriggered: 0
   - instructions: 'You are a mysterious AI assistant in a Unity puzzle game. The
       puzzles are script-based and require the player to edit lines of code using
@@ -101511,7 +101511,56 @@ MonoBehaviour:
       3 to 5 hints. Output format: Hint one#Hint two#Hint three#...'
     puzzleName: Scroll
     questionsAvailable: 2
-    timeThreshold: 5
+    timeThreshold: 60
+    hintTriggered: 0
+  - instructions: 'You are a mysterious AI assistant in a Unity puzzle game. The
+      puzzles are script-based and require the player to edit lines of code using
+      knowledge from informatics, logic, or science.
+
+      Your task is to provide
+      short, cryptic, and thematic hints that guide the player toward the correct
+      code values, without ever revealing the exact solution.
+
+      
+
+      Each
+      hint must:
+
+      
+
+      Be no longer than 80 characters.
+
+      
+
+      Be
+      subtle, indirect, and immersive.
+
+      
+
+      Relate to the context of
+      code, logic, or problem-solving.
+
+      
+
+      Be separated by the # symbol.
+
+      
+
+      Puzzle
+      name: Jars
+
+      Objects involved: fill_amount (float), jarColor (RGB), colorMatch(targetColor)
+
+      Solution
+      idea (do not reveal directly): Adjust fill_amount to mix correct RGB values.
+
+      
+
+      Generate
+      3 to 5 hints. Output format: Hint one#Hint two#Hint three#...'
+    puzzleName: Jars
+    questionsAvailable: 2
+    timeThreshold: 60
     hintTriggered: 0
   - instructions: 'You are a mysterious AI assistant in a Unity puzzle game. The
       puzzles are script-based and require the player to edit lines of code using
@@ -101561,57 +101610,7 @@ MonoBehaviour:
       Output format: Hint one#Hint two#Hint three#...'
     puzzleName: Owls
     questionsAvailable: 2
-    timeThreshold: 5
-    hintTriggered: 0
-  - instructions: 'You are a mysterious AI assistant in a Unity puzzle game. The
-      puzzles are script-based and require the player to edit lines of code using
-      knowledge from informatics, logic, or science.
-
-      Your task is to provide
-      short, cryptic, and thematic hints that guide the player toward the correct
-      code values, without ever revealing the exact solution.
-
-      
-
-      Each
-      hint must:
-
-      
-
-      Be no longer than 80 characters.
-
-      
-
-      Be
-      subtle, indirect, and immersive.
-
-      
-
-      Relate to the context of
-      code, logic, or problem-solving.
-
-      
-
-      Be separated by the # symbol.
-
-      
-
-      Puzzle
-      name: Owls Rotate
-
-      Objects involved: owlAngle array, faceDirection,
-      pairwise lookAt check
-
-      Solution idea (do not reveal directly): Rotate
-      owls so they face matching partners.
-
-      
-
-      Generate 3 to 5 hints.
-      Output format: Hint one#Hint two#Hint three#...'
-    puzzleName: Owls
-    questionsAvailable: 2
-    timeThreshold: 5
+    timeThreshold: 60
     hintTriggered: 0
   - instructions: 'You are a mysterious AI assistant in a Unity puzzle game. The
       puzzles are script-based and require the player to edit lines of code using
@@ -101656,7 +101655,7 @@ MonoBehaviour:
 '
     puzzleName: Musical
     questionsAvailable: 2
-    timeThreshold: 5
+    timeThreshold: 120
     hintTriggered: 0
   - instructions: "You are a mysterious AI assistant in a Unity puzzle game. The
       puzzles are script-based and require the player to edit lines of code using
@@ -101671,7 +101670,7 @@ MonoBehaviour:
       to 5 hints. Output format: Hint one#Hint two#Hint three#...\r\n"
     puzzleName: Alphabet
     questionsAvailable: 2
-    timeThreshold: 5
+    timeThreshold: 120
     hintTriggered: 0
   - instructions: 'You are a mysterious AI assistant in a Unity puzzle game. The
       puzzles are script-based and require the player to edit lines of code using
@@ -101714,7 +101713,7 @@ MonoBehaviour:
       3 to 5 hints. Output format: Hint one#Hint two#Hint three#...'
     puzzleName: BurningCandles
     questionsAvailable: 2
-    timeThreshold: 5
+    timeThreshold: 30
     hintTriggered: 0
   - instructions: 'You are a mysterious AI assistant in a Unity puzzle game. The
       puzzles are script-based and require the player to edit lines of code using
@@ -101758,7 +101757,7 @@ MonoBehaviour:
       two#Hint three#...'
     puzzleName: PourBottles
     questionsAvailable: 2
-    timeThreshold: 5
+    timeThreshold: 120
     hintTriggered: 0
   - instructions: 'You are a mysterious AI assistant in a Unity puzzle game. The
       puzzles are script-based and require the player to edit lines of code using
@@ -101801,7 +101800,7 @@ MonoBehaviour:
       3 to 5 hints. Output format: Hint one#Hint two#Hint three#...'
     puzzleName: Seesaw
     questionsAvailable: 2
-    timeThreshold: 5
+    timeThreshold: 90
     hintTriggered: 0
   - instructions: 'You are a mysterious AI assistant in a Unity puzzle game. The
       puzzles are script-based and require the player to edit lines of code using
@@ -101845,7 +101844,7 @@ MonoBehaviour:
       one#Hint two#Hint three#...'
     puzzleName: BlowCandles
     questionsAvailable: 2
-    timeThreshold: 5
+    timeThreshold: 30
     hintTriggered: 0
   - instructions: 'You are a mysterious AI assistant in a Unity puzzle game. The
       puzzles are script-based and require the player to edit lines of code using
@@ -101889,7 +101888,7 @@ MonoBehaviour:
       3 to 5 hints. Output format: Hint one#Hint two#Hint three#...'
     puzzleName: MeteoJar
     questionsAvailable: 2
-    timeThreshold: 5
+    timeThreshold: 60
     hintTriggered: 0
   - instructions: 'You are a mysterious AI assistant in a Unity puzzle game. The
       puzzles are script-based and require the player to edit lines of code using
@@ -101934,7 +101933,7 @@ MonoBehaviour:
       Hint one#Hint two#Hint three#...'
     puzzleName: Constellation
     questionsAvailable: 2
-    timeThreshold: 5
+    timeThreshold: 60
     hintTriggered: 0
   - instructions: 'You are a mysterious AI assistant in a Unity puzzle game. The
       puzzles are script-based and require the player to edit lines of code using
@@ -101979,7 +101978,7 @@ MonoBehaviour:
       two#Hint three#...'
     puzzleName: Jigsaw
     questionsAvailable: 2
-    timeThreshold: 5
+    timeThreshold: 120
     hintTriggered: 0
   debugTimers: []
 --- !u!1 &1204609380

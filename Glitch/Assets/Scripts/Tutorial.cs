@@ -173,6 +173,8 @@ public class Tutorial : MonoBehaviour
         }
 
         T_Think.text = "Have you got any questions?";
+        objectsForInput.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Questions left: " + currentPuzzle.questionsAvailable + "/2";
+
 
         yield return new WaitForSeconds(0.5f);
 
@@ -193,6 +195,7 @@ public class Tutorial : MonoBehaviour
             objectsForInput.SetActive(false);
         if (Cursor.lockState == CursorLockMode.None)
             Cursor.lockState = CursorLockMode.Locked;
+        StopAllCoroutines();
     }
 
     public IEnumerator DelayStop()
@@ -216,7 +219,7 @@ public class Tutorial : MonoBehaviour
 
         ShowGenericHints(ReplyCustom, InitialTime, InBetweenTime);
 
-        Debug.Log("Replici AI primite: " + string.Join(" | ", ReplyCustom));
+        Debug.Log("Replici AI primite: " + string.Join(" | ", ReplyCustom));    
     }
 
 
